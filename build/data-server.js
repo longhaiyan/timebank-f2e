@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 var bodyParser = require('body-parser')
-var Msg = require('./utils').msg;
+var Msg = require('./msg').msg;
 
 const dataDirPath = path.resolve(__dirname, '../static/api/')
 // console.log('dataDirPath:',dataDirPath)

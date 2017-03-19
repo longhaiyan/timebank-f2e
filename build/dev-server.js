@@ -20,7 +20,7 @@ var port = process.env.PORT || config.dev.port
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-var proxyTable = config.dev.proxyTable
+// var proxyTable = config.dev.proxyTable
 
 var app = express()
 var compiler = webpack(webpackConfig)
@@ -33,6 +33,12 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => {}
 })
+var dataServer = require('./data-server')
+
+// var app = express()
+
+// 设置模拟接口服务器
+dataServer(app);
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
@@ -42,13 +48,13 @@ compiler.plugin('compilation', function (compilation) {
 })
 
 // proxy api requests
-Object.keys(proxyTable).forEach(function (context) {
+/*Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
   if (typeof options === 'string') {
     options = { target: options }
   }
   app.use(proxyMiddleware(options.filter || context, options))
-})
+})*/
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
