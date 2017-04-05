@@ -13,8 +13,6 @@ var env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
     : config.build.env
 
-const publicPath = '//assets.dxycdn.com/gitrepo/dxy_mall_manage/dist/';
-
 var webpackConfig = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({

@@ -34,11 +34,14 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => {}
 })
 var dataServer = require('./data-server')
-
+var uploadServer = require('./upload-server')
 // var app = express()
 
 // 设置模拟接口服务器
 dataServer(app);
+// 处理图片上传
+uploadServer(app)
+
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {

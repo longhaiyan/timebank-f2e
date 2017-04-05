@@ -6,9 +6,37 @@ import store from '@/store'
 import routerQuery from './routerQuery'
 import * as demoTypes from '@/store/test/types'
 
-Vue.use(Router)
+import { routesConfig } from './routesConfig'
+import routerBefore from './routerBefore'
 
-export default new Router({
+import {NO_NEED_LOGIN_ROUTER} from  '../constants/router'
+
+
+Vue.use(Router)
+const routerInit = function (store) {
+  const routes = routesConfig(store)
+  console.log('routes', routes)
+
+  const router = new Router({
+    routes,
+    // mode: 'history'
+  })
+  // 全局路由钩子
+  router.beforeEach((to, from, next) => {
+    // console.info("全局路由钩子.beforeEach", to, from, store);
+    if(NO_NEED_LOGIN_ROUTER.has(to.name)){
+      next({name:'Hello' })
+    }
+
+    routerBefore({to, from, next}, store)
+  })
+
+  return router
+
+}
+export default routerInit
+
+/*export default new Router({
   routes: [
     {
       path: '/',
@@ -36,4 +64,4 @@ export default new Router({
       ],
     }
   ]
-})
+})*/

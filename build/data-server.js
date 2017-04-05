@@ -40,7 +40,7 @@ module.exports = function(app){
 				}else{
 					rsp = {
 						success:true,
-						results : fileJSON,
+						vars : fileJSON,
 
 					};
 

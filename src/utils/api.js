@@ -18,9 +18,10 @@ export function req (url = '', data = {}, success = null, error = null) {
 		url,
 		data,
 		success: function(rsp) {
+		  console.log('rsp',rsp)
 			if (rsp.success) {
 				// rsp.result._rspQuery = rsp._query;
-        success && success(rsp.results)
+        success && success(rsp.vars)
       } else {
         console.warn('error: api.req')
         error && error(rsp)
@@ -36,7 +37,7 @@ export function post (url = '', data  = {}, success = null, error = null) {
     method: 'post',
     success: function (rsp) {
       if (rsp.success) {
-        success && success(rsp.results)
+        success && success(rsp.vars)
       } else {
         console.warn('error: api.post')
         error && error(rsp)
