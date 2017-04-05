@@ -3,7 +3,7 @@
     <transition name="slide-fade">
       <router-view></router-view>
     </transition>
-    <h1>{{ msg }}</h1>
+    <h1 class="haiyan-style">{{ msg }}</h1>
     <h2>Essential Links</h2>
     <template v-for="item in items">
       <div>{{item.test}}</div>
