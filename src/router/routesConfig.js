@@ -2,36 +2,29 @@
  * Created by longhaiyan on 17/3/26.
  */
 import Hello from '@/components/Hello'
-import demo from '@/components/demoView/demo'
+import Index from '@/components/index/index'
+import index from '@/components/index/index'
 import store from '@/store'
 import routerQuery from './routerQuery'
 import * as demoTypes from '@/store/test/types'
 
 let routes = [
   {
+    label: '首页',
     path: '/',
+    name: 'Index',
+    component: Index,
+  },
+  {
+    path: '/Hello',
     name: 'Hello',
     component: Hello,
-    children:[
+    /*children:[
       {
         path: 'demo',
         component: demo,
-        /*beforeEnter: (to, from, next) => {
-          // ...
-          let query = routerQuery(to)
-          let payload = {
-            ...query
-          }
-          console.log(to)
-          console.log(from)
-          store.dispatch(demoTypes.A_LIST_REQUEST,payload);
-          // store.dispatch(managementProductTypes.A_LIST_REQUEST, payload)
-
-          next();
-
-        }*/
       }
-    ],
+    ],*/
   },
 
 ]

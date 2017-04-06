@@ -6,7 +6,7 @@ import routerInit from './router'
 import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-import './styles/haiyan.css'
+import './styles/main.less'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
