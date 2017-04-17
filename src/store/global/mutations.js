@@ -15,11 +15,12 @@ export default {
         console.log('state.dialogStep', state.dialogStep)
     },
     [Type.M_LOGIN_ONLOAD]: (state, payload) => {
-        console.log('M_LOGIN_ONLOAD 要回显用户信息', payload)
+        console.log('payload', payload)
         Object.assign(state, {
             dialogStep: 'onload',
-            username: payload.userName
+            username: payload.data.userName
         })
+        console.log('M_LOGIN_ONLOAD 要回显用户信息', state)
     },
     [Type.M_LOGIN_ERROR]: (state, payload) => {
         console.log('M_LOGIN_ERROR', payload)

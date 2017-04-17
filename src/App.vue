@@ -19,10 +19,38 @@
                     <el-input style="width: 120px;"
                             v-model="loginFormData.code">
                     </el-input>
-                    <img src="http://bbs.chenxubiao.cn/kaptcha-image" style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                    <img src="/kaptcha-image" style="width: 120px;height: 40px;vertical-align: middle;" alt="">
                 </el-form-item>
             </el-form>
         </MyModal>
+            <el-form :model="loginFormData" ref="registerData" :rules="loginRules" label-width="100px">
+                <el-form-item label="邮箱：" prop="email">
+                    <el-input
+                            placeholder="请输入用户名"
+                            v-model="loginFormData.email">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="用户名：" prop="userName">
+                    <el-input
+                            placeholder="请输入用户名"
+                            v-model="loginFormData.userName">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="密码：" prop="password">
+                    <el-input type="password"
+                              placeholder="请输入密码"
+                              v-model="loginFormData.password">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="验证码" prop="code">
+                    <el-input style="width: 120px;"
+                              v-model="loginFormData.code">
+                    </el-input>
+                    <img src="/kaptcha-image" style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                </el-form-item>
+            </el-form>
+        </MyModal>
+
 
         <el-row type="flex" justify="space-around" align="center" class="header">
             <el-col class="logo">
@@ -66,6 +94,11 @@
                     confirmButtonText: '确认登录',
                     title:'登录'
                 },
+                registerData: {
+                    size: 'tiny',
+                    confirmButtonText: '确认注册',
+                    title:'注册'
+                },
                 loginRules:{
                     userName:{
                         /*required: true,
@@ -88,7 +121,36 @@
                         message: '请输入验证码',
                         trigger: 'blur'
                     }
+                },
+                registerRules:{
+                    userName:{
+                        /*required: true,
+                         message: '请输入用户名',
+                         trigger: 'blur'*/
+                        required: true,
+                        validator: this.checkUserName,
+                        trigger: 'blur'
+                    },
+                    email: {
+                        required: true,
+                        message: '请输入邮箱',
+                        trigger: 'blur'
+                    },
+                    password:{
+                        required: true,
+                        message: '请输入密码',
+                        trigger: 'blur'
+                        /*require: true,
+                         validator: this.checkPwd,
+                         trigger: 'blur'*/
+                    },
+                    code:{
+                        required: true,
+                        message: '请输入验证码',
+                        trigger: 'blur'
+                    }
                 }
+
             }
         },
         computed:{
@@ -96,10 +158,14 @@
                 dialogStep: state => state.myGlobal.dialogStep,
                 loginErrorMsg: state => state.myGlobal.loginErrorMsg,
                 loginDialogVisible: state => state.myGlobal.loginDialogVisible,
+                registerDialogVisible: state => state.myGlobal.registerDialogVisible,
                 code: state => state.myGlobal.code
             }),
             loginFormData(){
                 return Object.assign(this.loginData, {visible: this.loginDialogVisible})
+            },
+            registerFormData(){
+                return Object.assign(this.registerData, {visible: this.registerDialogVisible})
             }
         },
         watch:{

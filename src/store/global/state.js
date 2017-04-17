@@ -7,6 +7,7 @@ export default {
     // 登录错误信息
     loginErrorMsg:'',
     loginDialogVisible: false,
+    registerDialogVisible: false,
     username:'',
     // 验证码
     code:''

@@ -1,21 +1,5 @@
 <template>
     <div>
-        <!--<MyModal :data="loginData" :step="dialogStep" style="text-align: left">
-            <el-form :model="loginForm" ref="loginForm" :rules="loginRules" label-width="100px">
-                <el-form-item label="用户名：" prop="userName">
-                    <el-input
-                            placeholder="用户名"
-                            v-model="loginForm.userName">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="密码：" prop="pwd">
-                    <el-input type="password"
-                            placeholder="密码"
-                            v-model="loginForm.pwd">
-                    </el-input>
-                </el-form-item>
-            </el-form>
-        </MyModal>-->
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1">
                 <router-link to="/Hello/demo">demo页</router-link>
@@ -94,7 +78,7 @@
         },
         watch: {
             userName: function() {
-                console.log("出发 islogin")
+                console.log("出发 islogin",this.userName)
                 this.isLogin()
             }
         },
@@ -161,6 +145,7 @@
                 this.$message.error(this.loginErrorMsg)
             },
             isLogin(){
+                console.log("chufa islogin",this.userName)
                 if (this.userName) {
                     console.log("xiugai ")
                     this.localUserName = this.userName
