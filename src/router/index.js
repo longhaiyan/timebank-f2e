@@ -25,11 +25,13 @@ const routerInit = function (store) {
   router.beforeEach((to, from, next) => {
     // console.info("全局路由钩子.beforeEach", to, from, store);
     if(NO_NEED_LOGIN_ROUTER.has(to.name)){
+      console.log("进入重定向")
       next({name:'Hello' })
     }
 
     routerBefore({to, from, next}, store)
   })
+  console.log("得到的router配置为",router)
 
   return router
 

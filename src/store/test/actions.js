@@ -11,7 +11,7 @@ const actions = {
   [Type.A_LIST_REQUEST]: ({commit, state, dispatch}, payload) => {
     commit(Type.M_LIST_LOADING)
     console.log('A_LIST_REQUEST');
-    apiTools.req(api.list, payload, rsp => {
+    return apiTools.req(api.list, payload, rsp => {
       // rsp = {id:10,name:"hello"}
       commit(Type.M_LIST_RECEIVED,rsp)
       console.log('成功',rsp);
