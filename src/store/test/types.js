@@ -1,7 +1,7 @@
 
 // action types
 export const A_LIST_REQUEST = 'test/as/list_request'
-export const A_START_MAIN = 'demo/as/start_main'
+export const A_START_MAIN = 'Hello_demo/as/start_main'
 
 // mutation types
 export const M_LIST_LOADING = 'test/mu/list_loading'
