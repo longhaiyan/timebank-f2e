@@ -13,7 +13,8 @@
                 <el-menu-item index="2-3">选项3</el-menu-item>
             </el-submenu>
             <el-menu-item v-if="!localUserName" index="3">
-                <el-button type="text" @click="onLogin">请登录</el-button>
+                <el-button type="text" @click="onLogin">登录/</el-button>
+                <el-button type="text" @click="onRegister">注册</el-button>
             </el-menu-item>
             <el-submenu index="4" class="userInfoBox" v-else>
                     <template slot="title" style="" >
@@ -85,40 +86,17 @@
         methods: {
             ...mapActions({
                 userLogin: GlobalType.A_USER_LOGIN,
-                loginShow: GlobalType.A_LOGIN_SHOW
+                loginShow: GlobalType.A_LOGIN_SHOW,
+                registerShow: GlobalType.A_REGISTER_SHOW
             }),
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
             onLogin(){
                 this.loginShow()
-                //                let self = this
-                /*this.openModal(this.loginData, {
-                 beforeConfirm(next){
-                 console.log("beforeConfirm")
-                 self.$refs.loginForm.validate(value => {
-                 if(value){
-                 console.log('dialogStep',self.dialogStep)
-                 console.log('loginForm',self.loginForm)
-                 self.userLogin({
-                 userName:self.loginForm.userName,
-                 pwd:self.loginForm.pwd
-                 }).then(()=>{
-                 if(self.dialogStep === 'error'){
-                 self.showMessage()
-                 return
-                 }
-                 self.$refs.loginForm.resetFields()
-                 return next()
-                 })
-                 }
-                 })
-                 },
-                 beforeCancel(next) {
-                 console.log("beforeCancel")
-                 return next()
-                 }
-                 })*/
+            },
+            onRegister(){
+                this.registerShow()
             },
             // 打开modal，传入一些回调函数
             openModal(obj, ops) {
