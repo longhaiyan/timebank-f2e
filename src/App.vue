@@ -174,6 +174,12 @@
                 if(this.loginDialogVisible){
                     this.onLogin()
                 }
+            },
+            registerDialogVisible: function() {
+                console.log('registerDialogVisible 的值改变了',this.registerDialogVisible)
+                if(this.registerDialogVisible){
+                    this.onLogin()
+                }
             }
         },
         methods:{
@@ -220,6 +226,10 @@
                         })
                     }
                 })
+            },
+            onRegister(){
+                console.log("onregister")
+
             },
             // 打开modal，传入一些回调函数
             openModal(obj, ops) {

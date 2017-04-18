@@ -43,6 +43,20 @@ export default {
         })
         console.log('M_LOGIN_HIDE loginDialogVisible',state.loginDialogVisible)
     },
+    [Type.M_REGISTER_SHOW]: (state, payload) =>{
+        console.log('M_REGISTER_SHOW', payload)
+        Object.assign(state, {
+            registerDialogVisible: true
+        })
+        console.log('M_REGISTER_SHOW registerDialogVisible',state.loginDialogVisible)
+    },
+    [Type.M_REGISTER_HIDE]: (state, payload) =>{
+        console.log('M_REGISTER_HIDE', payload)
+        Object.assign(state, {
+            registerDialogVisible: false
+        })
+        console.log('M_REGISTER_HIDE registerDialogVisible',state.loginDialogVisible)
+    },
     [Type.M_GET_CHECK_CODE]:(state,payload) => {
         console.log("M_GET_CHECK_CODE")
         Object.assign(state, {

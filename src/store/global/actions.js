@@ -23,6 +23,9 @@ const actions ={
     [Type.A_LOGIN_SHOW]:({commit, state, dispatch}, payload) =>{
         commit(Type.M_LOGIN_SHOW)
     },
+    [Type.A_REGISTER_SHOW]:({commit,state,dispatch},payload) =>{
+        commit(Type.M_REDISTER_SHOW)
+    },
     [Type.A_LOGIN_HIDE]:({commit, state, dispatch}, payload) =>{
         commit(Type.M_LOGIN_HIDE)
     },
