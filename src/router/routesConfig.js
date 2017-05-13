@@ -3,7 +3,14 @@
  */
 import Hello from '@/components/Hello'
 import Index from '@/views/index/index'
+import Intro from '@/views/intro'
 import demo from '@/components/demoView/demo'
+import Task from '@/views/task/my_task'
+import NewTask from '@/views/task/new_task'
+import CommunityIndex from '@/views/community/community_index'
+import CommunityInfo from '@/views/community/community_info'
+// import NewTask from '@/views/task/new_task'
+
 import index from '@/views/index/index'
 import store from '@/store'
 import routerQuery from './routerQuery'
@@ -26,6 +33,35 @@ let routes = [
         component: demo,
       }
     ],
+  },
+  {
+    label:'任务详情',
+    path: '/intro',
+    name:'Intro',
+    component: Intro
+  },
+  {
+    path: '/task',
+    name: 'Task',
+    component: Task,
+    children:[
+      {
+        path: 'new',
+        component: NewTask,
+      }
+    ],
+  },
+  {
+    label:'社区首页',
+    path: '/community',
+    name:'CommunityIndex',
+    component: CommunityIndex
+  },
+  {
+    label:'帖子详情',
+    path: '/info',
+    name:'CommunityInfo',
+    component: CommunityInfo
   },
 
 ]

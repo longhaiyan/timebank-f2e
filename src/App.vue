@@ -1,35 +1,8 @@
 <template>
     <div id="app">
 
-        <MyModal class="my-login-box" :data="loginData" :step="dialogStep" style="text-align: left">
+        <MyModal class="my-login-box" :data="loginData" :step="loginDialogStep" style="text-align: left">
             <el-form :model="loginFormData" ref="loginForm" :rules="loginRules" label-width="100px">
-                <el-form-item label="用户名：" prop="userName">
-                    <el-input
-                            placeholder="请输入用户名"
-                            v-model="loginFormData.userName">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="密码：" prop="password">
-                    <el-input type="password"
-                              placeholder="请输入密码"
-                              v-model="loginFormData.password">
-                    </el-input>
-                </el-form-item>
-                <el-form-item label="验证码" prop="code">
-                    <el-input style="width: 120px;"
-                            v-model="loginFormData.code">
-                    </el-input>
-                    <img src="/kaptcha-image" style="width: 120px;height: 40px;vertical-align: middle;" alt="">
-                </el-form-item>
-            </el-form>
-        </MyModal>
-            <el-form :model="loginFormData" ref="registerData" :rules="loginRules" label-width="100px">
-                <el-form-item label="邮箱：" prop="email">
-                    <el-input
-                            placeholder="请输入用户名"
-                            v-model="loginFormData.email">
-                    </el-input>
-                </el-form-item>
                 <el-form-item label="用户名：" prop="userName">
                     <el-input
                             placeholder="请输入用户名"
@@ -46,15 +19,121 @@
                     <el-input style="width: 120px;"
                               v-model="loginFormData.code">
                     </el-input>
-                    <img src="/kaptcha-image" style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                    <img src="http://timebank.longhaiyan.cn/kaptcha-image"
+                         style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="text" @click="toRegister">还没有账号，赶紧戳我去注册吧</el-button>
+                </el-form-item>
+            </el-form>
+        </MyModal>
+        <MyModal class="my-login-box" :data="registerData" :step="registerDialogStep" style="text-align: left">
+            <el-form :model="registerFormData" ref="registerForm" :rules="registerRules" label-width="100px">
+                <el-form-item label="邮箱：" prop="email">
+                    <el-input
+                            placeholder="请输入用户名"
+                            v-model="registerFormData.email">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="用户名：" prop="userName">
+                    <el-input
+                            placeholder="请输入用户名"
+                            v-model="registerFormData.userName">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="密码：" prop="password">
+                    <el-input type="password"
+                              placeholder="请输入密码"
+                              v-model="registerFormData.password">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="确认密码：" prop="checkPassword">
+                    <el-input type="password"
+                              placeholder="请确认密码"
+                              v-model="registerFormData.checkPassword">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="验证码" prop="code">
+                    <el-input style="width: 120px;"
+                              v-model="registerFormData.code">
+                    </el-input>
+                    <img @click="getKaptchaImg" src="http://timebank.longhaiyan.cn/kaptcha-image"
+                         style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                </el-form-item>
+            </el-form>
+        </MyModal>
+        <MyModal class="my-login-box" :data="publishData" :step="publishDialogStep" style="text-align: left">
+            <el-form :model="publishFormData" ref="publishForm" :rules="publishRules" label-width="100px">
+                <el-form-item label="任务主题简述：" prop="name">
+                    <el-input
+                            placeholder="请输入任务简要"
+                            v-model="publishFormData.name">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="任务详情：" prop="detail">
+                    <el-input type="textarea"
+                            placeholder="请输入用户名"
+                            v-model="publishFormData.detail">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="任务分类：" prop="type">
+                    <el-input type="textarea"
+                              v-model="publishFormData.type">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="酬金：" prop="money">
+                    <el-input
+                              placeholder=""
+                              v-model="publishFormData.money">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="要求：">
+                    <el-input
+                              placeholder=""
+                              v-model="publishFormData.require">
+                    </el-input>
+                </el-form-item>
+
+                <el-form-item label="验证码" prop="code">
+                    <el-input style="width: 120px;"
+                              v-model="publishFormData.code">
+                    </el-input>
+                    <img @click="getKaptchaImg" src="http://timebank.longhaiyan.cn/kaptcha-image"
+                         style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                </el-form-item>
+            </el-form>
+        </MyModal>
+        <MyModal class="my-login-box" :data="topicPublishData" :step="topicPublishDialogStep" style="text-align: left">
+            <el-form :model="topicPublishFormData" ref="topicPublishForm" :rules="topicPublishRules" label-width="100px">
+                <el-form-item label="帖子详情：" prop="detail">
+                    <el-input type="textarea"
+                            placeholder="请输入输入帖子内容"
+                            v-model="topicPublishFormData.detail">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="帖子图片：">
+                    <el-upload
+                            class="avatar-uploader"
+                            action="http://bbs.chenxubiao.cn/picture/upload/project"
+                            name="uploadFile"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                    >
+                        <img v-if="topicPublishFormData.imgUrl" :src="topicPublishData.imgUrl" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
                 </el-form-item>
             </el-form>
         </MyModal>
 
 
         <el-row type="flex" justify="space-around" align="center" class="header">
-            <el-col class="logo">
-                图片社区
+            <el-col>
+                <router-link to="/" class="logo">
+                    <img src="http://timebank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
+
+                </router-link>
+
             </el-col>
             <el-col class="my_header">
                 <MyHeader/>
@@ -73,205 +152,415 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex'
-    import * as GlobalType from '@/store/global/types'
-    import MyHeader from './components/my_header.vue'
-    import MyFooter from './components/my_footer.vue'
-    import MyModal from  '@/components/my_modal.vue'
+  import {mapActions, mapState} from 'vuex'
+  import * as GlobalType from '@/store/global/types'
+  import MyHeader from './components/my_header.vue'
+  import MyFooter from './components/my_footer.vue'
+  import MyModal from  '@/components/my_modal.vue'
 
-    export default {
-        name: 'app',
-        data(){
-            return {
-                loginForm: {
-                    userName: "",
-                    password: "",
-                    code:""
-                },
-                loginData: {
-//                    visible: false,
-                    size: 'tiny',
-                    confirmButtonText: '确认登录',
-                    title:'登录'
-                },
-                registerData: {
-                    size: 'tiny',
-                    confirmButtonText: '确认注册',
-                    title:'注册'
-                },
-                loginRules:{
-                    userName:{
-                        /*required: true,
-                         message: '请输入用户名',
-                         trigger: 'blur'*/
-                        required: true,
-                        validator: this.checkUserName,
-                        trigger: 'blur'
-                    },
-                    password:{
-                        required: true,
-                        message: '请输入密码',
-                        trigger: 'blur'
-                        /*require: true,
-                         validator: this.checkPwd,
-                         trigger: 'blur'*/
-                    },
-                    code:{
-                        required: true,
-                        message: '请输入验证码',
-                        trigger: 'blur'
-                    }
-                },
-                registerRules:{
-                    userName:{
-                        /*required: true,
-                         message: '请输入用户名',
-                         trigger: 'blur'*/
-                        required: true,
-                        validator: this.checkUserName,
-                        trigger: 'blur'
-                    },
-                    email: {
-                        required: true,
-                        message: '请输入邮箱',
-                        trigger: 'blur'
-                    },
-                    password:{
-                        required: true,
-                        message: '请输入密码',
-                        trigger: 'blur'
-                        /*require: true,
-                         validator: this.checkPwd,
-                         trigger: 'blur'*/
-                    },
-                    code:{
-                        required: true,
-                        message: '请输入验证码',
-                        trigger: 'blur'
-                    }
-                }
+  export default {
+    name: 'app',
+    data(){
+      return {
+        loginForm: {
+          userName: "",
+          password: "",
+          code: ""
+        },
+        registerForm: {
+          email: "",
+          userName: "",
+          password: "",
+          checkPassword: "",
+          code: ""
 
-            }
         },
-        computed:{
-            ...mapState({
-                dialogStep: state => state.myGlobal.dialogStep,
-                loginErrorMsg: state => state.myGlobal.loginErrorMsg,
-                loginDialogVisible: state => state.myGlobal.loginDialogVisible,
-                registerDialogVisible: state => state.myGlobal.registerDialogVisible,
-                code: state => state.myGlobal.code
-            }),
-            loginFormData(){
-                return Object.assign(this.loginData, {visible: this.loginDialogVisible})
-            },
-            registerFormData(){
-                return Object.assign(this.registerData, {visible: this.registerDialogVisible})
-            }
+        loginData: {
+          //                    visible: false,
+          size: 'tiny',
+          confirmButtonText: '确认登录',
+          title: '登录'
         },
-        watch:{
-            loginDialogVisible: function() {
-                console.log('loginDialogVisible 的值改变了',this.loginDialogVisible)
-                if(this.loginDialogVisible){
-                    this.onLogin()
-                }
-            },
-            registerDialogVisible: function() {
-                console.log('registerDialogVisible 的值改变了',this.registerDialogVisible)
-                if(this.registerDialogVisible){
-                    this.onLogin()
-                }
-            }
+        registerData: {
+          size: 'tiny',
+          confirmButtonText: '确认注册',
+          title: '注册'
         },
-        methods:{
-            ...mapActions({
-                userLogin: GlobalType.A_USER_LOGIN,
-                loginHide: GlobalType.A_LOGIN_HIDE,
-                getCheckCode: GlobalType.A_GET_CHECK_CODE
-            }),
-            onLogin(){
-                let self = this
-                console.log('loginFormData11',this.loginFormData)
-                console.log('code',this.code)
-                this.getCheckCode()
-                this.openModal(this.loginFormData, {
-                    beforeConfirm(next){
-                        console.log("beforeConfirm")
-                        self.$refs.loginForm.validate(value => {
-                            if(value){
-                                console.log('dialogStep',self.dialogStep)
-                                console.log('loginForm22',self.loginFormData)
-                                self.userLogin({
-                                    userName:self.loginFormData.userName,
-                                    password:self.loginFormData.password,
-                                    code: self.loginFormData.code
-                                }).then(()=>{
-                                    if(self.dialogStep === 'error'){
-                                        self.showMessage()
-                                        return
-                                    }else{
-                                        self.$message({
-                                            type: 'success',
-                                            message:'登录成功'
-                                        })
-                                        return next()
-                                    }
-                                })
-                            }
-                        })
-                    },
-                    beforeCancel(next) {
-                        console.log("beforeCancel")
-                        self.loginHide().then(()=>{
-                            return next()
-                        })
-                    }
-                })
-            },
-            onRegister(){
-                console.log("onregister")
+        publishData: {
+          size: 'tiny',
+          confirmButtonText: '确认发布',
+          title: '发布任务'
+        },
+        topicPublishData:{
+          size: 'small',
+          confirmButtonText: '确认发布',
+          title: '发帖子',
+          imgUrl:'',
+          picId:''
+        },
 
-            },
-            // 打开modal，传入一些回调函数
-            openModal(obj, ops) {
-//                obj.visible = true
-                for (var i in ops) {
-                    if (typeof ops[i] === 'function') {
-                        obj[i] = ops[i]
-                    }
-                }
-            },
-            checkUserName(rule, value, callback){
-                if (typeof value === 'undefined'|| value === '') {
-                    return callback(new Error('请输入用户名'))
-                }
-                return callback()
-            },
-            showMessage() {
-                this.$message.error(this.loginErrorMsg)
-            },
-//            检测屏幕滚动事件
-            getScroll(){
-                window.onscroll = function(){
-                    let hasActive = document.querySelector('.header').className.match(/(?:^|\s)header-active(?!\S)/)
-                    let top = document.querySelector('body').scrollTop
-                    if(top >0 && !hasActive){
-                        document.querySelector('.header').className += ' header-active '
-                    }
-                    if(top == 0){
-                        document.querySelector('.header').className = document.querySelector('.header').className.replace(( /(?:^|\s)header-active(?!\S)/),'')
-                    }
-                }
-            }
+        loginRules: {
+          userName: {
+              /*required: true,
+               message: '请输入用户名',
+               trigger: 'blur'*/
+            required: true,
+            validator: this.checkUserName,
+            trigger: 'blur'
+          },
+          password: {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+              /*require: true,
+               validator: this.checkPwd,
+               trigger: 'blur'*/
+          },
+          code: {
+            required: true,
+            message: '请输入验证码',
+            trigger: 'blur'
+          }
         },
-        mounted() {
-            this.getScroll()
+        registerRules: {
+          userName: {
+            required: true,
+            validator: this.checkUserName,
+            trigger: 'blur'
+          },
+          email: [
+            {required: true, message: '请输入邮箱地址', trigger: 'blur'},
+            {type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
+          ],
+          password: {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+          },
+          checkPassword: {
+            required: true,
+            validator: this.confirmCheckPassword,
+            trigger: 'blur'
+          },
+          code: {
+            required: true,
+            message: '请输入验证码',
+            trigger: 'blur'
+          }
         },
-        components: {
-            MyHeader,
-            MyFooter,
-            MyModal
+        publishRules:{
+          name: {
+            required: true,
+            message: '请输入任务简介',
+            trigger: 'blur'
+          },
+          detail: {
+            required: true,
+            message: '请输入任务详情',
+            trigger: 'blur'
+          },
+          type: {
+            required: true,
+            message: '请选择任务类型',
+            trigger: 'blur'
+          },
+          money: {
+            required: true,
+            message: '请输入要花费的时间币',
+            trigger: 'blur'
+          },
+          code: {
+            required: true,
+            message: '请输入验证码',
+            trigger: 'blur'
+          },
+
+        },
+        topicPublishRules:{
+          detail: {
+            required: true,
+            message: '请输入帖子内容',
+            trigger: 'blur'
+          },
         }
+
+      }
+    },
+    computed: {
+      ...mapState({
+        loginDialogStep: state => state.myGlobal.loginDialogStep,
+        registerDialogStep: state => state.myGlobal.registerDialogStep,
+        publishDialogStep: state => state.myGlobal.publishDialogStep,
+        topicPublishDialogStep: state => state.myGlobal.topicPublishDialogStep,
+        loginErrorMsg: state => state.myGlobal.loginErrorMsg,
+        loginDialogVisible: state => state.myGlobal.loginDialogVisible,
+        registerDialogVisible: state => state.myGlobal.registerDialogVisible,
+        publishDialogVisible: state => state.myGlobal.publishDialogVisible,
+        topicPublishDialogVisible: state => state.myGlobal.topicPublishDialogVisible,
+        code: state => state.myGlobal.code
+      }),
+      loginFormData(){
+        return Object.assign(this.loginData, {visible: this.loginDialogVisible})
+      },
+      registerFormData(){
+        return Object.assign(this.registerData, {visible: this.registerDialogVisible})
+      },
+      publishFormData(){
+        return Object.assign(this.publishData, {visible: this.publishDialogVisible})
+      },
+      topicPublishFormData(){
+        return Object.assign(this.topicPublishData, {visible: this.topicPublishDialogVisible})
+      },
+
+
+    },
+    watch: {
+      loginDialogVisible: function() {
+        console.log('loginDialogVisible 的值改变了', this.loginDialogVisible)
+        if (this.loginDialogVisible) {
+          this.onLogin()
+        }
+      },
+      registerDialogVisible: function() {
+        console.log('registerDialogVisible 的值改变了', this.registerDialogVisible)
+        if (this.registerDialogVisible) {
+          this.onRegister()
+        }
+      },
+      publishDialogVisible: function() {
+        console.log('publishDialogVisible 的值改变了', this.publishDialogVisible)
+        if (this.publishDialogVisible) {
+          this.onPublish()
+        }
+      },
+      topicPublishDialogVisible: function() {
+        console.log('topicPublishDialogVisible 的值改变了', this.topicPublishDialogVisible)
+        if (this.topicPublishDialogVisible) {
+          this.onTopicPublish()
+        }
+      },
+
+
+    },
+    methods: {
+      ...mapActions({
+        userLogin: GlobalType.A_USER_LOGIN,
+        userRegister: GlobalType.A_USER_REGISTER,
+        taskPublish: GlobalType.A_TASK_PUBLISH,
+        topicPublish: GlobalType.A_TOPIC_PUBLISH,
+        loginHide: GlobalType.A_LOGIN_HIDE,
+        registerHide: GlobalType.A_REGISTER_HIDE,
+        publishHide: GlobalType.A_PUBLISH_HIDE,
+        topicPublishHide: GlobalType.A_TOPIC_PUBLISH_HIDE,
+        getCheckCode: GlobalType.A_GET_CHECK_CODE,
+        registerShow: GlobalType.A_REGISTER_SHOW
+      }),
+      onLogin(){
+        let self = this
+        //                this.getCheckCode()
+        this.openModal(this.loginFormData, {
+          beforeConfirm(next){
+            self.$refs.loginForm.validate(value => {
+              if (value) {
+                self.userLogin({
+                  userName: self.loginFormData.userName,
+                  password: self.loginFormData.password,
+                  code: self.loginFormData.code
+                }).then(() => {
+                  if (self.loginDialogStep === 'error') {
+                    self.showMessage()
+                    return
+                  } else {
+                    self.$message({
+                      type: 'success',
+                      message: '登录成功'
+                    })
+                    return next()
+                  }
+                })
+              }
+            })
+          },
+          beforeCancel(next) {
+            console.log("beforeCancel")
+            self.loginHide().then(() => {
+              return next()
+            })
+          }
+        })
+      },
+      onRegister(){
+        let self = this
+        //                this.getCheckCode()
+        this.openModal(this.registerFormData, {
+          beforeConfirm(next){
+            console.log("beforeConfirm")
+            self.$refs.registerForm.validate(value => {
+              if (value) {
+                self.userRegister({
+                  email: self.registerFormData.email,
+                  userName: self.registerFormData.userName,
+                  password: self.registerFormData.password,
+                  code: self.registerFormData.code
+                }).then(() => {
+                  if (self.registerDialogStep === 'error') {
+                    self.showMessage()
+                    return
+                  } else {
+                    self.$message({
+                      type: 'success',
+                      message: '注册并登录成功'
+                    })
+                    return next()
+                  }
+                })
+              }
+            })
+          },
+          beforeCancel(next) {
+            self.registerHide().then(() => {
+              return next()
+            })
+          }
+        })
+
+      },
+      onPublish(){
+        let self = this
+        this.openModal(this.publishFormData, {
+          beforeConfirm(next){
+            console.log("beforeConfirm")
+            self.$refs.publishForm.validate(value => {
+              if (value) {
+                self.taskPublish({
+                  name: self.publishFormData.name,
+                  detail: self.publishFormData.detail,
+                  type: self.publishFormData.type,
+                  money: self.publishFormData.money,
+                  require: self.publishFormData.require,
+                  code: self.publishFormData.code
+                }).then(() => {
+                  if (self.publishDialogStep === 'error') {
+                    self.showMessage()
+                    return
+                  } else {
+                    self.$message({
+                      type: 'success',
+                      message: '发布成功'
+                    })
+                    return next()
+                  }
+                })
+              }
+            })
+          },
+          beforeCancel(next) {
+            self.publishHide().then(() => {
+              return next()
+            })
+          }
+        })
+
+      },
+      onTopicPublish(){
+        let self = this
+        this.openModal(this.topicPublishFormData, {
+          beforeConfirm(next){
+            console.log("beforeConfirm")
+            self.$refs.topicPublishForm.validate(value => {
+              if (value) {
+                self.topicPublish({
+                  detail: self.topicPublishFormData.detail,
+                  picId: self.topicPublishFormData.picId,
+                }).then(() => {
+                  if (self.topicPublishDialogStep === 'error') {
+                    self.showMessage()
+                    return
+                  } else {
+                    self.$message({
+                      type: 'success',
+                      message: '发布成功'
+                    })
+                    return next()
+                  }
+                })
+              }
+            })
+          },
+          beforeCancel(next) {
+            self.topicPublishHide().then(() => {
+              return next()
+            })
+          }
+        })
+
+      },
+
+      // 打开modal，传入一些回调函数
+      openModal(obj, ops) {
+        //                obj.visible = true
+        for (var i in ops) {
+          if (typeof ops[i] === 'function') {
+            obj[i] = ops[i]
+          }
+        }
+      },
+      checkUserName(rule, value, callback){
+        if (typeof value === 'undefined' || value === '') {
+          return callback(new Error('请输入用户名'))
+        }
+        return callback()
+      },
+      confirmCheckPassword(rule, value, callback){
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.registerFormData.password) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      },
+      showMessage() {
+        this.$message.error(this.loginErrorMsg)
+      },
+      //            检测屏幕滚动事件
+      getScroll(){
+        window.onscroll = function() {
+          let hasActive = document.querySelector('.header').className.match(/(?:^|\s)header-active(?!\S)/)
+          let top = document.querySelector('body').scrollTop
+          if (top > 0 && !hasActive) {
+            document.querySelector('.header').className += ' header-active '
+          }
+          if (top == 0) {
+            document.querySelector('.header').className = document.querySelector('.header').className.replace(( /(?:^|\s)header-active(?!\S)/), '')
+          }
+        }
+      },
+      toRegister(){
+        this.loginHide()
+        this.registerShow()
+      },
+      getKaptchaImg(event){
+        event.target.src = "http://timebank.longhaiyan.cn/kaptcha-image?v=" + new Date()
+      },
+      handleAvatarSuccess: function (res, file, fileList) {
+        if (res.success) {
+          this.topicPublishFormData.imgUrl = 'http://timebank.longhaiyan.cn/picture/show?id='+res.vars.data.id
+          this.topicPublishFormData.picId = res.vars.data.id
+        } else {
+          this.$message.error("上传失败")
+        }
+      },
+    },
+    mounted() {
+      this.getScroll()
+    },
+    components: {
+      MyHeader,
+      MyFooter,
+      MyModal
     }
+  }
 </script>
 
 <style>
@@ -284,7 +573,8 @@
         /*background: #abcabc;*/
         /*height: 100%;*/
     }
-    .my-login-box .el-dialog{
+
+    .my-login-box .el-dialog {
         min-width: 300px;
     }
 </style>

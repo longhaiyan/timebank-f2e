@@ -15,7 +15,6 @@ import {NO_NEED_LOGIN_ROUTER} from  '../constants/router'
 Vue.use(Router)
 const routerInit = function (store) {
   const routes = routesConfig(store)
-  console.log('routes', routes)
 
   const router = new Router({
     routes,
@@ -31,7 +30,6 @@ const routerInit = function (store) {
 
     routerBefore({to, from, next}, store)
   })
-  console.log("得到的router配置为",router)
 
   return router
 

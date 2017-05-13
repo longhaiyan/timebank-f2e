@@ -7,7 +7,7 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '//bbs.chenxubiao.cn/',//线上环境的地址
+    assetsPublicPath: '//timebank.longhaiyan.cn/',//线上环境的地址
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
@@ -31,7 +31,7 @@ module.exports = {
 
     },
       /*'/': {
-          target: 'http://bbs.chenxubiao.cn',
+          target: 'http://timebank.longhaiyan.cn',
           changeOrigin: true
       }*/
     // CSS Sourcemaps off by default because relative paths are "buggy"

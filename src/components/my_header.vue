@@ -1,24 +1,36 @@
 <template>
     <div>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1">
-                <router-link to="/Hello/demo">demo页</router-link>
+                <router-link to="/">首页</router-link>
             </el-menu-item>
             <el-submenu index="2">
                 <template slot="title">
-                    <router-link to="/">index页</router-link>
+                    <router-link to="/task/new">全部任务</router-link>
                 </template>
-                <el-menu-item index="2-1">选项1</el-menu-item>
-                <el-menu-item index="2-2">选项2</el-menu-item>
-                <el-menu-item index="2-3">选项3</el-menu-item>
+                <el-menu-item index="2-1">最新任务</el-menu-item>
+                <el-menu-item index="2-2">最热任务</el-menu-item>
+                <el-menu-item index="2-3">技能任务</el-menu-item>
+                <el-menu-item index="2-4">生活任务</el-menu-item>
+                <el-menu-item index="2-5">其它任务</el-menu-item>
             </el-submenu>
+            <el-menu-item index="3">
+                <router-link to="/community">社区</router-link>
+            </el-menu-item>
+            <el-menu-item index="4">
+                <router-link to="/">投诉</router-link>
+            </el-menu-item>
+            <el-menu-item index="5">
+                <router-link to="/">关于我们</router-link>
+            </el-menu-item>
+
             <el-menu-item v-if="!localUserName" index="3">
-                <el-button type="text" @click="onLogin">登录/</el-button>
+                <el-button type="text" @click="onLogin">登录</el-button><span>/</span>
                 <el-button type="text" @click="onRegister">注册</el-button>
             </el-menu-item>
             <el-submenu index="4" class="userInfoBox" v-else>
                     <template slot="title" style="" >
-                        <img src="static/img/userImg.jpeg" alt="" style="width: 40px;height: 40px;border-radius: 100%;">
+                        <img src="http://timebank.longhaiyan.cn/img/userImg.jpeg" alt="" style="width: 40px;height: 40px;border-radius: 100%;">
                         <span>{{localUserName}}</span>
                     </template>
                 <el-menu-item index="4-1">选项1</el-menu-item>
@@ -71,9 +83,7 @@
         },
         computed: {
             ...mapState({
-                dialogStep: state => state.myGlobal.dialogStep,
                 loginErrorMsg: state => state.myGlobal.loginErrorMsg,
-                loginDialogVisible: state => state.myGlobal.loginDialogVisible,
                 userName: state => state.myGlobal.username,
             })
         },
@@ -85,7 +95,6 @@
         },
         methods: {
             ...mapActions({
-                userLogin: GlobalType.A_USER_LOGIN,
                 loginShow: GlobalType.A_LOGIN_SHOW,
                 registerShow: GlobalType.A_REGISTER_SHOW
             }),
@@ -96,6 +105,7 @@
                 this.loginShow()
             },
             onRegister(){
+                console.log('header onRegister')
                 this.registerShow()
             },
             // 打开modal，传入一些回调函数

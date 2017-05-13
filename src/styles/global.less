@@ -1,5 +1,5 @@
 html,body{
-  //height: 100%;
+  height: 100%;
   background: #99a9bf;
 }
 a{
@@ -12,52 +12,69 @@ a{
   top: 0;
   left: 0;
   z-index: 20;
+  height: 80px;
+  background: #000;
 
   .logo{
     text-align: left;
     margin-left: 20px;
-    line-height: 60px;
+    line-height: 80px;
+    display: flex;
+    align-items: center;
     color: #fff;
   }
-
-  a{
-    color: rgba(255, 255, 255, .7);
+  .logo img{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
   }
+
 
   /*重置element的头部导航栏样式*/
   .el-menu{
     background: transparent;
     display: inline-block;
   }
-  .el-menu-item ,.el-submenu__title{
+/*  .el-menu-item ,.el-submenu__title{
     color: rgba(255, 255, 255, .7);
   }
   .el-menu-item .is-active{
     color: #fff;
-  }
-  .el-menu--horizontal>.el-menu-item:hover{
+  }*/
+/*  .el-menu--horizontal>.el-menu-item:hover{
     border-bottom: 0px solid transparent;
     background: transparent;
     color: #fff;
-  }
+  }*/
   .el-menu--horizontal .el-submenu__title:hover{
     background: transparent;
   }
   .el-menu--horizontal .el-submenu>.el-menu{
-    background: rgba(26, 26, 26, .9);
+    top:79px;
     border-width: 0;
     text-align: center;
-  }
-  .el-menu--horizontal .el-submenu .el-menu-item{
-    background: transparent;
+    box-shadow:none;
+    background-color: #000;
   }
   .el-menu--horizontal>.el-submenu:hover .el-submenu__title,
   .el-menu--horizontal>.el-submenu.is-active .el-submenu__title{
     border-bottom: 0px solid transparent;
   }
   .el-submenu .el-menu-item:hover{
-    color: #fff;
+    font-size: 16px;
   }
+}
+.el-menu--horizontal .el-menu-item{
+  height: 80px;
+  line-height: 80px;
+}
+.el-menu--horizontal .el-submenu .el-submenu__title{
+  height: 80px;
+  line-height: 80px;
+}
+.el-menu--horizontal .el-submenu .el-menu-item{
+  color: #fff;
+  background-color: #000;
 }
 .header-active{
   background-color: rgba(0,0,0,0.7);
@@ -69,8 +86,10 @@ a{
   top: 0;
   left: 0;
   height: 100%;
+  margin-top: 80px;
+  background-color: #fff;
 }
-/*.login-container{
+.login-container{
   position: absolute;
   width: 100%;
   height: 100%;
@@ -78,4 +97,43 @@ a{
   left: 0;
   z-index: 10000;
   //background: rgba(0,0,0,0.5);
-}*/
+}
+
+.my-space-Between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #20a0ff;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px !important;
+  text-align: center;
+}
+
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+//点点点
+.my-ellipsis{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
