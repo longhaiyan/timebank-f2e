@@ -1,0 +1,48 @@
+.my-community-info{
+  padding: 20px 50px;
+  .community-info-hd{
+    .my-topic-box{
+      border: 1px solid #99a9bf;
+      border-radius: 4px;
+      .my-ellipsis{
+        white-space: wrap;
+      }
+      &:hover{
+        box-shadow: none;
+      }
+    }
+  }
+  .community-info-bd{
+    .discuss{
+      .discuss-user{
+        display: flex;
+        align-items: center;
+        .avatar{
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+        }
+        .user-name{
+          font-size: 18px;
+          margin: 0 10px;
+        }
+        .send-time{
+          font-size: 13px;
+        }
+      }
+      .discuss-info{
+        margin-left: 50px;
+      }
+    }
+    .discuss-mine{
+      .discuss-user{
+        justify-content: flex-end;
+      }
+      .discuss-info{
+        text-align: right;
+        margin-left: 0;
+        margin-right: 50px;
+      }
+    }
+  }
+}

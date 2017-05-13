@@ -8,10 +8,12 @@ import ElementUI from 'element-ui'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'element-ui/lib/theme-default/index.css'
 import './styles/main.less'
+import pluginsGm from './utils/plugins_gm'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueAwesomeSwiper)
+Vue.use(pluginsGm)
 
 // Vue.use(router)
 /* eslint-disable no-new */

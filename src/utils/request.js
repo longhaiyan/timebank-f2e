@@ -16,7 +16,6 @@ export default (options) => {
 
     if (way == 2) {
         // reqwest
-        console.log("走2")
         options = Object.assign({}, {
             crossOrigin: true,
             contentType: "application/x-www-form-urlencoded",
