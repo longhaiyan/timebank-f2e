@@ -4,8 +4,22 @@
 import Hello from '@/components/Hello'
 import Index from '@/views/index/index'
 import Intro from '@/views/intro'
+import Complain from '@/views/complain'
 import demo from '@/components/demoView/demo'
 import Task from '@/views/task/my_task'
+import Zone from '@/views/zone'
+
+import MessageIndex from '@/views/message/message_index'
+import MessagePersonal from '@/views/message/message_personal'
+import MessageSystem from '@/views/message/message_system'
+
+import SettingIndex from '@/views/setting/setting_index'
+import SettingInfo from '@/views/setting/setting_info'
+import SettingGetTask from '@/views/setting/setting_get_task'
+import SettingPrivate from '@/views/setting/setting_private'
+import SettingPublishTask from '@/views/setting/setting_publish_task'
+import SettingCommunity from '@/views/setting/setting_community'
+
 import NewTask from '@/views/task/new_task'
 import CommunityIndex from '@/views/community/community_index'
 import CommunityInfo from '@/views/community/community_info'
@@ -63,6 +77,67 @@ let routes = [
     name:'CommunityInfo',
     component: CommunityInfo
   },
+  {
+    label:'投诉',
+    path: '/complain',
+    name:'Complain',
+    component: Complain
+  },
+  {
+    label:'个人首页',
+    path: '/zone',
+    name:'Zone',
+    component: Zone
+  },
+  {
+    label:'我的消息',
+    path: '/message',
+    name: 'MessageIndex',
+    component: MessageIndex,
+    children:[
+      {
+        path: 'personal',
+        component: MessagePersonal,
+      },
+      {
+        path: 'system',
+        component: MessageSystem,
+      },
+
+    ],
+  },
+  {
+    label:'我的设置',
+    path: '/setting',
+    name: 'SettingIndex',
+    component: SettingIndex,
+    children:[
+      {
+        path: 'info',
+        component: SettingInfo,
+      },
+      {
+        path: 'get_task',
+        component: SettingGetTask,
+      },
+      {
+        path: 'publish_task',
+        component: SettingPublishTask,
+      },
+      {
+        path: 'private',
+        component: SettingPrivate,
+      },
+      {
+        path: 'community',
+        component: SettingCommunity,
+      },
+
+
+
+    ],
+  },
+
 
 ]
 

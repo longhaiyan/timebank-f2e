@@ -63,7 +63,7 @@
             </el-form>
         </MyModal>
         <MyModal class="my-login-box" :data="publishData" :step="publishDialogStep" style="text-align: left">
-            <el-form :model="publishFormData" ref="publishForm" :rules="publishRules" label-width="100px">
+            <el-form :model="publishFormData" ref="publishForm" :rules="publishRules" label-width="130px">
                 <el-form-item label="任务主题简述：" prop="name">
                     <el-input
                             placeholder="请输入任务简要"
@@ -187,7 +187,7 @@
           title: '注册'
         },
         publishData: {
-          size: 'tiny',
+          size: 'small',
           confirmButtonText: '确认发布',
           title: '发布任务'
         },

@@ -1,0 +1,80 @@
+.my-zone{
+  .my-zone-hd{
+    padding: 30px 50px;
+    display: flex;
+    .my-zone_avatar{
+      width: 200px;
+      height: 130px;
+      background-color: #99a9bf;
+      margin-right: 30px;
+    }
+    .zone-user{
+      width: 100%;
+      .zone-user-hd{
+        display: flex;
+        border-bottom: 1px solid #99a9bf;
+        height: 40px;
+        h4{
+          font-weight: 800;
+          margin:0 20px;
+        }
+        p{
+          font-size: 15px;
+          margin: 0;
+          line-height: 40px;
+        }
+      }
+      .zone-user-bd{
+        padding: 10px;
+        .item{
+          font-size: 14px;
+          margin: 7px 0;
+        }
+      }
+
+    }
+  }
+  .my-zone-bd{
+    .el-tabs__content{
+      padding: 20px 0;
+    }
+    .el-tab-pane{
+      padding-top: 40px;
+    }
+    .task-boxes{
+      border-top:1px solid #99a9bf;
+      margin-top: 30px;
+      .task-box{
+        padding:0 30px;
+        .task-box-border{
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid #99a9bf;
+          width: 100%;
+          .order{
+            margin: 0 20px;
+            font-size: 20px;
+            font-style: italic;
+          }
+          .my-info-box{
+            border-radius: 0;
+            width: 100%;
+            border-width: 0;
+            margin-bottom: 0;
+            &:hover{
+              box-shadow:none;
+            }
+          }
+        }
+
+        &:hover{
+          background-color: rgba(153, 169, 191, 0.13);
+        }
+      }
+    }
+    .topic-boxes{
+      padding: 0 50px;
+    }
+  }
+
+}

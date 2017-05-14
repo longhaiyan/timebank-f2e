@@ -27,6 +27,7 @@
 
   export default{
     name: 'communityIndex',
+
     methods:{
       ...mapActions({
         topicPublishShow: GlobalType.A_TOPIC_PUBLISH_SHOW,
