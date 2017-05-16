@@ -1,19 +1,25 @@
 {
   "data": {
     "userId": 1,
+    "userName": "timebank",
     "avatarId": 0,
-    "userName": "long",
-    "cellphone": null,
+    "cellphone": "",
     "sex": 0,
-    "userStatus": 1,
-    "userRole": 0,
-    "email": "long@timebank.com",
-    "createTime": null,
-    "modifyTime": null,
-    "roleSet": null,
-    "login": true,
-    "locking": false,
-    "close": false,
-    "admin": false
+    "userType": 1,
+    "description": "",
+    "email": "bank@bank.cn",
+    "birthday": "1970-01-01 00:00:00",
+    "student": {
+      "id": 1,
+      "createTime": "2017-05-16 19:06:30",
+      "modifyTime": "2017-05-16 19:06:30",
+      "sno": 432,
+      "userId": 1,
+      "name": "342",
+      "dept": "43",
+      "major": "432",
+      "remark": ""
+    },
+    "teacher": null
   }
 }

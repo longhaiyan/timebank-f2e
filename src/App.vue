@@ -1,12 +1,12 @@
 <template>
     <div id="app">
-
+        <!--登录弹窗-->
         <MyModal class="my-login-box" :data="loginData" :step="loginDialogStep" style="text-align: left">
             <el-form :model="loginFormData" ref="loginForm" :rules="loginRules" label-width="100px">
-                <el-form-item label="用户名：" prop="userName">
+                <el-form-item label="用户名：" prop="name">
                     <el-input
                             placeholder="请输入用户名"
-                            v-model="loginFormData.userName">
+                            v-model="loginFormData.name">
                     </el-input>
                 </el-form-item>
                 <el-form-item label="密码：" prop="password">
@@ -19,7 +19,7 @@
                     <el-input style="width: 120px;"
                               v-model="loginFormData.code">
                     </el-input>
-                    <img src="http://timebank.longhaiyan.cn/kaptcha-image"
+                    <img src="http://bank.longhaiyan.cn/kaptcha-image"
                          style="width: 120px;height: 40px;vertical-align: middle;" alt="">
                 </el-form-item>
                 <el-form-item>
@@ -27,6 +27,7 @@
                 </el-form-item>
             </el-form>
         </MyModal>
+        <!--注册弹窗-->
         <MyModal class="my-login-box" :data="registerData" :step="registerDialogStep" style="text-align: left">
             <el-form :model="registerFormData" ref="registerForm" :rules="registerRules" label-width="100px">
                 <el-form-item label="邮箱：" prop="email">
@@ -57,11 +58,12 @@
                     <el-input style="width: 120px;"
                               v-model="registerFormData.code">
                     </el-input>
-                    <img @click="getKaptchaImg" src="http://timebank.longhaiyan.cn/kaptcha-image"
+                    <img @click="getKaptchaImg" src="http://bank.longhaiyan.cn/kaptcha-image"
                          style="width: 120px;height: 40px;vertical-align: middle;" alt="">
                 </el-form-item>
             </el-form>
         </MyModal>
+        <!--发布任务弹窗-->
         <MyModal class="my-login-box" :data="publishData" :step="publishDialogStep" style="text-align: left">
             <el-form :model="publishFormData" ref="publishForm" :rules="publishRules" label-width="130px">
                 <el-form-item label="任务主题简述：" prop="name">
@@ -98,11 +100,12 @@
                     <el-input style="width: 120px;"
                               v-model="publishFormData.code">
                     </el-input>
-                    <img @click="getKaptchaImg" src="http://timebank.longhaiyan.cn/kaptcha-image"
+                    <img @click="getKaptchaImg" src="http://bank.longhaiyan.cn/kaptcha-image"
                          style="width: 120px;height: 40px;vertical-align: middle;" alt="">
                 </el-form-item>
             </el-form>
         </MyModal>
+        <!--发布帖子弹窗-->
         <MyModal class="my-login-box" :data="topicPublishData" :step="topicPublishDialogStep" style="text-align: left">
             <el-form :model="topicPublishFormData" ref="topicPublishForm" :rules="topicPublishRules" label-width="100px">
                 <el-form-item label="帖子详情：" prop="detail">
@@ -130,7 +133,7 @@
         <el-row type="flex" justify="space-around" align="center" class="header">
             <el-col>
                 <router-link to="/" class="logo">
-                    <img src="http://timebank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
+                    <img src="http://bank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
 
                 </router-link>
 
@@ -200,7 +203,7 @@
         },
 
         loginRules: {
-          userName: {
+          name: {
               /*required: true,
                message: '请输入用户名',
                trigger: 'blur'*/
@@ -293,11 +296,13 @@
         publishDialogStep: state => state.myGlobal.publishDialogStep,
         topicPublishDialogStep: state => state.myGlobal.topicPublishDialogStep,
         loginErrorMsg: state => state.myGlobal.loginErrorMsg,
+        registerErrorMsg: state => state.myGlobal.registerErrorMsg,
+        publishErrorMsg: state => state.myGlobal.publishErrorMsg,
+        topicPublishErrorMsg: state => state.myGlobal.topicPublishErrorMsg,
         loginDialogVisible: state => state.myGlobal.loginDialogVisible,
         registerDialogVisible: state => state.myGlobal.registerDialogVisible,
         publishDialogVisible: state => state.myGlobal.publishDialogVisible,
         topicPublishDialogVisible: state => state.myGlobal.topicPublishDialogVisible,
-        code: state => state.myGlobal.code
       }),
       loginFormData(){
         return Object.assign(this.loginData, {visible: this.loginDialogVisible})
@@ -352,23 +357,21 @@
         registerHide: GlobalType.A_REGISTER_HIDE,
         publishHide: GlobalType.A_PUBLISH_HIDE,
         topicPublishHide: GlobalType.A_TOPIC_PUBLISH_HIDE,
-        getCheckCode: GlobalType.A_GET_CHECK_CODE,
         registerShow: GlobalType.A_REGISTER_SHOW
       }),
       onLogin(){
         let self = this
-        //                this.getCheckCode()
         this.openModal(this.loginFormData, {
           beforeConfirm(next){
             self.$refs.loginForm.validate(value => {
               if (value) {
                 self.userLogin({
-                  userName: self.loginFormData.userName,
+                  name: self.loginFormData.name,
                   password: self.loginFormData.password,
                   code: self.loginFormData.code
                 }).then(() => {
                   if (self.loginDialogStep === 'error') {
-                    self.showMessage()
+                    self.showMessage(self.loginErrorMsg)
                     return
                   } else {
                     self.$message({
@@ -391,7 +394,6 @@
       },
       onRegister(){
         let self = this
-        //                this.getCheckCode()
         this.openModal(this.registerFormData, {
           beforeConfirm(next){
             console.log("beforeConfirm")
@@ -404,12 +406,17 @@
                   code: self.registerFormData.code
                 }).then(() => {
                   if (self.registerDialogStep === 'error') {
-                    self.showMessage()
+                    self.showMessage(self.registerErrorMsg)
                     return
                   } else {
-                    self.$message({
-                      type: 'success',
-                      message: '注册并登录成功'
+                    const ele = self.$createElement;
+                    self.$notify({
+                      title: '注册并登录成功',
+                      message: ele('span', { style: 'color: #e08080'}, '只有实名认证的用户可以发布或接受任务，请先实名认证，本系统暂时只支持本校学生和教师实名认证'),
+                      duration: 0
+                    });
+                    self.GM_routerPush({
+                      path: '/setting/confirm',
                     })
                     return next()
                   }
@@ -441,7 +448,7 @@
                   code: self.publishFormData.code
                 }).then(() => {
                   if (self.publishDialogStep === 'error') {
-                    self.showMessage()
+                    self.showMessage(self.publishErrorMsg)
                     return
                   } else {
                     self.$message({
@@ -474,7 +481,7 @@
                   picId: self.topicPublishFormData.picId,
                 }).then(() => {
                   if (self.topicPublishDialogStep === 'error') {
-                    self.showMessage()
+                    self.showMessage(self.topicPublishErrorMsg)
                     return
                   } else {
                     self.$message({
@@ -520,8 +527,8 @@
           callback();
         }
       },
-      showMessage() {
-        this.$message.error(this.loginErrorMsg)
+      showMessage(msg) {
+        this.$message.error(msg)
       },
       //            检测屏幕滚动事件
       getScroll(){
@@ -541,11 +548,11 @@
         this.registerShow()
       },
       getKaptchaImg(event){
-        event.target.src = "http://timebank.longhaiyan.cn/kaptcha-image?v=" + new Date()
+        event.target.src = "http://bank.longhaiyan.cn/kaptcha-image?v=" + new Date()
       },
       handleAvatarSuccess: function (res, file, fileList) {
         if (res.success) {
-          this.topicPublishFormData.imgUrl = 'http://timebank.longhaiyan.cn/picture/show?id='+res.vars.data.id
+          this.topicPublishFormData.imgUrl = 'http://bank.longhaiyan.cn/picture/show?id='+res.vars.data.id
           this.topicPublishFormData.picId = res.vars.data.id
         } else {
           this.$message.error("上传失败")

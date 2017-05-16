@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="my-task-sub">
+        <div class="my-task-sub j-task">
             <el-button type="text">最新任务</el-button>
             <el-button type="text">最热任务</el-button>
             <el-button type="text">生活任务</el-button>

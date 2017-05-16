@@ -1,5 +1,5 @@
 <template>
-    <div class="my-community-index">
+    <div class="my-community-index j-community">
         <div class="my-space-Between community-index-hd">
             <div>
                 <h3>讨论区</h3>

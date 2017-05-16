@@ -15,15 +15,15 @@ export default {
     })
     console.log('state.loginDialogStep', state.loginDialogStep)
   },
-  [Type.M_LOGIN_ONLOAD]: (state, payload) => {
+  [Type.M_USER_INFO_SUCCESS]: (state, payload) => {
     console.log('payload', payload)
     Object.assign(state, {
       loginDialogStep: 'onload',
-      username: payload.data.userName
+      userBaseInfo: payload.data
     })
     console.log('M_LOGIN_ONLOAD 要回显用户信息', state)
   },
-  [Type.M_LOGIN_ERROR]: (state, payload) => {
+  [Type.M_USER_INFO_ERROR]: (state, payload) => {
     console.log('M_LOGIN_ERROR', payload)
     Object.assign(state, {
       loginDialogStep: 'error',
@@ -49,23 +49,24 @@ export default {
   [Type.M_REGISTER_SUBMITTING]: (state, payload) => {
     console.log('M_REGISTER_SUBMITTING state', state)
     Object.assign(state, {
-      loginDialogStep: 'submitting'
+      registerDialogStep: 'submitting'
     })
     console.log('state.loginDialogStep', state.loginDialogStep)
   },
   [Type.M_REGISTER_ONLOAD]: (state, payload) => {
     console.log('payload', payload)
     Object.assign(state, {
-      loginDialogStep: 'onload',
-      username: payload.data.userName
+      registerDialogStep: 'onload',
+      userBaseInfo:payload.data
+      // username: payload.data.userName
     })
     console.log('M_REGISTER_ONLOAD 要回显用户信息', state)
   },
   [Type.M_REGISTER_ERROR]: (state, payload) => {
     console.log('M_REGISTER_ERROR', payload)
     Object.assign(state, {
-      loginDialogStep: 'error',
-      loginErrorMsg: payload.message
+      registerDialogStep: 'error',
+      registerErrorMsg: payload.message
     })
   },
   [Type.M_REGISTER_SHOW]: (state, payload) => {
@@ -82,14 +83,15 @@ export default {
     })
     console.log('M_REGISTER_HIDE registerDialogVisible', state.loginDialogVisible)
   },
-  [Type.M_GET_CHECK_CODE]: (state, payload) => {
+
+  /*[Type.M_GET_CHECK_CODE]: (state, payload) => {
     console.log("M_GET_CHECK_CODE")
     Object.assign(state, {
       code: payload.code
     })
     console.log('M_GET_CHECK_CODE checkCode', state.code)
 
-  },
+  },*/
 
   // 发布弹窗状态
   [Type.M_PUBLISH_SUBMITTING]: (state, payload) => {
@@ -162,4 +164,9 @@ export default {
     })
     console.log('M_TOPIC_PUBLISH_HIDE publishDialogVisible',state.topicPublishDialogVisible)
   },
+  [Type.M_SETTING_NAV]:(state, payload) =>{
+    Object.assign(state, {
+      settingNav: payload.name
+    })
+  }
 }

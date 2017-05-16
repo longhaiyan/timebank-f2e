@@ -63,6 +63,8 @@
     </div>
 </template>
 <script>
+  import {mapActions, mapState} from 'vuex'
+  import * as GlobalType from '@/store/global/types'
   export default{
     name: 'settingGetTask',
     data(){
@@ -79,6 +81,9 @@
       }
     },
     methods:{
+      ...mapActions({
+        settingNav: GlobalType.A_SETTING_NAV,
+      }),
       goTaskInfo(){
         this.GM_routerPush({
           path: '/intro',
@@ -87,7 +92,10 @@
           }
         })
       }
-    }
+    },
+    mounted(){
+      this.settingNav({name:'get_task'})
+    },
 
   }
 </script>

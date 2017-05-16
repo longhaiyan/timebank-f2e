@@ -63,6 +63,8 @@
     </div>
 </template>
 <script>
+  import {mapActions, mapState} from 'vuex'
+  import * as GlobalType from '@/store/global/types'
   export default{
     name: 'settingPublishTask',
     data(){
@@ -78,7 +80,15 @@
 
       }
     },
-    methods: {}
+    methods: {
+      ...mapActions({
+        settingNav: GlobalType.A_SETTING_NAV,
+
+      }),
+    },
+    mounted(){
+      this.settingNav({name:'publish_task'})
+    },
 
   }
 </script>

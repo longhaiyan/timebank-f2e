@@ -10,10 +10,10 @@
                     <span>{{data.createTime}}</span>
                 </div>
                 <img v-if="data.picId" class="topic-box-img"
-                     :src="'http://timebank.longhaiyan.cn/picture/show?id='+data.picId" alt="">
+                     :src="'http://bank.longhaiyan.cn/picture/show?id='+data.picId" alt="">
                 <div class="my-space-Between">
                     <div class="topic-box_user">
-                        <img src="http://timebank.longhaiyan.cn/img/user.jpeg" alt="" class="avatar">
+                        <img src="http://bank.longhaiyan.cn/img/user.jpeg" alt="" class="avatar">
                         {{data.userName}}
 
                     </div>
@@ -28,6 +28,8 @@
 
 </template>
 <script>
+  import {mapActions, mapState} from 'vuex'
+  import * as GlobalType from '@/store/global/types'
   import topicBox from '@/components/topic_box'
   export default{
     name: 'settingCommunity',
@@ -45,6 +47,10 @@
       }
     },
     methods: {
+      ...mapActions({
+        settingNav: GlobalType.A_SETTING_NAV,
+
+      }),
       goCommunityInfo: function(communityId) {
         this.GM_routerPush({
           path: '/info',
@@ -53,6 +59,9 @@
           }
         })
       }
+    },
+    mounted(){
+      this.settingNav({name:'community'})
     },
     components: {
       topicBox,

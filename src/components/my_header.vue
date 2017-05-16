@@ -24,26 +24,26 @@
                 <router-link to="/">关于我们</router-link>
             </el-menu-item>
 
-            <el-menu-item v-if="!localUserName" index="3">
+            <el-menu-item v-if="!userBaseInfo" index="6">
                 <el-button type="text" @click="onLogin">登录</el-button>
                 <span>/</span>
                 <el-button type="text" @click="onRegister">注册</el-button>
             </el-menu-item>
-            <el-submenu index="4" class="userInfoBox" v-else>
+            <el-submenu index="7" class="userInfoBox" v-else>
                 <template slot="title" style="">
-                    <img src="http://timebank.longhaiyan.cn/img/userImg.jpeg" alt=""
+                    <img src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
                          style="width: 40px;height: 40px;border-radius: 100%;">
-                    <span>{{localUserName}}</span>
+                    <span>{{userBaseInfo.userName}}</span>
                 </template>
-                <el-menu-item index="4-1">选项1</el-menu-item>
-                <el-menu-item index="4-2">选项2</el-menu-item>
-                <el-menu-item index="4-3">选项3</el-menu-item>
+                <el-menu-item index="7-1">选项1</el-menu-item>
+                <el-menu-item index="7-2">选项2</el-menu-item>
+                <el-menu-item index="7-3">选项3</el-menu-item>
             </el-submenu>
             <el-submenu index="4" class="userInfoBox">
                 <template slot="title" style="">
-                    <img src="http://timebank.longhaiyan.cn/img/userImg.jpeg" alt=""
+                    <img src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
                          style="width: 40px;height: 40px;border-radius: 100%;">
-                    <span>{{localUserName}}</span>
+                    <span>{{userBaseInfo.userName}}</span>
                 </template>
                 <el-menu-item index="4-1">
                     <router-link to="/zone">个人主页</router-link>
@@ -74,7 +74,7 @@
     data() {
       return {
         activeIndex: '1',
-        localUserName: ''
+//        localUserName: ''
           /*loginForm: {
            userName: "",
            pwd: ""
@@ -108,20 +108,21 @@
     computed: {
       ...mapState({
         loginErrorMsg: state => state.myGlobal.loginErrorMsg,
-        userName: state => state.myGlobal.username,
+//        userName: state => state.myGlobal.username,
+        userBaseInfo: state => state.myGlobal.userBaseInfo,
       })
     },
     watch: {
-      userName: function() {
-        console.log("出发 islogin", this.userName)
+      /*userBaseInfo: function() {
         this.isLogin()
-      }
+      }*/
     },
     methods: {
       ...mapActions({
         loginShow: GlobalType.A_LOGIN_SHOW,
         registerShow: GlobalType.A_REGISTER_SHOW,
         publishShow: GlobalType.A_PUBLISH_SHOW,
+        getBaseUserInfo: GlobalType.A_USER_BASE_INFO,
 
       }),
       handleSelect(key, keyPath) {
@@ -158,16 +159,38 @@
       showMessage() {
         this.$message.error(this.loginErrorMsg)
       },
-      isLogin(){
+      /*isLogin(){
         console.log("chufa islogin", this.userName)
         if (this.userName) {
           console.log("xiugai ")
           this.localUserName = this.userName
         }
-      },
-      onPublish: function() {
+      },*/
+      onPublish() {
         this.publishShow()
+      },
+      setNavActiveIndex(){
+        if(document.querySelector('.j-index')){
+          this.activeIndex = "1"
+        }else if(document.querySelector('.j-task')){
+          this.activeIndex = "2"
+        }else if(document.querySelector('.j-community')){
+          this.activeIndex = "3"
+        }else if(document.querySelector('.complain')){
+          this.activeIndex = "4"
+        }else if(document.querySelector('.j-about')){
+          this.activeIndex = "5"
+        }else{
+          this.activeIndex = ""
+        }
       }
+    },
+    mounted(){
+      if (window.initState.isLogin) {
+        console.log("自动登录")
+        this.getBaseUserInfo()
+      }
+      this.setNavActiveIndex()
     },
     components: {
       MyModal

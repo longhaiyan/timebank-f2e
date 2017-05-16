@@ -1,6 +1,7 @@
 html,body{
   height: 100%;
   background: #99a9bf;
+  overflow-x: hidden;
 }
 a{
   text-decoration: none;
@@ -38,14 +39,19 @@ a{
 /*  .el-menu-item ,.el-submenu__title{
     color: rgba(255, 255, 255, .7);
   }
-  .el-menu-item .is-active{
-    color: #fff;
-  }*/
+  */
 /*  .el-menu--horizontal>.el-menu-item:hover{
     border-bottom: 0px solid transparent;
     background: transparent;
     color: #fff;
   }*/
+  .el-menu .is-active{
+    color: #1D8CE0;
+  }
+  .el-menu .is-active .el-submenu__title a{
+    color: #1D8CE0;
+  }
+
   .el-menu-item{
     color: #fff;
     &:hover{

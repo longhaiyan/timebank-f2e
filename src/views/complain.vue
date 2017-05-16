@@ -1,5 +1,5 @@
 <template>
-    <div class="my-complain">
+    <div class="my-complain j-complain">
         <h4 class="my-complain-hd my-title_two">您好，这里是投诉区，请填写以下表单，说明要投诉的事情，我们的工作人员将会在3工作日内与您沟通处理</h4>
         <el-row class="my-complain-bd">
             <el-col :sm="12" style="text-align: center">

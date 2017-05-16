@@ -1,5 +1,5 @@
 <template>
-    <div class="index">
+    <div class="index j-index">
         <div class="my-swiper">
             <swiper class="my-swiper-container" :options="swiperOption">
                 <swiperSlide v-for="slide in swiperSlides" key>
@@ -38,15 +38,15 @@
                     <div class="show-users">
                         <h3 class="show-users_title">本周活跃用户Top 5</h3>
                         <ul class="user-liat">
-                            <li class="my-space-Between"><img src="http://timebank.longhaiyan.cn/img/user.jpeg"
+                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
                                                               alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://timebank.longhaiyan.cn/img/user.jpeg"
+                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
                                                               alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://timebank.longhaiyan.cn/img/user.jpeg"
+                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
                                                               alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://timebank.longhaiyan.cn/img/user.jpeg"
+                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
                                                               alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://timebank.longhaiyan.cn/img/user.jpeg"
+                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
                                                               alt=""><span>lalal</span></li>
                         </ul>
                     </div>
@@ -91,9 +91,9 @@
 
         },
         swiperSlides: [{
-          img: 'http://timebank.longhaiyan.cn/img/test.png'
+          img: 'http://bank.longhaiyan.cn/img/test.png'
         }, {
-          img: 'http://timebank.longhaiyan.cn/img/test1.jpg'
+          img: 'http://bank.longhaiyan.cn/img/test1.jpg'
         }],
         indexInfoData: [
           {

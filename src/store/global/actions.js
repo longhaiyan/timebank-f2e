@@ -13,10 +13,10 @@ const actions = {
 
     return apiTools.post(api.login, payload, rsp => {
       console.log("用户登录成功", payload)
-      commit(Type.M_LOGIN_ONLOAD, rsp)
+      commit(Type.M_USER_INFO_SUCCESS, rsp)
 
     }, msg => {
-      commit(Type.M_LOGIN_ERROR, msg)
+      commit(Type.M_USER_INFO_ERROR, msg)
       console.log("用户登录失败")
     })
   },
@@ -47,13 +47,13 @@ const actions = {
     commit(Type.M_REGISTER_HIDE)
   },
 
-  [Type.A_GET_CHECK_CODE]: ({commit, state, dispatch}, payload) => {
+  /*[Type.A_GET_CHECK_CODE]: ({commit, state, dispatch}, payload) => {
     return apiTools.req(api.getCode, payload, rsp => {
       commit(Type.M_GET_CHECK_CODE, rsp)
     }, msg => {
       console.log("获取验证码失败")
     })
-  },
+  },*/
 
   // 发布弹窗
   [Type.A_TASK_PUBLISH]: ({commit, state, dispatch}, payload) => {
@@ -94,6 +94,22 @@ const actions = {
     console.log("A_TOPIC_PUBLISH_HIDE")
     commit(Type.M_TOPIC_PUBLISH_HIDE)
   },
+
+  // 自动登录
+  [Type.A_USER_BASE_INFO]: ({commit, state, dispatch}, payload) => {
+    return apiTools.req(api.baseInfo, payload, rsp => {
+      console.log("获取用户基本信息成功")
+      commit(Type.M_USER_INFO_SUCCESS, rsp)
+    }, msg => {
+      console.log('获取用户基本信息失败',msg)
+    })
+  },
+
+  // 个人设置页的导航条状态配置
+  [Type.A_SETTING_NAV]:({commit,state,dispatch},payload) =>{
+    commit(Type.M_SETTING_NAV,payload)
+  }
+
 
 }
 

@@ -9,12 +9,15 @@ export default {
   loginDialogStep: '', // onload, submitting, error
   // 登录错误信息
   loginErrorMsg: '',
+  registerErrorMsg:'',
   publishErrorMsg:'',
+  topicPublishErrorMsg:'',
   loginDialogVisible: false,
   registerDialogVisible: false,
   publishDialogVisible: false,
   topicPublishDialogVisible: false,
-  username: '',
-  // 验证码
-  code: ''
+  // username: '',
+  userBaseInfo:{},
+  settingNav:'info',
+
 }

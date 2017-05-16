@@ -61,6 +61,8 @@
     </div>
 </template>
 <script>
+  import {mapActions, mapState} from 'vuex'
+  import * as GlobalType from '@/store/global/types'
   export default{
     name: 'settingPrivate',
     data(){
@@ -71,7 +73,15 @@
         value4: false,
       }
     },
-    methods: {}
+    methods: {
+      ...mapActions({
+        settingNav: GlobalType.A_SETTING_NAV,
+
+      }),
+    },
+    mounted(){
+      this.settingNav({name:'private'})
+    },
 
   }
 </script>

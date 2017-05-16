@@ -4,10 +4,10 @@
             <p class="my-ellipsis"><i v-if="data.type" class="el-icon-warning"></i>{{data.detail}}</p>
             <span>{{data.createTime}}</span>
         </div>
-        <img v-if="data.picId" class="topic-box-img" :src="'http://timebank.longhaiyan.cn/picture/show?id='+data.picId" alt="">
+        <img v-if="data.picId" class="topic-box-img" :src="'http://bank.longhaiyan.cn/picture/show?id='+data.picId" alt="">
         <div class="my-space-Between">
             <div class="topic-box_user">
-                <img src="http://timebank.longhaiyan.cn/img/user.jpeg" alt="" class="avatar">
+                <img src="http://bank.longhaiyan.cn/img/user.jpeg" alt="" class="avatar">
                 {{data.userName}}
             </div>
             <span>{{data.messageCount}} 条评论</span>

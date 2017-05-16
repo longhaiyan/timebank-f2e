@@ -8,12 +8,15 @@ const api = {
     'login': '/data?name=userInfo',
     'register': '/data?name=userInfo',
     'error': '/data?name=error',
-    'getCode': 'data?name=get_check_code',
+    // 'getCode': 'data?name=get_check_code',
     'publish': 'data?name=mirror',
     'topicPublish': 'data?name=mirror',
+    'baseInfo': 'data?name=userInfo',
   },
   pro: {
     'login': '/user/login/data',
+    'register': '/user/register/data',
+    'baseInfo': '/user/info/data',
   }
 }
 export default api[env]

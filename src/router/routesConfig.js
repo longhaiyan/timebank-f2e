@@ -19,6 +19,7 @@ import SettingGetTask from '@/views/setting/setting_get_task'
 import SettingPrivate from '@/views/setting/setting_private'
 import SettingPublishTask from '@/views/setting/setting_publish_task'
 import SettingCommunity from '@/views/setting/setting_community'
+import SettingConfirm from '@/views/setting/setting_confirm'
 
 import NewTask from '@/views/task/new_task'
 import CommunityIndex from '@/views/community/community_index'
@@ -41,7 +42,7 @@ let routes = [
     path: '/Hello',
     name: 'Hello',
     component: Hello,
-    children:[
+    children: [
       {
         path: 'demo',
         component: demo,
@@ -49,16 +50,16 @@ let routes = [
     ],
   },
   {
-    label:'任务详情',
+    label: '任务详情',
     path: '/intro',
-    name:'Intro',
+    name: 'Intro',
     component: Intro
   },
   {
     path: '/task',
     name: 'Task',
     component: Task,
-    children:[
+    children: [
       {
         path: 'new',
         component: NewTask,
@@ -66,35 +67,35 @@ let routes = [
     ],
   },
   {
-    label:'社区首页',
+    label: '社区首页',
     path: '/community',
-    name:'CommunityIndex',
+    name: 'CommunityIndex',
     component: CommunityIndex
   },
   {
-    label:'帖子详情',
+    label: '帖子详情',
     path: '/info',
-    name:'CommunityInfo',
+    name: 'CommunityInfo',
     component: CommunityInfo
   },
   {
-    label:'投诉',
+    label: '投诉',
     path: '/complain',
-    name:'Complain',
+    name: 'Complain',
     component: Complain
   },
   {
-    label:'个人首页',
+    label: '个人首页',
     path: '/zone',
-    name:'Zone',
+    name: 'Zone',
     component: Zone
   },
   {
-    label:'我的消息',
+    label: '我的消息',
     path: '/message',
     name: 'MessageIndex',
     component: MessageIndex,
-    children:[
+    children: [
       {
         path: 'personal',
         component: MessagePersonal,
@@ -107,11 +108,11 @@ let routes = [
     ],
   },
   {
-    label:'我的设置',
+    label: '我的设置',
     path: '/setting',
     name: 'SettingIndex',
     component: SettingIndex,
-    children:[
+    children: [
       {
         path: 'info',
         component: SettingInfo,
@@ -132,16 +133,17 @@ let routes = [
         path: 'community',
         component: SettingCommunity,
       },
-
-
+      {
+        path: 'confirm',
+        component: SettingConfirm,
+      },
 
     ],
   },
 
-
 ]
 
-function routesConfig ( store ) {
+function routesConfig(store) {
   // main-start
 
   // 为面包屑导航补全路由，存放在_path

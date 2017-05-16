@@ -5,16 +5,20 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import test from './test'
 import myGlobal from './global'
-// import index from './index'
+import myIndex from './my_index'
+import settingConfirm from './setting_confirm'
+import settingInfo from './setting_info'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-    modules: {
-        test,
-        myGlobal,
-        // index
-    }
+  modules: {
+    test,
+    myGlobal,
+    myIndex,
+    settingConfirm,
+    settingInfo
+  }
 })
 
 export default store

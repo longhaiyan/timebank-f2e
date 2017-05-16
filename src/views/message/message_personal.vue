@@ -3,9 +3,20 @@
         <div class="setting-r-hd">
             <h4 class="my-title_two">私信</h4>
         </div>
+        <el-collapse @change="collapseChange" accordion class="personal-collapse-boxes">
+            <el-collapse-item v-for="(item,index) in data" :name="index" key>
+                <template slot="title" >
+                    <img src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
+                    <p>longhaiyan</p>
+                </template>
+                <div class="time">2017-01-01 13:00</div>
+                <div class="box"><span>对方：</span><p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p></div>
+                <div class="box right"><p>啦啦啦啦啦</p><span>：我</span></div>
+            </el-collapse-item>
+        </el-collapse>
         <div class="setting-r-bd my-message-personal">
             <div class="personal-box ">
-                <img src="http://bbs.chenxubiao.cn/img/userpic.png" alt="">
+                <img src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
                 <div style="width: 100%;">
                     <div class="my-space-Between personal-box-user">
                         <span>longhaiyan</span>
@@ -21,7 +32,7 @@
                 </div>
             </div>
             <div class="personal-box ">
-                <img src="http://bbs.chenxubiao.cn/img/userpic.png" alt="">
+                <img src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
                 <div style="width: 100%;">
                     <div class="my-space-Between personal-box-user">
                         <span>longhaiyan</span>
@@ -42,6 +53,20 @@
 </template>
 <script>
   export default{
-    name:'messagePersonal'
+    name:'messagePersonal',
+    data(){
+      return {
+        data:[
+          {'a':1},
+          {'a':1},
+          {'a':1}
+        ]
+      }
+    },
+    methods:{
+      collapseChange(activeNames){
+        console.log("改变",activeNames)
+      }
+    }
   }
 </script>
