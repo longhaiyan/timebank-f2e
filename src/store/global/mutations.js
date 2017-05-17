@@ -168,5 +168,17 @@ export default {
     Object.assign(state, {
       settingNav: payload.name
     })
+  },
+  [Type.M_MESSAGE_NAV]:(state, payload) =>{
+    Object.assign(state, {
+      messageNav: payload.name
+    })
+  },
+  [Type.M_LIVE_MESSAGE_COUNT]:(state,payload)=>{
+
+    Object.assign(state,{
+      unreadMsg:payload.data
+    })
   }
+
 }

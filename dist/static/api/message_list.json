@@ -1,0 +1,80 @@
+{
+  "sysMsgUnlook": {
+    "user": {
+      "userId": 1,
+      "avatarId": 0,
+      "userName": "timebank"
+    },
+    "msgCount": 2,
+    "messages": [
+      {
+        "id": 2,
+        "type": 3,
+        "projectId": 0,
+        "sender": 1,
+        "receiver": 1,
+        "message": "注册奖励：120",
+        "status": 1,
+        "createTime": "2017-05-17 15:43:48",
+        "modifyTime": "2017-05-17 15:43:48",
+        "time": "6分钟前",
+        "senderInfo": null,
+        "receiverInfo": null
+      },
+      {
+        "id": 1,
+        "type": 1,
+        "projectId": 0,
+        "sender": 1,
+        "receiver": 1,
+        "message": "hi～timebank,欢迎来到...(还没想好0.0)，请吃饭请联系：hfutchenxb@163.com，提交bug请联系本人私人助理：haiyan@bbs.cn",
+        "status": 1,
+        "createTime": "2017-05-17 15:43:48",
+        "modifyTime": "2017-05-17 15:43:48",
+        "time": "6分钟前",
+        "senderInfo": null,
+        "receiverInfo": null
+      }
+    ]
+  },
+  "sysMsgViewed": {
+    "user": {
+      "userId": 1,
+      "avatarId": 0,
+      "userName": "timebank"
+    },
+    "msgCount": 0,
+    "messages": [
+      {
+        "id": 2,
+        "type": 3,
+        "projectId": 0,
+        "sender": 1,
+        "receiver": 1,
+        "message": "注册奖励：120",
+        "status": 1,
+        "createTime": "2017-05-17 15:43:48",
+        "modifyTime": "2017-05-17 15:43:48",
+        "time": "6分钟前",
+        "senderInfo": null,
+        "receiverInfo": null
+      },
+      {
+        "id": 1,
+        "type": 1,
+        "projectId": 0,
+        "sender": 1,
+        "receiver": 1,
+        "message": "hi～timebank,欢迎来到...(还没想好0.0)，请吃饭请联系：hfutchenxb@163.com，提交bug请联系本人私人助理：haiyan@bbs.cn",
+        "status": 1,
+        "createTime": "2017-05-17 15:43:48",
+        "modifyTime": "2017-05-17 15:43:48",
+        "time": "6分钟前",
+        "senderInfo": null,
+        "receiverInfo": null
+      }
+    ]
+  },
+  "userMsgUnlook": null,
+  "userMsgViewed": null
+}

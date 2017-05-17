@@ -4,7 +4,7 @@
             <h4 class="my-title_two">私信</h4>
         </div>
         <el-collapse @change="collapseChange" accordion class="personal-collapse-boxes">
-            <el-collapse-item v-for="(item,index) in data" :name="index" key>
+            <el-collapse-item v-for="(item,index) in data" :name="index+1" key>
                 <template slot="title" >
                     <img src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
                     <p>longhaiyan</p>
@@ -14,7 +14,7 @@
                 <div class="box right"><p>啦啦啦啦啦</p><span>：我</span></div>
             </el-collapse-item>
         </el-collapse>
-        <div class="setting-r-bd my-message-personal">
+        <!--<div class="setting-r-bd my-message-personal">
             <div class="personal-box ">
                 <img src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
                 <div style="width: 100%;">
@@ -48,10 +48,13 @@
                     <p class="personal-box-answer"><span>回复：</span>对呀</p>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 <script>
+  import {mapActions,mapState} from 'vuex'
+  import * as GlobalType from '@/store/global/types'
+
   export default{
     name:'messagePersonal',
     data(){
@@ -63,10 +66,30 @@
         ]
       }
     },
+    computed:{
+      ...mapState({
+        msgList: state=>state.message.msgList,
+        msgError: state=>state.message.msgError,
+        msgStep: state=>state.message.msgStep,
+      })
+    },
     methods:{
+      ...mapActions({
+        messageNav: GlobalType.A_MESSAGE_NAV,
+      }),
       collapseChange(activeNames){
         console.log("改变",activeNames)
+      },
+      init(){
+        this.messageNav({name:'personal'})
+        if(this.msgStep === 'error'){
+          this.$message.warning(this.msgError)
+        }
       }
+    },
+    mounted(){
+      this.init()
+      console.log("私信 msgList",this.msgList)
     }
   }
 </script>

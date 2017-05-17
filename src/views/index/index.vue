@@ -38,16 +38,11 @@
                     <div class="show-users">
                         <h3 class="show-users_title">本周活跃用户Top 5</h3>
                         <ul class="user-liat">
-                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
-                                                              alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
-                                                              alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
-                                                              alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
-                                                              alt=""><span>lalal</span></li>
-                            <li class="my-space-Between"><img src="http://bank.longhaiyan.cn/img/user.jpeg"
-                                                              alt=""><span>lalal</span></li>
+                            <li v-for="index in 5" key @click="goZone(index)" class="my-space-Between">
+                                <img src="http://bank.longhaiyan.cn/img/user.jpeg"
+                                     alt="">
+                                <span>lalal</span>
+                            </li>
                         </ul>
                     </div>
                 </el-col>
@@ -57,6 +52,8 @@
                 <el-row class="friends-bd" :gutter="70">
                     <el-col :sm="8">
                         合肥工业大学
+
+
 
                     </el-col>
                     <el-col :sm="8">合肥工业大学管理学院</el-col>
@@ -130,7 +127,18 @@
       }),
       onPublish: function() {
         this.publishShow()
-      }
+      },
+      goZone:function (id) {
+        event.stopPropagation()
+        if(id){
+          this.GM_routerPush({
+            path: '/zone',
+            query: {
+              userId: id
+            }
+          })
+        }
+      },
     },
     components: {
       swiper,

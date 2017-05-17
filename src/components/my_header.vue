@@ -45,14 +45,16 @@
                          style="width: 40px;height: 40px;border-radius: 100%;">
                     <span>{{userBaseInfo.userName}}</span>
                 </template>
-                <el-menu-item index="4-1">
-                    <router-link to="/zone">个人主页</router-link>
+                <el-menu-item index="4-1" @click="goZone">
+                    个人主页
                 </el-menu-item>
                 <el-menu-item index="4-2">
                     <router-link to="/setting/info">我的设置</router-link>
                 </el-menu-item>
                 <el-menu-item index="4-3">
-                    <router-link to="/message/personal">我的消息</router-link>
+                    <el-badge :value="unreadMsg" :max="99" class="item">
+                        <router-link to="/message/personal">我的消息</router-link>
+                    </el-badge>
                 </el-menu-item>
                 <el-menu-item index="4-4" @click="onPublish">
                     发布任务
@@ -110,12 +112,22 @@
         loginErrorMsg: state => state.myGlobal.loginErrorMsg,
 //        userName: state => state.myGlobal.username,
         userBaseInfo: state => state.myGlobal.userBaseInfo,
+        unreadMsg: state => state.myGlobal.unreadMsg,
       })
     },
     watch: {
-      /*userBaseInfo: function() {
-        this.isLogin()
-      }*/
+        /*userBaseInfo: function() {
+         this.isLogin()
+         }*/
+      unreadMsg:function() {
+        let self =this
+        const ele = this.$createElement;
+        this.$notify({
+          title: '未读消息提醒',
+          message: ele('i', { style: 'color: #F7BA2A'}, "您有 "+self.unreadMsg+" 条未读消息"),
+          duration:2000
+        });
+      }
     },
     methods: {
       ...mapActions({
@@ -123,6 +135,7 @@
         registerShow: GlobalType.A_REGISTER_SHOW,
         publishShow: GlobalType.A_PUBLISH_SHOW,
         getBaseUserInfo: GlobalType.A_USER_BASE_INFO,
+        liveOpen: GlobalType.A_LIVE_OPEN,
 
       }),
       handleSelect(key, keyPath) {
@@ -183,14 +196,32 @@
         }else{
           this.activeIndex = ""
         }
+      },
+      goZone:function (i) {
+        event.stopPropagation()
+        if(this.userBaseInfo&&this.userBaseInfo.userId){
+          this.GM_routerPush({
+            path: '/zone',
+            query: {
+              userId: this.userBaseInfo.userId
+            }
+          })
+        }
+      },
+      init(){
+        if (window.initState.isLogin) {
+          console.log("自动登录")
+          this.getBaseUserInfo()
+        }
+        this.setNavActiveIndex()
+        this.liveOpen()
       }
+
     },
     mounted(){
-      if (window.initState.isLogin) {
-        console.log("自动登录")
-        this.getBaseUserInfo()
-      }
-      this.setNavActiveIndex()
+      this.init()
+
+
     },
     components: {
       MyModal

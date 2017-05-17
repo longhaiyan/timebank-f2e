@@ -19,5 +19,8 @@ export default {
   // username: '',
   userBaseInfo:{},
   settingNav:'info',
+  messageNav:'personal',
+  unreadMsg:0,/*未读消息数目*/
+
 
 }

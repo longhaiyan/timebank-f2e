@@ -1,0 +1,25 @@
+{
+  "data": {
+    "userId":2,
+    "userName": "longhaiyanlallall",
+    "avatarId": 0,
+    "cellphone": "",
+    "sex": 0,
+    "userType": 1,
+    "description": "这是一个测试号",
+    "email": "longhaiyan@bank.cn",
+    "birthday": "1970-01-01 00:00:00",
+    "student": {
+      "id": 1,
+      "createTime": "2017-05-16 19:06:30",
+      "modifyTime": "2017-05-16 19:06:30",
+      "sno": 432,
+      "userId": 1,
+      "name": "龙海燕",
+      "dept": "管理学院",
+      "major": "信管13-2班",
+      "remark": ""
+    },
+    "teacher": null
+  }
+}

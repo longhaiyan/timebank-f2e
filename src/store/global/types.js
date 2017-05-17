@@ -22,6 +22,10 @@ export const A_TOPIC_PUBLISH_HIDE = 'global/as/topic_publish_hide'
 export const A_USER_BASE_INFO = 'global/as/get_base_user_info'
 
 export const A_SETTING_NAV = 'global/as/setting_nav'
+export const A_MESSAGE_NAV = 'global/as/message_nav'
+
+export const A_LIVE_OPEN = 'global/as/live_open'
+export const A_LIVE_MESSAGE_COUNT = 'global/as/live_message_count'
 
 export const M_LOGIN_LOADING = 'global/mu/login_loading'
 export const M_LOGIN_SUBMITTING = 'global/mu/login_submitting'
@@ -55,4 +59,9 @@ export const M_GET_CHECK_CODE = 'global/mu/get_check_code'
 export const M_GET_CHECK_CODE_ERROR = 'global/mu/get_check_code_error'
 
 export const M_SETTING_NAV = 'global/mu/setting_nav'
+export const M_MESSAGE_NAV = 'global/mu/message_nav'
+
+export const M_LIVE_MESSAGE_COUNT = 'global/mu/live_message_count'
+
+
 
