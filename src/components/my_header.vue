@@ -24,12 +24,12 @@
                 <router-link to="/">关于我们</router-link>
             </el-menu-item>
 
-            <el-menu-item v-if="!userBaseInfo" index="6">
+            <el-menu-item index="6">
                 <el-button type="text" @click="onLogin">登录</el-button>
                 <span>/</span>
                 <el-button type="text" @click="onRegister">注册</el-button>
             </el-menu-item>
-            <el-submenu index="7" class="userInfoBox" v-else>
+            <!--<el-submenu index="7" class="userInfoBox" v-else>
                 <template slot="title" style="">
                     <img src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
                          style="width: 40px;height: 40px;border-radius: 100%;">
@@ -38,7 +38,7 @@
                 <el-menu-item index="7-1">选项1</el-menu-item>
                 <el-menu-item index="7-2">选项2</el-menu-item>
                 <el-menu-item index="7-3">选项3</el-menu-item>
-            </el-submenu>
+            </el-submenu>-->
             <el-submenu index="4" class="userInfoBox">
                 <template slot="title" style="">
                     <img src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
@@ -199,6 +199,7 @@
       },
       goZone:function (i) {
         event.stopPropagation()
+        console.log("goZone")
         if(this.userBaseInfo&&this.userBaseInfo.userId){
           this.GM_routerPush({
             path: '/zone',

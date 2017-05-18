@@ -1,0 +1,71 @@
+{
+  "data": [
+    {
+      "id": 14,
+      "type": 4,
+      "projectId": 0,
+      "sender": 3,
+      "receiver": 2,
+      "message": "测试3",
+      "status": 1,
+      "createTime": "2017-05-17 18:54:29",
+      "modifyTime": "2017-05-17 18:54:29",
+      "time": "6分钟前",
+      "senderInfo": {
+        "userId": 3,
+        "avatarId": 0,
+        "userName": "haiyan"
+      },
+      "receiverInfo": {
+        "userId": 2,
+        "avatarId": 0,
+        "userName": "long"
+      }
+    },
+    {
+      "id": 13,
+      "type": 4,
+      "projectId": 0,
+      "sender": 3,
+      "receiver": 2,
+      "message": "测试2",
+      "status": 1,
+      "createTime": "2017-05-17 18:54:25",
+      "modifyTime": "2017-05-17 18:54:25",
+      "time": "6分钟前",
+      "senderInfo": {
+        "userId": 3,
+        "avatarId": 0,
+        "userName": "haiyan"
+      },
+      "receiverInfo": {
+        "userId": 2,
+        "avatarId": 0,
+        "userName": "long"
+      }
+    },
+    {
+      "id": 12,
+      "type": 4,
+      "projectId": 0,
+      "sender": 3,
+      "receiver": 2,
+      "message": "测试1",
+      "status": 1,
+      "createTime": "2017-05-17 18:54:21",
+      "modifyTime": "2017-05-17 18:54:21",
+      "time": "6分钟前",
+      "senderInfo": {
+        "userId": 3,
+        "avatarId": 0,
+        "userName": "haiyan"
+      },
+      "receiverInfo": {
+        "userId": 2,
+        "avatarId": 0,
+        "userName": "long"
+      }
+    }
+  ],
+  "selfId": 2
+}

@@ -24,11 +24,21 @@ const actions = {
   [Type.A_MESSAGE_READ]: ({commit, state, dispatch}, payload) => {
     console.log("消息已读 payload", payload)
      return apiTools.post(api.update, payload, rsp => {
-     commit(Type.M_MESSAGE_READ_SUCCESS, rsp)
+     commit(Type.M_MESSAGE_READ_SUCCESS, payload)
      }, msg => {
      commit(Type.M_MESSAGE_READ_ERROR, msg)
      })
-  }
+  },
+  [Type.A_USER_MESSAGE]: ({commit, state, dispatch}, payload) => {
+    console.log("获取单个用户消息 payload", payload)
+     return apiTools.req(api.userMsg, payload, rsp => {
+     commit(Type.A_USER_MESSAGE_SUCCESS, rsp)
+     }, msg => {
+     commit(Type.A_USER_MESSAGE_ERROR, msg)
+     })
+  },
+
+
 
 }
 

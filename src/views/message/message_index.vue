@@ -4,7 +4,7 @@
             <el-col :sm="4" class="my-message-nav">
                 <el-menu :router="true" :default-active="messageNav||'personal'" class="el-menu-vertical-demo">
                     <el-menu-item index="personal"><i class="el-icon-document"></i>
-                        <el-badge v-if="msgList&&msgList.userMsgUnlook" :value="msgList.userMsgUnlook.msgCount" :max="99" class="item">
+                        <el-badge v-if="msgList" :value="msgList.userMsgUnlookCount" :max="99" class="item">
                             私信
                         </el-badge>
                         <template v-else>

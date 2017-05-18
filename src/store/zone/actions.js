@@ -13,7 +13,7 @@ const actions = {
   },
   [Type.A_ZONE_INFO]:({commit,state,dispatch},payload)=>{
     console.log("获取当前主页信息",payload)
-    return apiTools.post(api.info,payload,rsp=>{
+    return apiTools.req(api.userInfo,payload,rsp=>{
       commit(Type.M_ZONE_INFO_SUCCESS,rsp)
     },msg=>{
       commit(Type.M_ZONE_INFO_ERROR,msg)

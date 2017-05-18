@@ -14,6 +14,9 @@ export default {
 
   msgStep: '',
   msgList: [],
-  msgError: ''
+  msgError: '',
 
+  userMsg:[],
+  userStep:'',
+  userError:''
 }

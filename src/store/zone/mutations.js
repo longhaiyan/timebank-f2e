@@ -7,6 +7,7 @@ export default {
       infoStep:'success',
       homeInfo:payload.data
     })
+    console.log("获取当前主页信息成功 state",state)
   },
   [Type.M_ZONE_INFO_ERROR]:(state,payload)=>{
     Object.assign(state,{

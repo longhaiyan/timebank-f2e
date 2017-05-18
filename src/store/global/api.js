@@ -18,7 +18,8 @@ const api = {
     'login': '/user/login/data',
     'register': '/user/register/data',
     'baseInfo': '/user/info/data',
-    'unread':'/message/unlook/count'
+    'unread':'/message/unlook/count',
+    'publish':'/task/publish/data'
   }
 }
 export default api[env]

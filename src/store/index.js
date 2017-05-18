@@ -10,6 +10,7 @@ import settingConfirm from './setting_confirm'
 import settingInfo from './setting_info'
 import message from './message'
 import zone from './zone'
+import myMap from './map'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
     settingConfirm,
     settingInfo,
     message,
-    zone
+    zone,
+    myMap
   }
 })
 

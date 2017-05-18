@@ -74,14 +74,14 @@ export default {
     Object.assign(state, {
       registerDialogVisible: true
     })
-    console.log('M_REGISTER_SHOW registerDialogVisible', state.loginDialogVisible)
+    console.log('M_REGISTER_SHOW registerDialogVisible', state.registerDialogVisible)
   },
   [Type.M_REGISTER_HIDE]: (state, payload) => {
     console.log('M_REGISTER_HIDE', payload)
     Object.assign(state, {
       registerDialogVisible: false
     })
-    console.log('M_REGISTER_HIDE registerDialogVisible', state.loginDialogVisible)
+    console.log('M_REGISTER_HIDE registerDialogVisible', state.registerDialogVisible)
   },
 
   /*[Type.M_GET_CHECK_CODE]: (state, payload) => {
@@ -119,14 +119,14 @@ export default {
     Object.assign(state, {
       publishDialogVisible: true
     })
-    console.log('M_PUBLISH_SHOW publishDialogVisible',state.loginDialogVisible)
+    console.log('M_PUBLISH_SHOW publishDialogVisible',state.publishDialogVisible)
   },
   [Type.M_PUBLISH_HIDE]: (state, payload) =>{
     console.log('M_PUBLISH_HIDE', payload)
     Object.assign(state, {
       publishDialogVisible: false
     })
-    console.log('M_PUBLISH_HIDE publishDialogVisible',state.loginDialogVisible)
+    console.log('M_PUBLISH_HIDE publishDialogVisible',state.publishDialogVisible)
   },
 
   // 帖子发布弹窗状态

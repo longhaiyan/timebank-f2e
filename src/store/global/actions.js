@@ -5,6 +5,7 @@
 import * as Type from './types'
 import api from './api'
 import * as apiTools from '../../utils/api'
+import * as MapType from '@/store/map/types'
 
 const actions = {
   // 登录弹窗
@@ -59,17 +60,19 @@ const actions = {
   [Type.A_TASK_PUBLISH]: ({commit, state, dispatch}, payload) => {
     commit(Type.M_PUBLISH_SUBMITTING)
 
+    console.log("发布 payload", payload)
     return apiTools.post(api.publish, payload, rsp => {
-      console.log("发布成功", payload)
       commit(Type.M_PUBLISH_ONLOAD, rsp)
-
     }, msg => {
       commit(Type.M_PUBLISH_ERROR, msg)
       console.log("发布失败")
     })
   },
   [Type.A_PUBLISH_SHOW]: ({commit, state, dispatch}, payload) => {
-    commit(Type.M_PUBLISH_SHOW)
+    console.log("发布任务前先装载标签数据")
+    dispatch(MapType.A_TAG_MAP).then(()=>{
+      commit(Type.M_PUBLISH_SHOW)
+    })
   },
   [Type.A_PUBLISH_HIDE]: ({commit, state, dispatch}, payload) => {
     commit(Type.M_PUBLISH_HIDE)

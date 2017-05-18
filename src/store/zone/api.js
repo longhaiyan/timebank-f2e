@@ -3,12 +3,13 @@ import {env} from '@/utils/config'
 
 const api = {
   dev: {
-    'info':'/data?name=otherInfo',
+    'userInfo':'/data?name=otherInfo',
     'send':'/data?name=mirror',
     'error':'/data?name=error'
   },
   pro: {
-    'send':'/message/user/send/data'
+    'send':'/message/user/send/data',
+    'userInfo':'/user/info/data',
 
   }
 }
