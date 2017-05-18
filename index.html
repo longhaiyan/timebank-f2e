@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
 <head>
     <meta charset="utf-8">
-    <title th:text="${htmlTitle}"></title>
+    <title>时间银行</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
 <div id="app"></div>
-
-<script th:if="${isLogin}">
-  window.initState={
-    isLogin:true
-  }
-</script>
-<script th:if="${!isLogin}">
-  window.initState={
-    isLogin:false
+<script>
+  window.initState = {
+    isLogin: false
   }
 </script>
 <!-- built files will be auto injected -->
