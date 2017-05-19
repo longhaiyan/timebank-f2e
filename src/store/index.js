@@ -11,6 +11,8 @@ import settingInfo from './setting_info'
 import message from './message'
 import zone from './zone'
 import myMap from './map'
+import task from './task'
+import intro from './intro'
 
 Vue.use(Vuex)
 
@@ -23,7 +25,9 @@ const store = new Vuex.Store({
     settingInfo,
     message,
     zone,
-    myMap
+    myMap,
+    task,
+    intro
   }
 })
 

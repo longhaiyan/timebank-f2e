@@ -26,6 +26,27 @@ export default {
       sendErrorMsg:payload.message
     })
   },
+  [Type.M_MINE_PUBLISH]:(state,payload)=>{
+    Object.assign(state,{
+      mineTask:payload.data
+    })
+  },
+  [Type.M_GET_PUBLISH]:(state,payload)=>{
+    Object.assign(state,{
+      getTask:payload.data
+    })
+  },
+  [Type.M_MINE_TOPIC]:(state,payload)=>{
+    Object.assign(state,{
+      mineTopic:payload.data
+    })
+  },
+  [Type.M_MINE_WARN]:(state,payload)=>{
+    Object.assign(state,{
+      mainWarn:payload.data
+    })
+  },
+
 
 
 

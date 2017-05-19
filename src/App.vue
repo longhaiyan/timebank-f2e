@@ -245,6 +245,9 @@
   import MyHeader from './components/my_header.vue'
   import MyFooter from './components/my_footer.vue'
   import MyModal from  '@/components/my_modal.vue'
+  import * as MyIndexType from '@/store/my_index/types'
+  import * as TaskType from '@/store/task/types'
+  import * as ZoneType from '@/store/zone/types'
 
   export default {
     name: 'app',
@@ -402,7 +405,8 @@
           },
         },
         stepActive: 0,
-        panelActive: '1'
+        panelActive: '1',
+        zoneUserId: this.$route.query.userId || '',
 
       }
     },
@@ -475,7 +479,11 @@
         registerHide: GlobalType.A_REGISTER_HIDE,
         publishHide: GlobalType.A_PUBLISH_HIDE,
         topicPublishHide: GlobalType.A_TOPIC_PUBLISH_HIDE,
-        registerShow: GlobalType.A_REGISTER_SHOW
+        registerShow: GlobalType.A_REGISTER_SHOW,
+        indexStartMain: MyIndexType.A_START_MAIN,
+        newTaskStartMain: TaskType.A_NEW_START_MAIN,
+        getZoneInfo: ZoneType.A_ZONE_INFO,
+
       }),
       onLogin(){
         let self = this
@@ -592,6 +600,16 @@
                     self.showMessage(self.publishErrorMsg)
                     return
                   } else {
+                    if(document.querySelector('.j-my-new-task-list')){
+                      console.log("刷新newtask页面 实现")
+                      self.newTaskStartMain()
+                    }else if(document.querySelector('.j-index')){
+                      console.log("刷新index页面 实现")
+                      self.indexStartMain()
+                    }else if(document.querySelector('.j-my-zone')){
+                      console.log("刷新zone页面 实现")
+                      self.getZoneInfo({userId:self.zoneUserId})
+                    }
                     self.$message({
                       type: 'success',
                       message: '发布成功'

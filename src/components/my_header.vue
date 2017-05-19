@@ -10,9 +10,6 @@
                 </template>
                 <el-menu-item index="2-1">最新任务</el-menu-item>
                 <el-menu-item index="2-2">最热任务</el-menu-item>
-                <el-menu-item index="2-3">技能任务</el-menu-item>
-                <el-menu-item index="2-4">生活任务</el-menu-item>
-                <el-menu-item index="2-5">其它任务</el-menu-item>
             </el-submenu>
             <el-menu-item index="3">
                 <router-link to="/community">社区</router-link>
@@ -197,9 +194,10 @@
           this.activeIndex = ""
         }
       },
-      goZone:function (i) {
+      goZone:function () {
         event.stopPropagation()
         console.log("goZone")
+        console.log("userBaseInfo",this.userBaseInfo)
         if(this.userBaseInfo&&this.userBaseInfo.userId){
           this.GM_routerPush({
             path: '/zone',

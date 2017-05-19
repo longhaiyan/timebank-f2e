@@ -1,23 +1,23 @@
 <template>
     <div>
-        <el-row :gutter="10" style="padding: 0 40px;">
-            <el-col :sm="12" v-for="item in infoData"  key>
-                <infoBox :data="item"></infoBox>
-            </el-col>
-        </el-row>
-        <div class="my-task-list">
-            任务分类列表
+        <div class="my-new-task-list j-my-new-task-list">
+            <el-row v-if="newTaskInfo&&newTaskInfo.data" :gutter="10" style="padding: 0 40px;">
+                <el-col :sm="12" v-for="item in newTaskInfo.data" key>
+                    <infoBox :data="item"></infoBox>
+                </el-col>
+            </el-row>
         </div>
     </div>
 </template>
 <script>
+  import {mapActions, mapState} from 'vuex'
   import infoBox from '@/components/info_box'
 
   export default{
     name: 'taskList',
     data(){
-      return{
-        infoData: [
+      return {
+        /*infoData: [
           {
             taskId: 12,
             name: '帮忙取快递lalal',
@@ -43,14 +43,20 @@
             createTime: '2017-05-02 12：00'
           },
 
-        ]
+        ]*/
       }
     },
-    methods:{
-
+    computed:{
+      ...mapState({
+        newTaskInfo:state=>state.task.newTaskInfo
+      })
+    },
+    methods: {},
+    mounted(){
+      console.log("newTaskInfo",self.newTaskInfo)
     },
     components: {
-      infoBox
+      infoBox,
     }
   }
 </script>

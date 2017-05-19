@@ -1,0 +1,32 @@
+{
+  "data": {
+    "name": "高育良",
+    "userId": 1,
+    "title": "任务主题",
+    "description": "任务详情",
+    "remark": "这是加急任务",
+    "demand": "这是要求，没啥要求",
+    "urgent": 20,
+    "urgentMoney": 0,
+    "serviceTime": "大概需要6小时",
+    "deadTime": "2017-05-25 15:51:00",
+    "address": "南区教育超市",
+    "personal": "这是必要的信息，我们会隐藏",
+    "money": 50,
+    "tagIds": null,
+    "tags": [
+      {
+        "id": 1,
+        "name": "123",
+        "createTime": "2017-05-19 13:29:28",
+        "modifyTime": "2017-05-19 13:29:28"
+      },
+      {
+        "id": 2,
+        "name": "超市",
+        "createTime": "2017-05-19 15:52:43",
+        "modifyTime": "2017-05-19 15:52:43"
+      }
+    ]
+  }
+}

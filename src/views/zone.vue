@@ -1,5 +1,5 @@
 <template>
-    <div class="my-zone">
+    <div class="my-zone j-my-zone">
         <div class="my-zone-hd">
             <div class="my-zone_avatar">
                 <img src="" alt="">
@@ -77,12 +77,8 @@
             </div>
         </div>
         <div class="my-zone-bd">
-            <el-form ref="form" :model="form" label-width="80px">
-                <el-tabs type="border-card" @tab-click="handleClick">
-                    <el-tab-pane>
-                        <el-form-item label="活动名称1">
-                            <el-input v-model="form.test1"></el-input>
-                        </el-form-item>
+                <el-tabs type="border-card" v-model="activeCart" @tab-click="handleClick">
+                    <el-tab-pane name="publish_task">
                         <span slot="label"><i class="el-icon-document"></i> 发布的任务</span>
                         <el-button type="primary" style="margin-left: 50px;">全部</el-button>
                         <el-button>发布中</el-button>
@@ -91,17 +87,22 @@
                             <div class="task-box" v-for="(item,index) in infoData">
                                 <div class="task-box-border">
                                     <span class="order">{{index + 1}}</span>
-                                    <infoBox :data="item" key></infoBox>
+                                    <infoBox :data="item" :visible="true" key></infoBox>
+                                    <!--<div class="btn-group">
+                                        <el-button>确认中</el-button>
+                                        <el-button>确认中</el-button>
+                                    </div>-->
+                                    <!--<el-button-group class="btn-group">
+                                        <el-button type="primary">上一页</el-button>
+                                        <el-button type="primary">下一页</el-button>
+                                    </el-button-group>-->
                                 </div>
                             </div>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane>
+                    <el-tab-pane name="get_task">
                         <span slot="label"><i class="el-icon-menu"></i> 接受的任务</span>
                         <div class="task-boxes">
-                            <el-form-item label="活动名称1">
-                                <el-input v-model="form.test2"></el-input>
-                            </el-form-item>
                             <div class="task-box" v-for="(item,index) in infoData">
                                 <div class="task-box-border">
                                     <span class="order">{{index + 1}}</span>
@@ -110,17 +111,14 @@
                             </div>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane>
+                    <el-tab-pane name="topic">
                         <span slot="label"><i class="el-icon-date"></i> 发布的帖子</span>
                         <div class="topic-boxes">
-                            <el-form-item label="活动名称1">
-                                <el-input v-model="form.test3"></el-input>
-                            </el-form-item>
                             <topicBox v-for="item in 6" key></topicBox>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane>
-                        <span slot="label"><i class="el-icon-warning"></i> 举报任务</span>
+                    <el-tab-pane name="warn">
+                        <span slot="label"><i class="el-icon-warning"></i> 举报记录</span>
                         <div class="task-boxes">
                             <div class="task-box" v-for="(item,index) in infoData">
                                 <div class="task-box-border">
@@ -131,7 +129,6 @@
                         </div>
                     </el-tab-pane>
                 </el-tabs>
-            </el-form>
 
         </div>
         <MyModal class="my-login-box" :data="msgData" :step="msgDialogStep" style="text-align: left">
@@ -156,38 +153,34 @@
     name: 'zone',
     data(){
       return {
-        form:{
-          test1: '',
-          test2: '',
-          test3: '',
-        },
         value: 4.5,
         msgDialogVisible: true,
+        activeCart:'publish_task',
         userId: this.$route.query.userId || '',
         infoData: [
           {
             taskId: 12,
-            name: '帮忙取快递lalal',
+            title: '帮忙取快递lalal',
             money: 0.5,
             address: '南村教育超市la',
             endTime: '2017-05-02 17：00',
-            createTime: '2017-05-02 12：00'
+            time: '2017-05-02 12：00'
           },
           {
             taskId: 13,
-            name: '帮忙取快递lalal',
+            title: '帮忙取快递lalal',
             money: 0.5,
             address: '南村教育超市la',
             endTime: '2017-05-02 17：00',
-            createTime: '2017-05-02 12：00'
+            time: '2017-05-02 12：00'
           },
           {
             taskId: 14,
-            name: '帮忙取快递lalal',
+            title: '帮忙取快递lalal',
             money: 0.5,
             address: '南村教育超市la',
             endTime: '2017-05-02 17：00',
-            createTime: '2017-05-02 12：00'
+            time: '2017-05-02 12：00'
           },
 
         ],
@@ -217,12 +210,20 @@
         infoErrorMsg: state => state.zone.infoErrorMsg,
         sendStep: state => state.zone.sendStep,
         sendErrorMsg: state => state.zone.sendErrorMsg,
+        mineTask: state => state.zone.mineTask,
+        getTask: state => state.zone.getTask,
+        mineTopic: state => state.zone.mineTopic,
+        mainWarn: state => state.zone.mainWarn,
       })
     },
     methods: {
       ...mapActions({
-        getZoneInfo: ZoneType.A_ZONE_INFO,
+//        getZoneInfo: ZoneType.A_ZONE_INFO,
         sendMsg: ZoneType.A_SEND_MSG,
+        getMineTask: ZoneType.A_MINE_PUBLISH,
+        getPublishTask: ZoneType.A_GET_PUBLISH,
+        getMineTopic: ZoneType.A_MINE_TOPIC,
+        getMineWarn: ZoneType.A_MINE_WARN,
       }),
       onSendMsg(){
         let self = this
@@ -268,11 +269,21 @@
         }
       },
       handleClick(tab, event) {
-        console.log("table被点击", tab, event);
-        console.log('form',this.form)
+        console.log("table被点击", tab.name, event);
+        if(tab.name === 'publish_task'){
+          this.getMineTask()
+        }else if(tab.name === 'get_task'){
+          this.getPublishTask()
+        }else if(tab.name === 'topic'){
+          this.getMineTopic()
+        }else if(tab.name === 'warn'){
+          this.getMineWarn()
+        }else{
+          console.log("tab 的name错误")
+        }
       }
     },
-    beforeCreate(){
+    /*beforeCreate(){
       console.log(-3)
       console.log('infoStep', this.infoStep)
     },
@@ -283,28 +294,19 @@
     beforeMount(){
       console.log(-1)
       console.log('infoStep', this.infoStep)
-    },
+    },*/
     mounted(){
       console.log("mounted")
-      let self = this
-      this.userId = this.$route.query.userId || ''
-      console.log("userId", this.userId)
-      if (this.userId) {
-        console.log("发送请求")
-        this.getZoneInfo({userId: this.userId}).then(() => {
-          console.log('homeInfo', self.homeInfo)
-        })
-      }
       console.log('infoStep', this.infoStep)
 
     },
-    beforeUpdate(){
+    /*beforeUpdate(){
       console.log("beforeUpdate")
       console.log('infoStep', this.infoStep)
       if (this.infoStep === 'error') {
         this.$message.error(this.infoErrorMsg)
       }
-    },
+    },*/
       /*updated(){
        console.log("2")
        console.log('infoStep',this.infoStep)

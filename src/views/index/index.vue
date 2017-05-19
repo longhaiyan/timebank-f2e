@@ -121,6 +121,11 @@
         ]
       }
     },
+    computed:{
+      ...mapState({
+        indexInfo:state=>state.myIndex.indexInfo
+      })
+    },
     methods: {
       ...mapActions({
         publishShow: GlobalType.A_PUBLISH_SHOW,

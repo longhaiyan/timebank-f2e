@@ -5,7 +5,9 @@ const api = {
   dev: {
     'userInfo':'/data?name=otherInfo',
     'send':'/data?name=mirror',
-    'error':'/data?name=error'
+    'error':'/data?name=error',
+    'info':'/data?name=mirror',
+
   },
   pro: {
     'send':'/message/user/send/data',

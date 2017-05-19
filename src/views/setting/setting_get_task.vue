@@ -5,8 +5,8 @@
         </div>
         <div class="setting-r-bd my-setting-get-task">
             <div class="my-info-box" @click="goTaskInfo(data.taskId)">
-                <div class="info-box-hd">
-                    <h4 class="info-box_title">
+                <div class="info-box-hd ">
+                    <h4 class="info-box_title my-ellipsis">
                         {{data.name}}
             </h4>
                     <p>查看详情</p>
@@ -33,8 +33,8 @@
 
             </div>
             <div class="my-info-box" @click="goTaskInfo(data.taskId)">
-                <div class="info-box-hd">
-                    <h4 class="info-box_title">
+                <div class="info-box-hd ">
+                    <h4 class="info-box_title my-ellipsis">
                         {{data.name}}
             </h4>
                     <p>查看详情</p>

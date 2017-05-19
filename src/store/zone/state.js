@@ -5,7 +5,12 @@ export default {
   infoErrorMsg:'',
 
   sendStep:'',
-  sendErrorMsg:''
+  sendErrorMsg:'',
+
+  mineTask:{},
+  getTask:{},
+  mineTopic:{},
+  mainWarn:{}
 
 
 }
