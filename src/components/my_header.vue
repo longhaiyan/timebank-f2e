@@ -8,7 +8,9 @@
                 <template slot="title">
                     <router-link to="/task/new">全部任务</router-link>
                 </template>
-                <el-menu-item index="2-1">最新任务</el-menu-item>
+                <el-menu-item index="2-1">
+                    <router-link to="/task/new">最新任务</router-link>
+                </el-menu-item>
                 <el-menu-item index="2-2">最热任务</el-menu-item>
             </el-submenu>
             <el-menu-item index="3">
@@ -44,6 +46,7 @@
                 </template>
                 <el-menu-item index="4-1" @click="goZone">
                     个人主页
+
                 </el-menu-item>
                 <el-menu-item index="4-2">
                     <router-link to="/setting/info">我的设置</router-link>
@@ -55,6 +58,7 @@
                 </el-menu-item>
                 <el-menu-item index="4-4" @click="onPublish">
                     发布任务
+
                 </el-menu-item>
                 <el-menu-item index="4-5">
                     <router-link to="/">退出登录</router-link>
@@ -73,7 +77,7 @@
     data() {
       return {
         activeIndex: '1',
-//        localUserName: ''
+        //        localUserName: ''
           /*loginForm: {
            userName: "",
            pwd: ""
@@ -107,7 +111,7 @@
     computed: {
       ...mapState({
         loginErrorMsg: state => state.myGlobal.loginErrorMsg,
-//        userName: state => state.myGlobal.username,
+        //        userName: state => state.myGlobal.username,
         userBaseInfo: state => state.myGlobal.userBaseInfo,
         unreadMsg: state => state.myGlobal.unreadMsg,
       })
@@ -116,13 +120,13 @@
         /*userBaseInfo: function() {
          this.isLogin()
          }*/
-      unreadMsg:function() {
-        let self =this
+      unreadMsg: function() {
+        let self = this
         const ele = this.$createElement;
         this.$notify({
           title: '未读消息提醒',
-          message: ele('i', { style: 'color: #F7BA2A'}, "您有 "+self.unreadMsg+" 条未读消息"),
-          duration:2000
+          message: ele('i', {style: 'color: #F7BA2A'}, "您有 " + self.unreadMsg + " 条未读消息"),
+          duration: 2000
         });
       }
     },
@@ -169,36 +173,36 @@
       showMessage() {
         this.$message.error(this.loginErrorMsg)
       },
-      /*isLogin(){
-        console.log("chufa islogin", this.userName)
-        if (this.userName) {
-          console.log("xiugai ")
-          this.localUserName = this.userName
-        }
-      },*/
+        /*isLogin(){
+         console.log("chufa islogin", this.userName)
+         if (this.userName) {
+         console.log("xiugai ")
+         this.localUserName = this.userName
+         }
+         },*/
       onPublish() {
         this.publishShow()
       },
       setNavActiveIndex(){
-        if(document.querySelector('.j-index')){
+        if (document.querySelector('.j-index')) {
           this.activeIndex = "1"
-        }else if(document.querySelector('.j-task')){
+        } else if (document.querySelector('.j-task')) {
           this.activeIndex = "2"
-        }else if(document.querySelector('.j-community')){
+        } else if (document.querySelector('.j-community')) {
           this.activeIndex = "3"
-        }else if(document.querySelector('.complain')){
+        } else if (document.querySelector('.complain')) {
           this.activeIndex = "4"
-        }else if(document.querySelector('.j-about')){
+        } else if (document.querySelector('.j-about')) {
           this.activeIndex = "5"
-        }else{
+        } else {
           this.activeIndex = ""
         }
       },
-      goZone:function () {
+      goZone: function() {
         event.stopPropagation()
         console.log("goZone")
-        console.log("userBaseInfo",this.userBaseInfo)
-        if(this.userBaseInfo&&this.userBaseInfo.userId){
+        console.log("userBaseInfo", this.userBaseInfo)
+        if (this.userBaseInfo && this.userBaseInfo.userId) {
           this.GM_routerPush({
             path: '/zone',
             query: {
@@ -219,7 +223,6 @@
     },
     mounted(){
       this.init()
-
 
     },
     components: {

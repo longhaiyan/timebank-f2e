@@ -210,14 +210,14 @@
         </MyModal>
 
 
-        <el-row type="flex" justify="space-around" align="center" class="header">
-            <el-col>
+        <el-row class="header">
+            <el-col :sm="8">
                 <router-link to="/" class="logo">
                     <img src="http://bank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
                 </router-link>
 
             </el-col>
-            <el-col class="my_header">
+            <el-col :sm="16" class="my_header">
                 <MyHeader/>
             </el-col>
         </el-row>
