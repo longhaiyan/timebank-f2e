@@ -26,9 +26,22 @@
         </div>
         <div class="intro-warn"><span>任务状态：发布中</span><span>已有 0 人举报</span></div>
         <div class="btn-group">
-            <el-button type="primary" @click="onAccept">我要接受任务</el-button>
-            <el-button type="danger" @click="onWarn">我要举报</el-button>
+            <el-button type="primary" @click="getFormVisible=true" >我要接受任务</el-button>
+            <!--<el-button @keyup.enter.native="onWarn">我要举报</el-button>-->
+            <input @keyup.enter="onWarn">
         </div>
+        <el-dialog title="确定接受这条任务?" v-model="getFormVisible">
+            <p>接受任务的话，请对任务的主人说几句话吧</p>
+            <el-form :model="getForm">
+                <el-form-item>
+                    <el-input v-model="getForm.value"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="onAccept">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -40,7 +53,11 @@
     name: 'intro',
     data(){
       return {
-        taskId: this.$route.query.taskId || ''
+        taskId: this.$route.query.taskId || '',
+        getForm:{
+          value:''
+        },
+        getFormVisible:false
       }
     },
     computed:{
@@ -64,6 +81,9 @@
       },
       onWarn: function() {
         let self = this
+        /*if(this.getForm.value.trim){
+
+        }*/
         this.$confirm('确定举报这条任务?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -90,10 +110,10 @@
       onAccept(){
         let self = this
 
-        this.$prompt('接受任务的话，请对任务的主人说几句话吧', '确定接受这条任务?', {
+        /*this.$prompt('接受任务的话，请对任务的主人说几句话吧', '确定接受这条任务?', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          inputPattern: /[\s,\S]+g/,
+          inputPattern: /[\s,\S]+/g,
           inputErrorMessage: '内容不能为空'
         }).then(({ value }) => {
           self.acceptTask({taskId:self.taskId,value:value}).then(()=>{
@@ -111,7 +131,7 @@
             type: 'info',
             message: '已取消接受任务'
           });
-        });
+        });*/
 
         /*this.$confirm('确定接受这条任务?', '确认', {
           confirmButtonText: '确定',

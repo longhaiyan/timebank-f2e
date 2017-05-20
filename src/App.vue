@@ -214,12 +214,6 @@
             <el-col>
                 <router-link to="/" class="logo">
                     <img src="http://bank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
-
-
-
-
-
-
                 </router-link>
 
             </el-col>
