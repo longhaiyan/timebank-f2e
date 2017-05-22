@@ -4,7 +4,7 @@ import * as Type from './types'
 export default {
   [Type.M_INTRO_SUCCESS]:(state,payload)=>{
     Object.assign(state,{
-      taskInfo:payload.data
+      taskInfo:payload
     })
     console.log("获取task详情 state",state)
   },

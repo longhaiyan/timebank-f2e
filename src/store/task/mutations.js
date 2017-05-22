@@ -7,6 +7,11 @@ export default {
       newTaskInfo:payload
     })
   },
+  [Type.M_NEW_ERROR]:(state,payload)=>{
+    Object.assign(state,{
+      newTaskError:payload.message
+    })
+  },
   [Type.M_HOT_SUCCESS]:(state,payload)=>{
     Object.assign(state,{
       hotTaskInfo:payload

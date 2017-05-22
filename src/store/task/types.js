@@ -12,6 +12,7 @@ export const A_SEND_MSG = 'task/as/send_msg'
 
 
 export const M_NEW_SUCCESS ='task_new/mu/info_success'
+export const M_NEW_ERROR ='task_new/mu/info_error'
 export const M_HOT_SUCCESS ='task_hot/mu/info_success'
 
 

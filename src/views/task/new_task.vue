@@ -6,6 +6,9 @@
                     <infoBox :data="item"></infoBox>
                 </el-col>
             </el-row>
+            <div v-else class="no-task">
+                <i class="el-icon-warning"></i>{{newTaskError}}
+            </div>
         </div>
     </div>
 </template>
@@ -48,7 +51,8 @@
     },
     computed:{
       ...mapState({
-        newTaskInfo:state=>state.task.newTaskInfo
+        newTaskInfo:state=>state.task.newTaskInfo,
+        newTaskError:state=>state.task.newTaskError,
       })
     },
     methods: {},

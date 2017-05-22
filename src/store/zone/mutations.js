@@ -28,7 +28,7 @@ export default {
   },
   [Type.M_MINE_PUBLISH]:(state,payload)=>{
     Object.assign(state,{
-      mineTask:payload.data
+      mineTask:payload
     })
   },
   [Type.M_GET_PUBLISH]:(state,payload)=>{
@@ -46,6 +46,18 @@ export default {
       mainWarn:payload.data
     })
   },
+  [Type.M_UPDATE_MINE_SUCCESS]:(state,payload)=>{
+    Object.assign(state,{
+      mineUpdateStep:'success'
+    })
+  },
+  [Type.M_UPDATE_MINE_ERROR]:(state,payload)=>{
+    Object.assign(state,{
+      mineUpdateStep:'error',
+      mineUpdateError:payload.message
+    })
+  },
+
 
 
 

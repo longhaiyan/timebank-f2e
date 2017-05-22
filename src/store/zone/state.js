@@ -10,7 +10,9 @@ export default {
   mineTask:{},
   getTask:{},
   mineTopic:{},
-  mainWarn:{}
+  mainWarn:{},
 
+  mineUpdateStep:'',
+  mineUpdateError:''
 
 }

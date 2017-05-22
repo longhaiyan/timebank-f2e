@@ -197,7 +197,7 @@
                 <el-form-item label="帖子图片：">
                     <el-upload
                             class="avatar-uploader"
-                            action="http://bbs.chenxubiao.cn/picture/upload/project"
+                            action="http://bank.longhaiyan.cn/picture/upload/project"
                             name="uploadFile"
                             :show-file-list="false"
                             :on-success="handleAvatarSuccess"

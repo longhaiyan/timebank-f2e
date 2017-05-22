@@ -11,6 +11,8 @@ export const A_GET_PUBLISH = 'zone/as/get_publish'
 export const A_MINE_TOPIC = 'zone/as/mine_topic'
 export const A_MINE_WARN = 'zone/as/mine_warn'
 
+export const A_UPDATE_MINE_PUBLISH = 'zone/as/update_mine_publish'
+
 
 // mutation types
 
@@ -25,6 +27,9 @@ export const M_MINE_PUBLISH ='zone/mu/mine_publish_success'
 export const M_GET_PUBLISH ='zone/mu/get_publish_success'
 export const M_MINE_TOPIC ='zone/mu/mine_topic_success'
 export const M_MINE_WARN ='zone/mu/mine_warn_success'
+
+export const M_UPDATE_MINE_SUCCESS = 'zone/mu/update_mine_success'
+export const M_UPDATE_MINE_ERROR = 'zone/mu/update_mine_error'
 
 
 

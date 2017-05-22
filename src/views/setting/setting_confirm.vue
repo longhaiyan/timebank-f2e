@@ -9,8 +9,8 @@
                 <el-tag v-if="!userBaseInfo.userType" type="danger">未认证</el-tag>
                 <el-tag v-if="userBaseInfo.userType === 1" type="success">已认证为学生</el-tag>
                 <el-tag v-if="userBaseInfo.userType === 2" type="success">已认证为教师</el-tag>
-                <el-tag v-if="!userBaseInfo.userType === 3" type="danger">学生正在认证中</el-tag>
-                <el-tag v-if="!userBaseInfo.userType === 4" type="danger">教师正在认证中</el-tag>
+                <el-tag v-if="userBaseInfo.userType === 3" type="danger">学生认证中</el-tag>
+                <el-tag v-if="userBaseInfo.userType === 4" type="danger">教师认证中</el-tag>
             </h4>
         </div>
         <div class="setting-r-bd my-setting-info">
@@ -87,7 +87,7 @@
                                 <el-form-item :label="parseInt(userInfoData.type) === 1?'学号':'教师号'" prop="no">
                                     <el-input
                                             :placeholder="parseInt(userInfoData.type) === 1?'请输入学号':'请输入教师号'"
-                                            v-model.number="userInfoData.no">
+                                            v-model="userInfoData.no">
                                     </el-input>
                                 </el-form-item>
                                 <el-form-item :label="parseInt(userInfoData.type) === 1?'学院':'职务'" prop="dept">
@@ -199,7 +199,7 @@
             if (self.userInfoData.attachment) {
               self.confirmUpdate({
                 name: self.userInfoData.name,
-                no: parseInt(self.userInfoData.no),
+                no: self.userInfoData.no,
                 type: parseInt(self.userInfoData.type),
                 dept: self.userInfoData.dept,
                 major: self.userInfoData.major,

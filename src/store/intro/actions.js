@@ -15,7 +15,7 @@ const actions = {
   },
   [Type.A_ACCEPT_TASK]: ({commit, state, dispatch}, payload) => {
     console.log("接受任务 payload",payload)
-    return apiTools.req(api.taskInfo,{taskId:payload.taskId},rsp=>{
+    return apiTools.post(api.take,payload,rsp=>{
       commit(Type.M_ACCEPT_SUCCESS,rsp)
     },msg=>{
       console.log("接受任务失败",msg)
@@ -24,7 +24,7 @@ const actions = {
   },
   [Type.A_WARN_TASK]: ({commit, state, dispatch}, payload) => {
     console.log("举报任务 payload",payload)
-    return apiTools.req(api.taskInfo,{taskId:payload.taskId},rsp=>{
+    return apiTools.req(api.warn,payload,rsp=>{
       commit(Type.M_WARN_SUCCESS,rsp)
     },msg=>{
       console.log("举报任务失败",msg)

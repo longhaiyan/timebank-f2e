@@ -1,0 +1,101 @@
+{
+  "data": [
+    {
+      "taskInfo": {
+        "senderInfo": {
+          "id": 1,
+          "avatarId": 0,
+          "name": "高育良",
+          "userName": "timebank"
+        },
+        "taskId":2,
+        "finisherInfo": null,
+        "title": "系统用户任务",
+        "description": "455454",
+        "remark": "r43r34r",
+        "demand": "r43r43r",
+        "urgent": 0,
+        "urgentMoney": 0,
+        "serviceTime": "仍然4",
+        "deadTime": "2017-05-23 17:27:24",
+        "address": "r34r43r",
+        "personal": "r43r43r34r43r",
+        "money": 5,
+        "tagIds": null,
+        "tags": [
+          {
+            "id": 1,
+            "name": "测试",
+            "createTime": "2017-05-22 08:45:43",
+            "modifyTime": "2017-05-22 08:45:43"
+          }
+        ],
+        "status": "发布中",
+        "stu": 1
+      },
+      "taskFinish": null
+    },
+    {
+      "taskInfo": {
+        "senderInfo": {
+          "id": 1,
+          "avatarId": 0,
+          "name": "高育良",
+          "userName": "timebank"
+        },
+        "finisherInfo": {
+          "id": 2,
+          "avatarId": 5,
+          "name": "龙海燕",
+          "userName": "long"
+        },
+        "taskId":1,
+        "title": "标题",
+        "description": "任务详情",
+        "remark": "备注",
+        "demand": "要求",
+        "urgent": 1,
+        "urgentMoney": 5,
+        "serviceTime": "服务时间",
+        "deadTime": "2017-05-23 08:44:32",
+        "address": "服务地点",
+        "personal": "隐私信息",
+        "money": 10,
+        "tagIds": null,
+        "tags": [
+          {
+            "id": 1,
+            "name": "测试",
+            "createTime": "2017-05-22 08:45:43",
+            "modifyTime": "2017-05-22 08:45:43"
+          }
+        ],
+        "status": "已接单,进行中",
+        "stu": 4
+      },
+      "taskFinish": {
+        "finishId": 1,
+        "finishTime": null,
+        "remark": "",
+        "createTime": "2017-05-22 08:45:43",
+        "stu": 4,
+        "status": "已接单,进行中",
+        "taskId": 1,
+        "sender": {
+          "id": 1,
+          "avatarId": 0,
+          "name": "高育良",
+          "userName": "timebank"
+        },
+        "taker": {
+          "id": 2,
+          "avatarId": 5,
+          "name": "龙海燕",
+          "userName": "long"
+        }
+      }
+    }
+  ],
+  "taskNum": 2,
+  "takeNum": 0
+}

@@ -1,35 +1,43 @@
 <template>
-    <div class="my-intro" v-if="taskInfo">
+    <div class="my-intro" v-if="myTaskCon">
         <div class="my-space-Between">
-            <h4 class="my-intro-hd">{{taskInfo.title}}</h4>
+            <h4 class="my-intro-hd">{{myTaskCon.title}}</h4>
             <el-button type="primary" @click="onPublish">我也要发布任务</el-button>
 
         </div>
         <div class="my-intro-bd">
-            <p><i>发布人：</i>{{taskInfo.name}}</p>
-            <p><i>奖励时间币：</i>{{taskInfo.money}}</p>
-            <p><i>截止时间：</i>{{taskInfo.deadTime}}</p>
-            <p><i>任务描述：</i>{{taskInfo.description}}</p>
-            <p v-if="taskInfo.serviceTime"><i>所需时间：</i>{{taskInfo.serviceTime}}</p>
-            <p v-if="taskInfo.demand"><i>承接要求：</i>{{taskInfo.demand}}</p>
-            <p v-if="taskInfo.remark"><i>备注：</i>{{taskInfo.remark}}</p>
+            <p v-if="myTaskCon.senderInfo"><i>发布人：</i>{{myTaskCon.senderInfo.name}}</p>
+            <p><i>奖励时间币：</i>{{myTaskCon.money}}</p>
+            <p><i>截止时间：</i>{{myTaskCon.deadTime}}</p>
+            <p><i>任务描述：</i>{{myTaskCon.description}}</p>
+            <p v-if="myTaskCon.serviceTime"><i>所需时间：</i>{{myTaskCon.serviceTime}}</p>
+            <p v-if="myTaskCon.demand"><i>承接要求：</i>{{myTaskCon.demand}}</p>
+            <p v-if="myTaskCon.remark"><i>备注：</i>{{myTaskCon.remark}}</p>
             <div class="my-space-Between">
-                <p><i>地点：</i>{{taskInfo.address}}</p>
+                <p><i>地点：</i>{{myTaskCon.address}}</p>
                 <p>没有发布时间</p>
             </div>
-            <div class="info-box_tags" v-if="taskInfo.tags">
-                <el-tag style="margin-right: 10px;" color="#6992cc" v-for="item in taskInfo.tags" key>{{item.name}}
+            <div class="info-box_tags" v-if="myTaskCon.tags">
+                <el-tag style="margin-right: 10px;" color="#6992cc" v-for="item in myTaskCon.tags" key>{{item.name}}
                 </el-tag>
             </div>
             <div v-else>
                 <el-tag type="gray">无标签</el-tag>
             </div>
         </div>
-        <div class="intro-warn"><span>任务状态：发布中</span><span>已有 0 人举报</span></div>
+        <div class="intro-warn">
+            <span>
+                <template v-if="myTaskFinish">
+                    任务状态：{{myTaskFinish.status}}
+                </template>
+                <template v-else>
+                    任务状态：正在发布中
+                </template>
+            </span>
+            <span>已有 0 人举报</span></div>
         <div class="btn-group">
             <el-button type="primary" @click="getFormVisible=true">我要接受任务</el-button>
             <el-button @click="onWarn">我要举报</el-button>
-            `
 
         </div>
         <el-dialog title="确定接受这条任务?" v-model="getFormVisible">
@@ -66,7 +74,9 @@
             trigger: 'blur'
           }
         },
-        getFormVisible: false
+        getFormVisible: false,
+        /*myTaskCon:{},
+        myTaskFinish:{}*/
       }
     },
     computed: {
@@ -76,7 +86,27 @@
         acceptErrorMsg: state => state.intro.acceptErrorMsg,
         warnStep: state => state.intro.warnStep,
         warnErrorMsg: state => state.intro.warnErrorMsg,
-      })
+      }),
+      myTaskCon:function() {
+        console.log("this.taskInfo.data",this.taskInfo.data)
+//        return Object.assign(this.myTaskCon,this.taskInfo.data)
+        return this.taskInfo.data
+      },
+      myTaskFinish:function() {
+        console.log("this.taskInfo.taskFinish",this.taskInfo.taskFinish)
+//        return Object.assign(this.myTaskFinish,this.taskInfo.finishInfo)
+        return this.taskInfo.taskFinish
+
+      }
+    },
+    watch:{
+      /*taskInfo:function() {
+        console.log("watch taskInfo",this.taskInfo)
+        Object.assign(this.myTaskCon,this.taskInfo.data)
+        console.log("this.myTaskCon",this.myTaskCon)
+        Object.assign(this.myTaskFinish,this.taskInfo.finishInfo)
+        console.log("this.myTaskFinish",this.myTaskFinish)
+      }*/
     },
     methods: {
       ...mapActions({
@@ -118,11 +148,10 @@
       },
       onAccept(){
         let self = this
-        console.log("fd")
         this.$refs.getForm.validate((valid) => {
           if (valid) {
             this.getFormVisible = false
-            self.acceptTask({taskId: self.taskId, value: self.getForm.value}).then(() => {
+            self.acceptTask({id: self.taskId, value: self.getForm.value}).then(() => {
               if (self.acceptStep !== 'error') {
                 self.$message({
                   type: 'success',

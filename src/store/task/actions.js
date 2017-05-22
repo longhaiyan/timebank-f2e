@@ -9,6 +9,7 @@ const actions = {
     return apiTools.req(api.newTask,payload,rsp=>{
       commit(Type.M_NEW_SUCCESS,rsp)
     },msg=>{
+      commit(Type.M_NEW_ERROR,msg)
       console.log("获取最新任务失败",msg)
     })
   },

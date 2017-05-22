@@ -1,26 +1,26 @@
 <template>
     <div>
-        <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1">
-                <router-link to="/">首页</router-link>
+        <el-menu :router="true" :default-active="activeIndex" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="/">
+                首页
             </el-menu-item>
-            <el-submenu index="2">
+            <el-submenu index="/task/new">
                 <template slot="title">
-                    <router-link to="/task/new">全部任务</router-link>
+                    全部任务
                 </template>
-                <el-menu-item index="2-1">
-                    <router-link to="/task/new">最新任务</router-link>
+                <el-menu-item index="/task/new">
+                    最新任务
                 </el-menu-item>
                 <el-menu-item index="2-2">最热任务</el-menu-item>
             </el-submenu>
-            <el-menu-item index="3">
-                <router-link to="/community">社区</router-link>
+            <el-menu-item index="/community">
+                社区
             </el-menu-item>
-            <el-menu-item index="4">
-                <router-link to="/complain">投诉</router-link>
+            <el-menu-item index="/complain">
+                投诉
             </el-menu-item>
-            <el-menu-item index="5">
-                <router-link to="/">关于我们</router-link>
+            <el-menu-item index="/">
+                关于我们
             </el-menu-item>
 
             <el-menu-item index="6">
@@ -38,30 +38,31 @@
                 <el-menu-item index="7-2">选项2</el-menu-item>
                 <el-menu-item index="7-3">选项3</el-menu-item>
             </el-submenu>-->
-            <el-submenu index="4" class="userInfoBox">
+            <el-submenu index="" class="userInfoBox">
                 <template slot="title" style="">
-                    <img src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
+                    <img v-if="!userBaseInfo.avatarId" src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
                          style="width: 40px;height: 40px;border-radius: 100%;">
+                    <img v-else :src="'http://bank.longhaiyan.cn/picture/show?id='+userBaseInfo.avatarId" alt=""
+                         style="width: 40px;height: 40px;border-radius: 100%;">
+
                     <span>{{userBaseInfo.userName}}</span>
                 </template>
-                <el-menu-item index="4-1" @click="goZone">
+                <el-menu-item index="" @click="goZone">
                     个人主页
-
                 </el-menu-item>
-                <el-menu-item index="4-2">
-                    <router-link to="/setting/info">我的设置</router-link>
+                <el-menu-item index="/setting/info">
+                    我的设置
                 </el-menu-item>
-                <el-menu-item index="4-3">
+                <el-menu-item index="/message/personal">
                     <el-badge :value="unreadMsg" :max="99" class="item">
-                        <router-link to="/message/personal">我的消息</router-link>
+                        我的消息
                     </el-badge>
                 </el-menu-item>
                 <el-menu-item index="4-4" @click="onPublish">
                     发布任务
-
                 </el-menu-item>
-                <el-menu-item index="4-5">
-                    <router-link to="/">退出登录</router-link>
+                <el-menu-item index="/">
+                    退出登录
                 </el-menu-item>
             </el-submenu>
         </el-menu>

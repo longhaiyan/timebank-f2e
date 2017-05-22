@@ -28,7 +28,7 @@
                                 </el-select>
                             </el-form-item>-->
                             <el-form-item label="联系电话：" prop="cellphone">
-                                <el-input v-model.number="localData.cellphone" placeholder=""></el-input>
+                                <el-input v-model="localData.cellphone" placeholder=""></el-input>
                             </el-form-item>
                             <el-form-item label="个人简介：" prop="description">
                                 <el-input type="textarea" v-model="localData.description" placeholder=""></el-input>
@@ -40,7 +40,7 @@
                     <h3>头像</h3>
                     <el-upload
                             class="avatar-uploader"
-                            action="http://bank.longhaiyan.cn/picture/upload/profile"
+                            action="http://bank.longhaiyan.cn/picture/upload/project"
                             name="uploadFile"
                             :show-file-list="false"
                             :on-success="handleAvatarSuccess"
@@ -53,7 +53,7 @@
                              class="avatar"
                              src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
                         <img v-else style="width:200px;height: 200px;display: block;"
-                             :src="'http://bbs.chenxubiao.cn/picture/show?id='+localData.avatarId" alt="">
+                             :src="'http://bank.longhaiyan.cn/picture/show?id='+localData.avatarId" alt="">
                     </el-upload>
                     <span>点击图片，更换头像</span>
                 </el-col>
@@ -133,7 +133,7 @@
           if (value) {
             self.infoUpdate({
               userName:self.localData.userName,
-              cellphone:self.localData.cellphone,
+              cellphone:parseInt(self.localData.cellphone),
               sex:parseInt(self.localData.sex),
               description:self.localData.description,
               avatarId:parseInt(self.localData.avatarId),

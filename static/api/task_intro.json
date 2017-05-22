@@ -1,32 +1,47 @@
 {
   "data": {
-    "name": "高育良",
-    "userId": 1,
-    "title": "任务主题",
+    "senderInfo": {
+      "id": 0,
+      "avatarId": 0,
+      "name": "***",
+      "userName": null
+    },
+    "finisherInfo": null,
+    "title": "标题",
     "description": "任务详情",
-    "remark": "这是加急任务",
-    "demand": "这是要求，没啥要求",
-    "urgent": 20,
+    "remark": "备注",
+    "demand": "要求",
+    "urgent": 0,
     "urgentMoney": 0,
-    "serviceTime": "大概需要6小时",
-    "deadTime": "2017-05-25 15:51:00",
-    "address": "南区教育超市",
-    "personal": "这是必要的信息，我们会隐藏",
-    "money": 50,
+    "serviceTime": "服务时间",
+    "deadTime": "2017-05-23 08:44:32",
+    "address": "****",
+    "personal": "****",
+    "money": 10,
     "tagIds": null,
     "tags": [
       {
         "id": 1,
-        "name": "123",
-        "createTime": "2017-05-19 13:29:28",
-        "modifyTime": "2017-05-19 13:29:28"
-      },
-      {
-        "id": 2,
-        "name": "超市",
-        "createTime": "2017-05-19 15:52:43",
-        "modifyTime": "2017-05-19 15:52:43"
+        "name": "测试",
+        "createTime": "2017-05-22 08:45:43",
+        "modifyTime": "2017-05-22 08:45:43"
       }
-    ]
+    ],
+    "status": "已接单,进行中"
+  },
+  "finishInfo": {
+    "finishId": 1,
+    "finishTime": null,
+    "remark": "",
+    "createTime": "2017-05-22 08:45:43",
+    "status": "发布中",
+    "taskId": 1,
+    "sender": {
+      "id": 0,
+      "avatarId": 0,
+      "name": "***",
+      "userName": null
+    },
+    "taker": null
   }
 }
