@@ -6,10 +6,10 @@ import {env} from '@/utils/config'
 
 const api = {
   dev: {
-    'index_msg': '/data?name=index_msg',
+    'index_msg': '/data?name=user_list',
   },
   pro: {
-    'index_msg': '',
+    'index_msg': '/user/recommond/list/data',
   }
 }
 export default api[env]

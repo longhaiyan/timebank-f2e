@@ -9,25 +9,32 @@
                     全部任务
                 </template>
                 <el-menu-item index="/task/new">
-                    最新任务
+                    发布中
+
                 </el-menu-item>
-                <el-menu-item index="2-2">最热任务</el-menu-item>
+                <el-menu-item index="/task/receive">
+                    已接单
+
+                </el-menu-item>
+                <el-menu-item index="/task/finish">
+                    已完成
+                </el-menu-item>
+
             </el-submenu>
             <el-menu-item index="/community">
                 社区
+
             </el-menu-item>
             <el-menu-item index="/complain">
                 投诉
+
             </el-menu-item>
             <el-menu-item index="/">
                 关于我们
+
             </el-menu-item>
 
-            <el-menu-item index="6">
-                <el-button type="text" @click="onLogin">登录</el-button>
-                <span>/</span>
-                <el-button type="text" @click="onRegister">注册</el-button>
-            </el-menu-item>
+
             <!--<el-submenu index="7" class="userInfoBox" v-else>
                 <template slot="title" style="">
                     <img src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
@@ -38,9 +45,14 @@
                 <el-menu-item index="7-2">选项2</el-menu-item>
                 <el-menu-item index="7-3">选项3</el-menu-item>
             </el-submenu>-->
-            <el-submenu index="" class="userInfoBox">
+            <el-menu-item v-if="!userBaseInfo||!userBaseInfo.userName" index="/">
+                <el-button type="text" @click="onLogin">登录</el-button>
+                <span>/</span>
+                <el-button type="text" @click="onRegister">注册</el-button>
+            </el-menu-item>
+            <el-submenu v-else index="" class="userInfoBox">
                 <template slot="title" style="">
-                    <img v-if="!userBaseInfo.avatarId" src="http://bank.longhaiyan.cn/img/userImg.jpeg" alt=""
+                    <img v-if="!userBaseInfo.avatarId" src="http://bank.longhaiyan.cn/img/user.jpeg" alt=""
                          style="width: 40px;height: 40px;border-radius: 100%;">
                     <img v-else :src="'http://bank.longhaiyan.cn/picture/show?id='+userBaseInfo.avatarId" alt=""
                          style="width: 40px;height: 40px;border-radius: 100%;">
@@ -49,20 +61,28 @@
                 </template>
                 <el-menu-item index="" @click="goZone">
                     个人主页
+
                 </el-menu-item>
                 <el-menu-item index="/setting/info">
                     我的设置
+
                 </el-menu-item>
-                <el-menu-item index="/message/personal">
+                <el-menu-item index="/message/system">
                     <el-badge :value="unreadMsg" :max="99" class="item">
                         我的消息
+
                     </el-badge>
                 </el-menu-item>
-                <el-menu-item index="4-4" @click="onPublish">
-                    发布任务
+                <el-menu-item index="/account">
+                   我的账户
                 </el-menu-item>
-                <el-menu-item index="/">
+                <el-menu-item index="" @click="onPublish">
+                    发布任务
+
+                </el-menu-item>
+                <el-menu-item index="/" @click="onLoginOut">
                     退出登录
+
                 </el-menu-item>
             </el-submenu>
         </el-menu>
@@ -138,6 +158,7 @@
         publishShow: GlobalType.A_PUBLISH_SHOW,
         getBaseUserInfo: GlobalType.A_USER_BASE_INFO,
         liveOpen: GlobalType.A_LIVE_OPEN,
+        loginOut: GlobalType.A_USER_LOGIN_OUT,
 
       }),
       handleSelect(key, keyPath) {
@@ -219,7 +240,27 @@
         }
         this.setNavActiveIndex()
         this.liveOpen()
-      }
+      },
+      onLoginOut(){
+        let self = this
+        this.loginOut().then(() => {
+          self.userBaseInfo.userName = ''
+          window.initState.isLogin = false
+          self.$message({
+            type: 'success',
+            message: '注销成功'
+          })
+          this.GM_routerPush({
+            path: '/',
+          })
+
+        }, () => {
+          self.$message({
+            type: 'error',
+            message: '注销失败'
+          })
+        })
+      },
 
     },
     mounted(){

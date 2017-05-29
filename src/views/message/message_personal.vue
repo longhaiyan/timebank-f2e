@@ -9,7 +9,7 @@
                 <el-collapse-item v-if="item.user"  :name="item.user.userId" key>
                     <template slot="title">
                         <img v-if="!item.user.avatarId"
-                             src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
+                             src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
                         <img v-else
                              :src="'http://bank.longhaiyan.cn/picture/show?id='+item.user.avatarId" alt="">
 
@@ -33,7 +33,7 @@
                 <el-collapse-item v-if="item.user"  :name="item.user.userId" key>
                     <template slot="title">
                         <img v-if="!item.user.avatarId"
-                             src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
+                             src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
                         <img v-else
                              :src="'http://bank.longhaiyan.cn/picture/show?id='+item.user.avatarId" alt="">
 

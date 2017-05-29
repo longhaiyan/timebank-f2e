@@ -179,6 +179,13 @@ export default {
     Object.assign(state,{
       unreadMsg:payload.data
     })
-  }
+  },
+  [Type.M_ACCOUNT_START_MAIN]:(state,payload)=>{
+
+    Object.assign(state,{
+      accountInfo:payload
+    })
+  },
+
 
 }

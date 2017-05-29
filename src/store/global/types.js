@@ -27,6 +27,10 @@ export const A_MESSAGE_NAV = 'global/as/message_nav'
 export const A_LIVE_OPEN = 'global/as/live_open'
 export const A_LIVE_MESSAGE_COUNT = 'global/as/live_message_count'
 
+export const A_USER_LOGIN_OUT = 'global/as/user_login_out'
+
+export const A_ACCOUNT_START_MAIN = 'account/as/start_main'
+
 export const M_LOGIN_LOADING = 'global/mu/login_loading'
 export const M_LOGIN_SUBMITTING = 'global/mu/login_submitting'
 export const M_USER_INFO_SUCCESS = 'global/mu/user_info_success'
@@ -62,6 +66,9 @@ export const M_SETTING_NAV = 'global/mu/setting_nav'
 export const M_MESSAGE_NAV = 'global/mu/message_nav'
 
 export const M_LIVE_MESSAGE_COUNT = 'global/mu/live_message_count'
+
+export const M_ACCOUNT_START_MAIN = 'account/mu/start_main'
+
 
 
 

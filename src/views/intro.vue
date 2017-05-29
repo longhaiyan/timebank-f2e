@@ -9,13 +9,14 @@
             <p v-if="myTaskCon.senderInfo"><i>发布人：</i>{{myTaskCon.senderInfo.name}}</p>
             <p><i>奖励时间币：</i>{{myTaskCon.money}}</p>
             <p><i>截止时间：</i>{{myTaskCon.deadTime}}</p>
+            <p v-if="myTaskCon.serviceTime"><i>服务时间：</i>{{myTaskCon.serviceTime}}</p>
             <p><i>任务描述：</i>{{myTaskCon.description}}</p>
-            <p v-if="myTaskCon.serviceTime"><i>所需时间：</i>{{myTaskCon.serviceTime}}</p>
+            <p v-if="myTaskCon.personal"><i>隐私信息：</i>{{myTaskCon.personal}}</p>
             <p v-if="myTaskCon.demand"><i>承接要求：</i>{{myTaskCon.demand}}</p>
             <p v-if="myTaskCon.remark"><i>备注：</i>{{myTaskCon.remark}}</p>
-            <div class="my-space-Between">
+            <div class="my-space-Between" style="height: 17px;margin-bottom: 14px;">
                 <p><i>地点：</i>{{myTaskCon.address}}</p>
-                <p>没有发布时间</p>
+                <p>{{myTaskCon.createTime}}</p>
             </div>
             <div class="info-box_tags" v-if="myTaskCon.tags">
                 <el-tag style="margin-right: 10px;" color="#6992cc" v-for="item in myTaskCon.tags" key>{{item.name}}
@@ -27,8 +28,8 @@
         </div>
         <div class="intro-warn">
             <span>
-                <template v-if="myTaskFinish">
-                    任务状态：{{myTaskFinish.status}}
+                <template v-if="myTaskCon.status">
+                    任务状态：{{myTaskCon.status}}
                 </template>
                 <template v-else>
                     任务状态：正在发布中
@@ -36,9 +37,8 @@
             </span>
             <span>已有 0 人举报</span></div>
         <div class="btn-group">
-            <el-button type="primary" @click="getFormVisible=true">我要接受任务</el-button>
+            <el-button type="primary" v-if="myTaskCon.stu === 1" @click="getFormVisible=true">我要接受任务</el-button>
             <el-button @click="onWarn">我要举报</el-button>
-
         </div>
         <el-dialog title="确定接受这条任务?" v-model="getFormVisible">
             <p>接受任务的话，请对任务的主人说几句话吧</p>
@@ -112,7 +112,9 @@
       ...mapActions({
         acceptTask: IntroType.A_ACCEPT_TASK,
         warnTask: IntroType.A_WARN_TASK,
+        startMain: IntroType.A_START_MAIN,
         publishShow: GlobalType.A_PUBLISH_SHOW,
+
 
       }),
       onPublish() {
@@ -153,9 +155,10 @@
             this.getFormVisible = false
             self.acceptTask({id: self.taskId, value: self.getForm.value}).then(() => {
               if (self.acceptStep !== 'error') {
+                self.startMain({taskId: self.taskId})
                 self.$message({
                   type: 'success',
-                  message: '接受成功，请尽快完成任务!'
+                  message: '接受成功，请查看详情，并尽快完成任务!'
                 });
               } else {
                 self.$message.error(self.acceptErrorMsg)

@@ -135,6 +135,20 @@ const actions = {
     }, msg => {
       console.log('A获取未读消息数成功', msg)
     })
+  },
+  [Type.A_USER_LOGIN_OUT]: ({commit, state, dispatch}, payload) => {
+    return apiTools.post(api.loginOut, payload, rsp => {
+      console.log("注销成功")
+    }, msg => {
+      console.log('注销失败',msg)
+    })
+  },
+  [Type.A_ACCOUNT_START_MAIN]:({commit,state,dispatch},payload) =>{
+    return apiTools.req(api.account, payload, rsp => {
+      commit(Type.M_ACCOUNT_START_MAIN, rsp)
+    }, msg => {
+
+    })
   }
 
 }

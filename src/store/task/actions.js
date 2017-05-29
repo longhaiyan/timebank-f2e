@@ -7,19 +7,28 @@ import * as GlobalType from '@/store/global/types'
 const actions = {
   [Type.A_NEW_START_MAIN]: ({commit, state, dispatch}, payload) => {
     return apiTools.req(api.newTask,payload,rsp=>{
+      console.log("api.newTask rsp",rsp)
       commit(Type.M_NEW_SUCCESS,rsp)
     },msg=>{
       commit(Type.M_NEW_ERROR,msg)
       console.log("获取最新任务失败",msg)
     })
   },
-  [Type.A_HOT_START_MAIN]: ({commit, state, dispatch}, payload) => {
-    return apiTools.req(api.hotTask,payload,rsp=>{
-      commit(Type.M_HOT_SUCCESS,rsp)
+  [Type.A_RECEIVE_START_MAIN]: ({commit, state, dispatch}, payload) => {
+    return apiTools.req(api.newTask,{type:1},rsp=>{
+      commit(Type.M_RECEIVE_SUCCESS,rsp)
     },msg=>{
-      console.log("获取热门任务失败",msg)
+      commit(Type.M_RECEIVE_ERROR,msg)
     })
   },
+  [Type.A_FINISH_START_MAIN]: ({commit, state, dispatch}, payload) => {
+    return apiTools.req(api.newTask,{type:2},rsp=>{
+      commit(Type.M_FINISH_SUCCESS,rsp)
+    },msg=>{
+      commit(Type.M_FINISH_ERROR,msg)
+    })
+  },
+
 
   /*[Type.A_ZONE_INFO]:({commit,state,dispatch},payload)=>{
     console.log("获取当前主页信息",payload)

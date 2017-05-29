@@ -13,6 +13,10 @@ export default {
   mainWarn:{},
 
   mineUpdateStep:'',
-  mineUpdateError:''
+  mineUpdateError:'',
+
+  otherUpdateStep:'',
+  otherUpdateError:'',
+
 
 }

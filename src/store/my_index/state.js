@@ -2,7 +2,7 @@
  * Created by longhaiyan on 17/4/8.
  */
 export default {
-  indexInfo:{},
+  userList:[],
   newTaskArr:[],
   recommendation:[],
   topList:[],

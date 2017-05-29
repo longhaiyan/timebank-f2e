@@ -13,13 +13,18 @@ const api = {
     'topicPublish': 'data?name=mirror',
     'baseInfo': 'data?name=userInfo',
     'unread': 'data?name=unread',
+    'loginOut':'/data?name=mirror',
+    'account':'/data?name=account'
   },
   pro: {
     'login': '/user/login/data',
     'register': '/user/register/data',
     'baseInfo': '/user/info/data',
     'unread':'/message/unlook/count',
-    'publish':'/task/publish/data'
+    'publish':'/task/publish/data',
+    'loginOut': '/user/logout/data',
+    'account': '/account/info/data',
+
   }
 }
 export default api[env]

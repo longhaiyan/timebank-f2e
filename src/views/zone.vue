@@ -2,7 +2,10 @@
     <div class="my-zone j-my-zone">
         <div class="my-zone-hd">
             <div class="my-zone_avatar">
-                <img src="" alt="">
+                <img  v-if="!homeInfo.avatarId"
+                      src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
+                <img v-else
+                     :src="'http://bank.longhaiyan.cn/picture/show?id='+homeInfo.avatarId" alt="">
             </div>
             <div class="zone-user">
                 <div class="zone-user-hd">
@@ -95,36 +98,45 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else>
-                        没有发布的任务
+                    <div v-else style="text-align: center;">
+                        <i class="el-icon-warning"></i>无记录
                     </div>
                 </el-tab-pane>
                 <el-tab-pane name="get_task">
                     <span slot="label"><i class="el-icon-menu"></i> 接受的任务</span>
-                    <div class="task-boxes">
-                        <div class="task-box" v-for="(item,index) in infoData">
+                    <div class="task-boxes" v-if="mineTask&&mineTask.takeTask">
+                        <div class="task-box" v-for="(item,index) in mineTask.takeTask">
                             <div class="task-box-border">
                                 <span class="order">{{index + 1}}</span>
-                                <infoBox :data="item" key></infoBox>
+                                <infoBox :data="item" :visible="true" key></infoBox>
                             </div>
                         </div>
+                    </div>
+                    <div  v-else style="text-align: center;">
+                        <i class="el-icon-warning"></i>无记录
                     </div>
                 </el-tab-pane>
                 <el-tab-pane name="topic">
                     <span slot="label"><i class="el-icon-date"></i> 发布的帖子</span>
-                    <div class="topic-boxes">
+                    <!--<div class="topic-boxes">
                         <topicBox v-for="item in 6" key></topicBox>
+                    </div>-->
+                    <div style="text-align: center;">
+                        <i class="el-icon-warning"></i>无记录
                     </div>
                 </el-tab-pane>
                 <el-tab-pane name="warn">
                     <span slot="label"><i class="el-icon-warning"></i> 举报记录</span>
-                    <div class="task-boxes">
+                    <!--<div class="task-boxes">
                         <div class="task-box" v-for="(item,index) in infoData">
                             <div class="task-box-border">
                                 <span class="order">{{index + 1}}</span>
                                 <infoBox :data="item" key></infoBox>
                             </div>
                         </div>
+                    </div>-->
+                    <div style="text-align: center;">
+                        <i class="el-icon-warning"></i>无举报记录
                     </div>
                 </el-tab-pane>
             </el-tabs>
@@ -270,9 +282,9 @@
       handleClick(tab, event) {
         console.log("table被点击", tab.name, event);
         if (tab.name === 'publish_task') {
-          this.getMineTask()
+//          this.getMineTask()
         } else if (tab.name === 'get_task') {
-          this.getPublishTask()
+//          this.getPublishTask()
         } else if (tab.name === 'topic') {
           this.getMineTopic()
         } else if (tab.name === 'warn') {

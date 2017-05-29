@@ -57,6 +57,18 @@ export default {
       mineUpdateError:payload.message
     })
   },
+  [Type.M_UPDATE_OTHER_SUCCESS]:(state,payload)=>{
+    Object.assign(state,{
+      otherUpdateStep:'success'
+    })
+  },
+  [Type.M_UPDATE_OTHER_ERROR]:(state,payload)=>{
+    Object.assign(state,{
+      otherUpdateStep:'error',
+      otherUpdateError:payload.message
+    })
+  },
+
 
 
 

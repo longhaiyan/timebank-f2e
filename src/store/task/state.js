@@ -1,5 +1,10 @@
 export default {
   newTaskInfo:{},
   newTaskError:'',
-  hotTaskInfo:{}
+  hotTaskInfo:{},
+  receiveTaskInfo:{},
+  receiveTaskError:'',
+  finishTaskInfo:{},
+  finishTaskError:'',
+
 }

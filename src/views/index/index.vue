@@ -16,19 +16,48 @@
                     <div class="show-banner">
                         <div class="show-banner-hd my-space-Between">
                             <h3 class="show-banner_title">最新任务</h3>
-                            <router-link to="/" class="show-banner_more">更多<i class="el-icon-d-arrow-right"></i>
+                            <router-link to="/task/new" class="show-banner_more">更多<i class="el-icon-d-arrow-right"></i>
                             </router-link>
                         </div>
-                        <infoBox v-for="item in indexInfoData" :data="item" key></infoBox>
+                        <template v-if="newTaskInfo&&newTaskInfo.data">
+                            <div v-if="index <5" v-for="(item,index) in newTaskInfo.data" key>
+                                <div class="my-info-box" @click="goTaskInfo(item.taskId)">
+                                    <div class="info-box-hd">
+                                        <h4 class="info-box_title">
+                                            {{item.title}}
+            </h4>
+                                        <p>查看详情</p>
+                                    </div>
+                                    <p class="info-box_info">时间币：{{item.money}}枚</p>
+                                    <p class="info-box_info">地点：{{item.address}}</p>
+                                    <p class="info-box_info">时间：{{item.deadTime}} 前完成</p>
+                                    <div class="my-space-Between">
+                                        <div class="info-box_tags" v-if="item.tags">
+                                            <el-tag color="rgba(48, 101, 181, 0.67);" v-for="tag in item.tags" key>
+                                                {{tag.name}}
+
+                                            </el-tag>
+                                        </div>
+                                        <div v-else>
+                                            <el-tag type="gray">无标签</el-tag>
+                                        </div>
+                                        <span class="info-box_info">{{item.time}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <div v-else class="no-task">
+                            <i class="el-icon-warning"></i>没有新任务哦，快来发一条吧
+                        </div>
                     </div>
-                    <div class="show-banner">
+                    <!--<div class="show-banner">
                         <div class="show-banner-hd my-space-Between">
                             <h3 class="show-banner_title">最热任务</h3>
                             <router-link to="/" class="show-banner_more">更多<i class="el-icon-d-arrow-right"></i>
                             </router-link>
                         </div>
                         <infoBox v-for="item in indexInfoData" :data="item" key></infoBox>
-                    </div>
+                    </div>-->
 
                 </el-col>
                 <el-col :sm="7">
@@ -37,13 +66,19 @@
                     </div>
                     <div class="show-users">
                         <h3 class="show-users_title">本周活跃用户Top 5</h3>
-                        <ul class="user-liat">
-                            <li v-for="index in 5" key @click="goZone(index)" class="my-space-Between">
-                                <img src="http://bank.longhaiyan.cn/img/user.jpeg"
-                                     alt="">
-                                <span>lalal</span>
+                        <ul class="user-liat" v-if="userList&&userList.data">
+                            <li v-if="index<5" v-for="(item,index) in userList.data" key @click="goZone(item.id)"
+                                class="my-space-Between">
+                                <img v-if="!item.avatarId"
+                                     src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
+                                <img v-else
+                                     :src="'http://bank.longhaiyan.cn/picture/show?id='+item.avatarId" alt="">
+                                <span>{{item.userName}}</span>
                             </li>
                         </ul>
+                        <div v-else class="no-task">
+                            <i class="el-icon-warning"></i>天呐，居然一个用户都没有
+                        </div>
                     </div>
                 </el-col>
             </el-row>
@@ -53,10 +88,11 @@
                     <el-col :sm="8">
                         合肥工业大学
 
-
-
                     </el-col>
                     <el-col :sm="8">合肥工业大学管理学院</el-col>
+                    <el-col :sm="8">合肥工业大学宣城校区</el-col>
+                    <el-col :sm="8">工大学子</el-col>
+                    <el-col :sm="8">明理苑大学生网络文化工作室</el-col>
                     <el-col :sm="8"></el-col>
                 </el-row>
             </div>
@@ -88,42 +124,43 @@
 
         },
         swiperSlides: [{
-          img: 'http://bank.longhaiyan.cn/img/test.png'
+          img: 'http://bank.longhaiyan.cn/img/test.jpg'
         }, {
-          img: 'http://bank.longhaiyan.cn/img/test1.jpg'
+          img: 'http://bank.longhaiyan.cn/img/test1.png'
         }],
-        indexInfoData: [
-          {
-            taskId: 12,
-            name: '帮忙取快递lalal',
-            money: 0.5,
-            address: '南村教育超市la',
-            endTime: '2017-05-02 17：00',
-            createTime: '2017-05-02 12：00'
-          },
-          {
-            taskId: 13,
-            name: '帮忙取快递lalal',
-            money: 0.5,
-            address: '南村教育超市la',
-            endTime: '2017-05-02 17：00',
-            createTime: '2017-05-02 12：00'
-          },
-          {
-            taskId: 14,
-            name: '帮忙取快递lalal',
-            money: 0.5,
-            address: '南村教育超市la',
-            endTime: '2017-05-02 17：00',
-            createTime: '2017-05-02 12：00'
-          },
+          /*indexInfoData: [
+           {
+           taskId: 12,
+           name: '帮忙取快递lalal',
+           money: 0.5,
+           address: '南村教育超市la',
+           endTime: '2017-05-02 17：00',
+           createTime: '2017-05-02 12：00'
+           },
+           {
+           taskId: 13,
+           name: '帮忙取快递lalal',
+           money: 0.5,
+           address: '南村教育超市la',
+           endTime: '2017-05-02 17：00',
+           createTime: '2017-05-02 12：00'
+           },
+           {
+           taskId: 14,
+           name: '帮忙取快递lalal',
+           money: 0.5,
+           address: '南村教育超市la',
+           endTime: '2017-05-02 17：00',
+           createTime: '2017-05-02 12：00'
+           },
 
-        ]
+           ]*/
       }
     },
-    computed:{
+    computed: {
       ...mapState({
-        indexInfo:state=>state.myIndex.indexInfo
+        newTaskInfo: state => state.task.newTaskInfo,
+        userList: state => state.myIndex.userList
       })
     },
     methods: {
@@ -133,9 +170,9 @@
       onPublish: function() {
         this.publishShow()
       },
-      goZone:function (id) {
+      goZone: function(id) {
         event.stopPropagation()
-        if(id){
+        if (id) {
           this.GM_routerPush({
             path: '/zone',
             query: {
@@ -144,6 +181,14 @@
           })
         }
       },
+      goTaskInfo(taskId) {
+        this.GM_routerPush({
+          path: '/intro',
+          query: {
+            taskId: taskId
+          }
+        })
+      }
     },
     components: {
       swiper,

@@ -1,8 +1,21 @@
 <template>
     <div>
         <div class="my-task-sub j-task">
-            <el-button type="text" class="j-nav-new">最新任务</el-button>
-            <el-button type="text" class="j-nav-hot ">最热任务</el-button>
+            <el-button type="text" class="j-nav-new">
+                <router-link to="/task/new" class="logo">
+                    发布中
+                </router-link>
+            </el-button>
+            <el-button type="text" class="j-nav-receive">
+                <router-link to="/task/receive" class="logo">
+                    已接单
+                </router-link>
+            </el-button>
+            <el-button type="text" class="j-nav-finish">
+                <router-link to="/task/finish" class="logo">
+                    已完成
+                </router-link>
+            </el-button>
         </div>
         <router-view></router-view>
     </div>
@@ -11,18 +24,9 @@
   export default{
     name: 'task',
     methods:{
-      init(){
-        if(document.querySelector('.j-my-new-task-list')){
-          document.querySelector('.j-nav-hot').className = document.querySelector('.j-nav-hot').className.replace(( /(?:^|\s)activeTask(?!\S)/), '')
-          document.querySelector('.j-nav-new').className += ' activeTask '
-        }else if(document.querySelector('.j-my-hot-task-list')){
-          document.querySelector('.j-nav-new').className = document.querySelector('.j-nav-new').className.replace(( /(?:^|\s)activeTask(?!\S)/), '')
-          document.querySelector('.j-nav-hot').className += ' activeTask '
-        }
-      }
+
     },
     mounted(){
-      this.init()
     }
   }
 </script>

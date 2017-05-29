@@ -74,29 +74,36 @@
                 </el-steps>
                 <el-tabs v-model="panelActive">
                     <el-tab-pane label="用户管理" name="1">
-                        <el-form-item label="任务主题简述：" prop="name">
+                        <el-form-item label="主题：" prop="name">
                             <el-input
-                                    placeholder="请输入任务简要"
+                                    placeholder="请简要概括任务信息，如取快递"
                                     v-model="publishFormData.name">
                             </el-input>
                         </el-form-item>
-                        <el-form-item label="任务详情：" prop="description">
+                        <el-form-item label="详细描述：" prop="description">
                             <el-input type="textarea"
-                                      placeholder="输入任务详情"
+                                      placeholder="请详细描述您的任务内容"
                                       v-model="publishFormData.description">
                             </el-input>
                         </el-form-item>
-                        <el-form-item label="酬金：" prop="money">
-                            <el-input-number v-model="publishFormData.money" :step="5"></el-input-number>
+                        <el-form-item label="要求：">
+                            <el-input
+                                    placeholder="请说明您的要求"
+                                    v-model="publishFormData.demand">
+                            </el-input>
                         </el-form-item>
-                        <el-form-item label="任务截止时间：" prop="deadTime">
-                            <el-date-picker
-                                    type="datetime"
-                                    v-model="publishFormData.deadTime"
-                                    placeholder="选择任务截止日期时间"
-                                    :picker-options="pickerOptions0"
-                            >
-                            </el-date-picker>
+                        <el-form-item label="备注：" prop="remark">
+                            <el-input
+                                    placeholder=""
+                                    v-model="publishFormData.remark">
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="隐私信息：" prop="personal">
+                            <el-input
+                                    type="textarea"
+                                    placeholder="此项只有您和接单人可见，例如：快递单号是12345"
+                                    v-model="publishFormData.personal">
+                            </el-input>
                         </el-form-item>
 
                         <div class="btn-group">
@@ -104,18 +111,6 @@
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="配置管理" name="2">
-                        <el-form-item label="服务时间：" prop="serviceTime">
-                            <el-input
-                                    placeholder=""
-                                    v-model="publishFormData.serviceTime">
-                            </el-input>
-                        </el-form-item>
-                        <el-form-item label="服务地点：" prop="address">
-                            <el-input
-                                    placeholder=""
-                                    v-model="publishFormData.address">
-                            </el-input>
-                        </el-form-item>
                         <el-form-item label="标签：" prop="tagIds">
                             <el-select
                                     v-model="publishFormData.tagIds"
@@ -132,18 +127,28 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
+                        <el-form-item label="截止时间：" prop="deadTime">
+                            <el-date-picker
+                                    type="datetime"
+                                    v-model="publishFormData.deadTime"
+                                    placeholder="选择任务截止日期时间"
+                                    :picker-options="pickerOptions0"
+                            >
+                            </el-date-picker>
+                        </el-form-item>
 
-                        <el-form-item label="要求：">
+
+                        <el-form-item label="服务地点：" prop="address">
                             <el-input
                                     placeholder=""
-                                    v-model="publishFormData.demand">
+                                    v-model="publishFormData.address">
                             </el-input>
                         </el-form-item>
-                        <el-form-item label="完成任务必要的信息：" prop="personal">
+
+                        <el-form-item label="服务时间：" prop="serviceTime">
                             <el-input
-                                    type="textarea"
-                                    placeholder=""
-                                    v-model="publishFormData.personal">
+                                    placeholder="例如：周六下午3-5点，预计2小时"
+                                    v-model="publishFormData.serviceTime">
                             </el-input>
                         </el-form-item>
 
@@ -160,22 +165,23 @@
                             <img @click="getKaptchaImg" src="http://bank.longhaiyan.cn/kaptcha-image"
                                  style="width: 120px;height: 40px;vertical-align: middle;" alt="">
                         </el-form-item>-->
-                        <el-form-item label="加急：">
-                            <el-radio-group v-model="publishFormData.urgent">
+                        <el-form-item label="酬金：" prop="money">
+                            <el-input-number v-model="publishFormData.money" :step="5"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="我爱公益：">
+                            <!--<el-radio-group v-model="publishFormData.urgent">
                                 <el-radio label="0">不加急</el-radio>
                                 <el-radio label="1">加急</el-radio>
-                            </el-radio-group>
+                            </el-radio-group>-->
+                            <el-checkbox v-model="publishFormData.urgent"><span v-if="!publishFormData.urgent" style="font-size: 13px;color: #999;">我们将根据您的资助优先推送您的任务信息</span></el-checkbox>
+
                         </el-form-item>
 
-                        <el-form-item v-if="parseInt(publishFormData.urgent) > 0" label="加急额度：" prop="urgentMoney">
-                            <el-input-number v-model="publishFormData.urgentMoney" :step="5"></el-input-number>
+                        <el-form-item  label="" prop="urgentMoney">
+                            <el-input-number v-if="publishFormData.urgent" v-model="publishFormData.urgentMoney" :step="5"></el-input-number>
+
                         </el-form-item>
-                        <el-form-item label="备注：" prop="remark">
-                            <el-input
-                                    placeholder=""
-                                    v-model="publishFormData.remark">
-                            </el-input>
-                        </el-form-item>
+
 
                         <div class="btn-group">
                             <el-button type="primary" @click="firstNext">上一步</el-button>
@@ -282,7 +288,7 @@
           confirmButtonText: '确认发布',
           title: '发布任务',
           deadTime: new Date(),
-          urgent: "0",
+          urgent: false,
           money: "0",
           tagIds: [],
           urgentMoney: "0",
@@ -571,8 +577,12 @@
                 }
                 console.log('rlt[key]', rlt.tagIds)
                 let urgentMoneyValue = 0
-                if (parseInt(self.publishFormData.urgent) > 0) {
+                let urgentValue = 0
+                if (self.publishFormData.urgent) {
                   urgentMoneyValue = parseInt(self.publishFormData.urgentMoney)
+                }
+                if(self.publishFormData.urgent){
+                  urgentValue = 1
                 }
                 console.log("urgentMoneyValue", urgentMoneyValue)
                 console.log("开始发布")
@@ -581,7 +591,7 @@
                   description: self.publishFormData.description, /*描述*/
                   money: parseInt(self.publishFormData.money),//钱
                   demand: self.publishFormData.demand || '', /*承接要求*/
-                  urgent: parseInt(self.publishFormData.urgent),//是否加急
+                  urgent: urgentValue,//是否加急
                   remark: self.publishFormData.remark || '',//备注
                   urgentMoney: urgentMoneyValue,//加急的钱数
                   serviceTime: self.publishFormData.serviceTime || '',//服务时间
@@ -734,9 +744,9 @@
       },
       checkUrgentMoney(rule, value, callback){
         let self = this
-        if (parseInt(self.publishFormData.urgent) > 0 && value === '') {
+        if (self.publishFormData.urgent&& value === '') {
           return callback(new Error('请输入时间币金额'))
-        } else if (parseInt(self.publishFormData.urgent) > 0 && parseInt(value) < 1) {
+        } else if (self.publishFormData.urgent&& parseInt(value) < 1) {
           return callback(new Error('请输入大于1的整数'))
         }
         return callback()

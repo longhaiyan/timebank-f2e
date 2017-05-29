@@ -51,7 +51,7 @@
                              :src="'http://bbs.chenxubiao.cn/picture/show?id='+avatarId" alt="">-->
                         <img style="width:200px;height: 200px;display: block;" v-if="!localData.avatarId"
                              class="avatar"
-                             src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
+                             src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
                         <img v-else style="width:200px;height: 200px;display: block;"
                              :src="'http://bank.longhaiyan.cn/picture/show?id='+localData.avatarId" alt="">
                     </el-upload>

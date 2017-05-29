@@ -9,13 +9,17 @@
         <p class="info-box_info">时间币：{{data.taskInfo.money}}枚</p>
         <div class="my-space-Between">
             <p class="info-box_info">地点：{{data.taskInfo.address}}</p>
-            <el-button-group v-if="visible&&data.taskInfo.stu ===4 " class="btn-group">
+            <el-button-group v-if="visible " class="btn-group">
                 <!--<el-button type="primary">撤回</el-button>-->
-                <el-button type="primary" @click.stop="ok">已完成</el-button>
-                <el-button type="primary">删除</el-button>
+                <el-button v-if="data.taskInfo.stu ===4 || data.taskInfo.stu ===8||data.taskInfo.stu ===12" type="primary" @click.stop="ok">已完成</el-button>
+                <el-button v-if="data.taskInfo.stu ===1 || data.taskInfo.stu ===4||data.taskInfo.stu ===12" type="primary" @click.stop="otherOk(2)">申请结束</el-button>
+                <el-button v-if="data.taskInfo.stu ===5 || data.taskInfo.stu ===13" type="primary" @click.stop="otherOk(3)">同意结束</el-button>
+                <el-button v-if="data.taskInfo.stu ===1 || data.taskInfo.stu ===3||data.taskInfo.stu ===7||data.taskInfo.stu ===9||data.taskInfo.stu ===11" type="primary" @click.stop="otherOk(1)">删除</el-button>
             </el-button-group>
         </div>
         <p class="info-box_info">时间：{{data.taskInfo.deadTime}} 前完成</p>
+        <p class="info-box_info">状态：{{data.taskInfo.status}}</p>
+        <p v-if="data.taskFinish" class="info-box_info">接单用户：{{data.taskFinish.taker.userName}}</p>
         <div class="my-space-Between">
             <div class="info-box_tags my-ellipsis" v-if="data.taskInfo.tags">
                 <el-tag color="#6992cc" v-for="item in data.taskInfo.tags" key>{{item.name}}</el-tag>
@@ -25,8 +29,6 @@
             </div>
             <span class="info-box_info info-box_time">{{data.time}}</span>
         </div>
-        <p class="info-box_info">状态：{{data.taskInfo.status}}</p>
-        <p v-if="data.taskFinish" class="info-box_info">接单用户：{{data.taskFinish.taker.userName}}</p>
 
     </div>
 </template>
@@ -111,11 +113,16 @@
       ...mapState({
         mineUpdateStep: state => state.zone.mineUpdateStep,
         mineUpdateError: state => state.zone.mineUpdateError,
+        otherUpdateStep: state => state.zone.otherUpdateStep,
+        otherUpdateError: state => state.zone.otherUpdateError,
+
       })
     },
     methods: {
       ...mapActions({
        updateMinePublish : ZoneType.A_UPDATE_MINE_PUBLISH,
+       updateOtherPublish : ZoneType.A_UPDATE_OTHER_PUBLISH,
+       minePublish : ZoneType.A_MINE_PUBLISH,
       }),
       ok(){
 
@@ -125,11 +132,43 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          console.log("taskId",)
+          console.log("taskId",self.data.taskInfo.taskIdd)
           self.updateMinePublish({taskId:self.data.taskInfo.taskId}).then(()=>{
             if(self.mineUpdateStep === 'error'){
-              self.$message.error(self.mineUpdateStep)
+              self.$message.error(self.mineUpdateError)
             }else{
+              self.minePublish()
+              self.$message.success("确认成功")
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消确认'
+          });
+        });
+      },
+      otherOk(type){
+        let self = this
+        let msg = '请确认操作'
+        if(type === 1){
+          msg = "确认删除？"
+        }else if(type === 2){
+          msg = "确认申请结束？"
+        }else if(type === 3){
+          msg = "确认同意结束？"
+        }
+        this.$confirm(msg, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log("taskId",)
+          self.updateOtherPublish({taskId:self.data.taskInfo.taskId,type:type}).then(()=>{
+            if(self.otherUpdateStep === 'error'){
+              self.$message.error(self.otherUpdateError)
+            }else{
+              self.minePublish()
               self.$message.success("确认成功")
             }
           })

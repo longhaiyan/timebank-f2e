@@ -21,9 +21,13 @@ import SettingPublishTask from '@/views/setting/setting_publish_task'
 import SettingCommunity from '@/views/setting/setting_community'
 import SettingConfirm from '@/views/setting/setting_confirm'
 
+import ReceiveTask from '@/views/task/receive_task'
+import FinishTask from '@/views/task/finish_task'
 import NewTask from '@/views/task/new_task'
 import CommunityIndex from '@/views/community/community_index'
 import CommunityInfo from '@/views/community/community_info'
+
+import Account from '@/views/account'
 // import NewTask from '@/views/task/new_task'
 
 import index from '@/views/index/index'
@@ -63,7 +67,16 @@ let routes = [
       {
         path: 'new',
         component: NewTask,
-      }
+      },
+      {
+        path: 'receive',
+        component: ReceiveTask,
+      },
+      {
+        path: 'finish',
+        component: FinishTask,
+      },
+
     ],
   },
   {
@@ -89,6 +102,12 @@ let routes = [
     path: '/zone',
     name: 'Zone',
     component: Zone
+  },
+  {
+    label:'账户信息',
+    path:'/account',
+    name:'Account',
+    component:Account
   },
   {
     label: '我的消息',

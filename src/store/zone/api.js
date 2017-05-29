@@ -8,14 +8,17 @@ const api = {
     'error':'/data?name=error',
     'info':'/data?name=mirror',
     'mine':'/data?name=zone_mine',
-    'mineUpdate':'/data?name=mirror'
+    'mineUpdate':'/data?name=mirror',
+    'otherUpdate':'/data?name=mirror',
+
 
   },
   pro: {
     'send':'/message/user/send/data',
     'userInfo':'/user/info/data',
     'mine':'/task/user/list/data',
-    'mineUpdate':'/task/finish/done/update/data'
+    'mineUpdate':'/task/finish/done/update/data',
+    'otherUpdate':'/task/info/update/data'
 
   }
 }

@@ -12,9 +12,25 @@ export default {
       newTaskError:payload.message
     })
   },
-  [Type.M_HOT_SUCCESS]:(state,payload)=>{
+  [Type.M_RECEIVE_SUCCESS]:(state,payload)=>{
     Object.assign(state,{
-      hotTaskInfo:payload
+      receiveTaskInfo:payload
     })
   },
+  [Type.M_RECEIVE_ERROR]:(state,payload)=>{
+    Object.assign(state,{
+      receiveTaskError:payload.message
+    })
+  },
+  [Type.M_FINISH_SUCCESS]:(state,payload)=>{
+    Object.assign(state,{
+      finishTaskInfo:payload
+    })
+  },
+  [Type.M_FINISH_ERROR]:(state,payload)=>{
+    Object.assign(state,{
+      finishTaskError:payload.message
+    })
+  },
+
 }

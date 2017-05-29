@@ -21,6 +21,7 @@ export default {
   settingNav:'info',
   messageNav:'personal',
   unreadMsg:0,/*未读消息数目*/
+  accountInfo:{}
 
 
 }

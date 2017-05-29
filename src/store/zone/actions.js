@@ -27,6 +27,7 @@ const actions = {
   },
   [Type.A_MINE_PUBLISH]: ({commit, state, dispatch}, payload) => {
     return apiTools.req(api.mine, payload, rsp => {
+      console.log("获取我发布的任务信息成功")
       commit(Type.M_MINE_PUBLISH, rsp)
     }, msg => {
       console.log("获取我发布的任务信息失败", msg)
@@ -57,10 +58,17 @@ const actions = {
     return apiTools.post(api.mineUpdate, payload, rsp => {
       commit(Type.M_UPDATE_MINE_SUCCESS, rsp)
     }, msg => {
-      console.log("获取我的举报历史失败", msg)
       commit(Type.M_UPDATE_MINE_ERROR,msg)
     })
   },
+  [Type.A_UPDATE_OTHER_PUBLISH]: ({commit, state, dispatch}, payload) => {
+    return apiTools.post(api.otherUpdate, payload, rsp => {
+      commit(Type.M_UPDATE_OTHER_SUCCESS, rsp)
+    }, msg => {
+      commit(Type.M_UPDATE_OTHER_ERROR,msg)
+    })
+  },
+
 
 }
 

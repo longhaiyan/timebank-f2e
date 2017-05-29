@@ -14,14 +14,13 @@
             </h4>
         </div>
         <div class="setting-r-bd my-setting-info">
-            <template v-if="userBaseInfo.userType">
-                <el-row :gutter="20" class="my-setting-info-confirmed">
+            <template v-if="userBaseInfo.userType === 1 || userBaseInfo.userType === 3">
+                <el-row  :gutter="20" class="my-setting-info-confirmed">
                     <el-col :sm="4" class="hd">
                         真实姓名：
-
                     </el-col>
-                    <el-col :sm="19" class="bd">
-                        {{userBaseInfo.student.name||userBaseInfo.teacher.name}}
+                    <el-col :sm="19" class="bd"  v-if="userBaseInfo.student">
+                        {{userBaseInfo.student.name}}
                     </el-col>
                 </el-row>
                 <el-row :gutter="20" class="my-setting-info-confirmed">
@@ -30,12 +29,7 @@
 
                     </el-col>
                     <el-col :sm="19" class="bd">
-                        <template v-if="userBaseInfo.userType === 1 || userBaseInfo.userType === 3">
-                            学生
-                        </template>
-                        <template v-if="userBaseInfo.userType === 2 || userBaseInfo.userType === 4">
-                            教师
-                        </template>
+                        学生
                     </el-col>
                 </el-row>
                 <el-row :gutter="20" class="my-setting-info-confirmed">
@@ -44,8 +38,7 @@
 
                     </el-col>
                     <el-col :sm="19" class="bd">
-                        {{userBaseInfo.student.sno||userBaseInfo.teacher.sno}}
-
+                        {{userBaseInfo.student.sno}}
                     </el-col>
                 </el-row>
                 <el-row :gutter="20" class="my-setting-info-confirmed">
@@ -54,18 +47,53 @@
 
                     </el-col>
                     <el-col :sm="19" class="bd">
-                        {{userBaseInfo.student.dept||userBaseInfo.teacher.dept}}
+                        {{userBaseInfo.student.dept}}
 
                     </el-col>
                 </el-row>
-                <el-row v-if="userBaseInfo.student" :gutter="20" class="my-setting-info-confirmed">
+                <el-row :gutter="20" class="my-setting-info-confirmed">
                     <el-col :sm="4" class="hd">
                         专业班级：
-
                     </el-col>
                     <el-col :sm="19" class="bd">
                         {{userBaseInfo.student.major}}
+                    </el-col>
+                </el-row>
+            </template>
+            <template v-if="userBaseInfo.userType === 2 || userBaseInfo.userType === 4">
+                <el-row  :gutter="20" class="my-setting-info-confirmed">
+                    <el-col :sm="4" class="hd">
+                        真实姓名：
 
+                    </el-col>
+                    <el-col :sm="19" class="bd">
+                        {{userBaseInfo.teacher.name}}
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20" class="my-setting-info-confirmed">
+                    <el-col :sm="4" class="hd">
+                        用户类型：
+
+                    </el-col>
+                    <el-col :sm="19" class="bd">
+                        教师
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20" class="my-setting-info-confirmed">
+                    <el-col :sm="4" class="hd">
+                        教师号：
+
+                    </el-col>
+                    <el-col :sm="19" class="bd">
+                        {{userBaseInfo.teacher.tno}}
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20" class="my-setting-info-confirmed">
+                    <el-col :sm="4" class="hd">
+                        学院：
+                    </el-col>
+                    <el-col :sm="19" class="bd">
+                        {{userBaseInfo.teacher.dept}}
                     </el-col>
                 </el-row>
 
@@ -255,8 +283,6 @@
           return callback(new Error('请输入学号'))
         } else if (parseInt(this.userInfoData.type) > 1 && value === '') {
           return callback(new Error('请输入教师号'))
-        } else if (!Number.isInteger(value)) {
-          return callback(new Error('请输入整数'))
         }
         return callback()
       },
