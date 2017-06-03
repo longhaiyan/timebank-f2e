@@ -78,6 +78,14 @@ a{
   .el-submenu .el-menu-item:hover{
     font-size: 16px;
   }
+
+  .my-menu-more{
+    font-size: 20px;
+    color: #fff;
+    margin-right: 20px;
+    display: none;
+  }
+
 }
 .el-menu--horizontal .el-menu-item{
   height: 80px;
@@ -201,5 +209,41 @@ a{
 .my-publish-box-show{
   .el-dialog__footer{
     display: block;
+  }
+}
+
+@media only screen and (max-device-width:765px),
+only screen and (-webkit-min-device-pixel-ratio: 3) {
+  .header{
+    .my-menu-more{
+      display: block;
+    }
+    .my_header_hide{
+      display: none;
+    }
+    .my_header_phone_show{
+      .el-menu--horizontal{
+        background: rgba(8, 3, 3, 0.33);
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        .header-intro{
+          display: none;
+        }
+        .el-menu-item,.el-submenu__title{
+          padding: 0;
+        }
+        .el-menu--horizontal .el-menu-item:hover, .el-menu--horizontal .el-submenu__title:hover{
+          background-color: transparent !important;
+        }
+
+      }
+    }
+  }
+  .index .my-swiper{
+    height: 240px !important;
+  }
+  .index .my-swiper .my-swiper-box{
+    height: 240px !important;
   }
 }

@@ -1,5 +1,30 @@
 <template>
     <div id="app">
+        <el-row class="header">
+            <el-col :sm="8" class="my-space-Between">
+                <router-link to="/" class="logo">
+                    <img src="http://bank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
+                </router-link>
+                <i v-if="moreIconVisible" @click="onShowMenu" class="el-icon-more my-menu-more"></i>
+                <div v-else style="margin-right: 24px;">
+                    <el-button type="text" @click="onLoginShow">登录</el-button>
+                    <span>/</span>
+                    <el-button type="text" @click="onRegisterShow">注册</el-button>
+                </div>
+
+            </el-col>
+            <el-col  :sm="16" class="my_header j-my_header my_header_hide">
+                <MyHeader/>
+            </el-col>
+        </el-row>
+        <!--<img src="./assets/logo.png" alt="">-->
+        <el-row class="container">
+            <router-view></router-view>
+        </el-row>
+        <el-row>
+            <MyFooter/>
+        </el-row>
+
         <!--登录弹窗-->
         <MyModal class="my-login-box" :data="loginData" :step="loginDialogStep" style="text-align: left">
             <el-form :model="loginFormData" ref="loginForm" :rules="loginRules" label-width="100px">
@@ -216,25 +241,6 @@
         </MyModal>
 
 
-        <el-row class="header">
-            <el-col :sm="8">
-                <router-link to="/" class="logo">
-                    <img src="http://bank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
-                </router-link>
-
-            </el-col>
-            <el-col :sm="16" class="my_header">
-                <MyHeader/>
-            </el-col>
-        </el-row>
-        <!--<img src="./assets/logo.png" alt="">-->
-        <el-row class="container">
-            <router-view></router-view>
-        </el-row>
-        <el-row>
-            <MyFooter/>
-        </el-row>
-
 
     </div>
 </template>
@@ -253,6 +259,7 @@
     name: 'app',
     data(){
       return {
+        moreIconVisible:false,
         pickerOptions0: {
           disabledDate(time) {
             return time.getTime() < Date.now() - 8.64e7;
@@ -483,6 +490,7 @@
         indexStartMain: MyIndexType.A_START_MAIN,
         newTaskStartMain: TaskType.A_NEW_START_MAIN,
         getZoneInfo: ZoneType.A_ZONE_INFO,
+        loginShow: GlobalType.A_LOGIN_SHOW,
 
       }),
       onLogin(){
@@ -500,6 +508,7 @@
                     self.showMessage(self.loginErrorMsg)
                     return
                   } else {
+                    self.moreIconVisible = true
                     self.$message({
                       type: 'success',
                       message: '登录成功'
@@ -517,6 +526,9 @@
             })
           }
         })
+      },
+      onLoginShow(){
+        this.loginShow()
       },
       onRegister(){
         let self = this
@@ -544,6 +556,7 @@
                     self.GM_routerPush({
                       path: '/setting/confirm',
                     })
+                    self.moreIconVisible = true
                     return next()
                   }
                 })
@@ -557,6 +570,9 @@
           }
         })
 
+      },
+      onRegisterShow(){
+        this.registerShow()
       },
       onPublish(){
         let self = this
@@ -764,6 +780,16 @@
           return callback(new Error('请选择任务截止时间'))
         }
         return callback()
+      },
+      onShowMenu(){
+        if(document.querySelector('.my_header_hide')){
+          document.querySelector('.j-my_header').className = document.querySelector('.j-my_header').className.replace(( /(?:^|\s)my_header_hide(?!\S)/), '')
+          document.querySelector('.j-my_header').className += ' my_header_phone_show'
+        }else{
+          document.querySelector('.j-my_header').className += ' my_header_hide'
+          document.querySelector('.j-my_header').className = document.querySelector('.j-my_header').className.replace(( /(?:^|\s)my_header_phone_show(?!\S)/), '')
+        }
+
       }
 
     },

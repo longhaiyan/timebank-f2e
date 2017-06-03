@@ -6,7 +6,10 @@ import * as GlobalType from '@/store/global/types'
 const actions = {
   [Type.A_START_MAIN]: ({commit, state, dispatch}, payload) => {
     dispatch(Type.A_ZONE_INFO, {userId: payload.userId}).then(() => {
-      dispatch(Type.A_MINE_PUBLISH)
+      console.log("判断是否为用户当前用户主页",window.initState.userId === payload.userId)
+      if(window.initState.userId === payload.userId){
+        dispatch(Type.A_MINE_PUBLISH)
+      }
     })
   },
   [Type.A_ZONE_INFO]: ({commit, state, dispatch}, payload) => {

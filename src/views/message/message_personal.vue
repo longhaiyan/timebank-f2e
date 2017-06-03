@@ -17,15 +17,25 @@
                         <el-badge  :value="item.msgCount" :max="99" class="item">
                         </el-badge>
                     </template>
-                    <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="item in userMsg.data">
-                        <div class="time">{{item.createTime}}</div>
-                        <div v-if="item.senderInfo.userId === userMsg.selfId" class="box right">
-                            <p>{{item.message}}</p><span>：我</span>
+                    <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="(subitem,index) in userMsg.data">
+                        <div class="time">{{subitem.createTime}}</div>
+                        <div v-if="subitem.senderInfo.userId === userMsg.selfId" class="box right">
+                            <p>{{subitem.message}}</p><span>：我</span>
                         </div>
-                        <div v-else class="box"><span>对方：</span>
-                            <p>{{item.message}}</p>
+
+                        <div v-else class="box"><span>{{item.user.userName}}：</span>
+                            <p>{{subitem.message}}</p>
                         </div>
+                        <!--<template v-if="index+1 ===  userMsg.data.length" v-for="(answer,subindex) in answerVal">
+                            <div v-if="subindex === 0" class="time">刚刚</div>
+                            <div  class="box right">
+                                <p>{{answer}}</p><span>：我</span>
+                            </div>
+                        </template>-->
                     </template>
+                    <el-input :maxlength=200 placeholder="请输入内容" v-model="answer">
+                        <el-button type="primary" slot="append" @click="onAnswer(item.user.userId)">回复</el-button>
+                    </el-input>
 
                 </el-collapse-item>
             </template>
@@ -39,18 +49,55 @@
 
                         <p>{{item.user.userName}}</p>
                     </template>
-                    <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="item in userMsg.data">
-                        <div class="time">{{item.createTime}}</div>
-                        <div v-if="item.senderInfo.userId === userMsg.selfId" class="box right">
-                            <p>{{item.message}}</p><span>：我</span>
+                    <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="(subitem,index) in userMsg.data">
+                        <div class="time">{{subitem.createTime}}</div>
+                        <div v-if="subitem.senderInfo.userId === userMsg.selfId" class="box right">
+                            <p>{{subitem.message}}</p><span>：我</span>
                         </div>
-                        <div v-else class="box"><span>对方：</span>
-                            <p>{{item.message}}</p>
+
+                        <div v-else class="box"><span>{{item.user.userName}}：</span>
+                            <p>{{subitem.message}}</p>
                         </div>
+                        <!--<template v-if="index+1 ===  userMsg.data.length" v-for="(answer,subindex) in answerVal">
+                            <div v-if="subindex === 0" class="time">刚刚</div>
+                            <div  class="box right">
+                                <p>{{answer}}</p><span>：我</span>
+                            </div>
+                        </template>-->
                     </template>
+                    <el-input :maxlength=200 placeholder="请输入内容" v-model="answer">
+                        <el-button type="primary" slot="append" @click="onAnswer(item.user.userId)">回复</el-button>
+                    </el-input>
 
                 </el-collapse-item>
             </template>
+<!--
+            <template v-if="msgList.userMsgViewed" v-for="(item,index) in msgList.userMsgViewed">
+                <el-collapse-item v-if="item.user"  :name="item.user.userId" key>
+                    <template slot="title">
+                        <img v-if="!item.user.avatarId"
+                             src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
+                        <img v-else
+                             :src="'http://bank.longhaiyan.cn/picture/show?id='+item.user.avatarId" alt="">
+
+                        <p>{{item.user.userName}}</p>
+                    </template>
+                    <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="subitem in userMsg.data">
+                        <div class="time">{{item.createTime}}</div>
+                        <div v-if="subitem.senderInfo.userId === userMsg.selfId" class="box right">
+                            <p>{{subitem.message}}</p><span>：我</span>
+                        </div>
+                        <div v-else class="box"><span>{{item.user.userName}}：</span>
+                            <p>{{subitem.message}}</p>
+                        </div>
+                    </template>
+                    <el-input :maxlength=200 placeholder="请输入内容" v-model="answer">
+                        <el-button type="primary" slot="append" @click="onAnswer(item.user.userId)">回复</el-button>
+                    </el-input>
+
+                </el-collapse-item>
+            </template>
+-->
         </el-collapse>
         <!--<div class="setting-r-bd my-message-personal">
             <div class="personal-box ">
@@ -92,6 +139,7 @@
 <script>
   import {mapActions, mapState} from 'vuex'
   import * as GlobalType from '@/store/global/types'
+  import * as ZoneType from '@/store/zone/types'
   import * as MessageType from '@/store/message/types'
 
   export default{
@@ -103,6 +151,8 @@
           {'a': 1},
           {'a': 1}
         ],
+        answer:'',
+        answerVal:[],
       }
     },
     computed: {
@@ -113,6 +163,8 @@
         userMsg: state => state.message.userMsg,
         userStep: state => state.message.userStep,
         userError: state => state.message.userError,
+        sendStep: state => state.zone.sendStep,
+        sendErrorMsg: state => state.zone.sendErrorMsg,
       })
     },
     methods: {
@@ -120,6 +172,8 @@
         messageNav: GlobalType.A_MESSAGE_NAV,
         getUserMsg: MessageType.A_USER_MESSAGE,
         readMsg:MessageType.A_MESSAGE_READ,
+        sendMsg: ZoneType.A_SEND_MSG,
+
       }),
       collapseChange(activeNames){
         let self =this
@@ -137,6 +191,30 @@
             }
           })
         }
+      },
+      onAnswer(id){
+        let self = this
+        console.log("id",id)
+        this.answerVal.push(this.answer)
+        self.sendMsg({
+          name: self.answer,
+          id: id,
+        }).then(() => {
+          if (self.sendStep === 'error') {
+            self.$message.error(self.sendErrorMsg)
+            return
+          } else {
+            self.answer = ''
+            self.collapseChange(id)
+            self.$message({
+              type: 'success',
+              message: '发送成功'
+            })
+          }
+        }).catch(()=>{
+          self.$message.error(self.sendErrorMsg)
+        })
+        console.log(this.answerVal)
       },
       init(){
         this.messageNav({name: 'personal'})

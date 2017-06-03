@@ -85,11 +85,11 @@
         </div>
         <div class="my-zone-bd">
             <el-tabs type="border-card" v-model="activeCart" @tab-click="handleClick">
-                <el-tab-pane name="publish_task">
+                <el-tab-pane v-if="paneVisible" name="publish_task">
                     <span slot="label"><i class="el-icon-document"></i> 发布的任务</span>
-                    <el-button type="primary" style="margin-left: 50px;">全部</el-button>
+                    <!--<el-button type="primary" style="margin-left: 50px;">全部</el-button>
                     <el-button>发布中</el-button>
-                    <el-button>已结束</el-button>
+                    <el-button>已结束</el-button>-->
                     <div class="task-boxes" v-if="mineTask&&mineTask.data">
                         <div class="task-box" v-for="(item,index) in mineTask.data">
                             <div class="task-box-border">
@@ -102,7 +102,7 @@
                         <i class="el-icon-warning"></i>无记录
                     </div>
                 </el-tab-pane>
-                <el-tab-pane name="get_task">
+                <el-tab-pane v-if="paneVisible" name="get_task">
                     <span slot="label"><i class="el-icon-menu"></i> 接受的任务</span>
                     <div class="task-boxes" v-if="mineTask&&mineTask.takeTask">
                         <div class="task-box" v-for="(item,index) in mineTask.takeTask">
@@ -125,7 +125,7 @@
                         <i class="el-icon-warning"></i>无记录
                     </div>
                 </el-tab-pane>
-                <el-tab-pane name="warn">
+                <el-tab-pane v-if="paneVisible" name="warn">
                     <span slot="label"><i class="el-icon-warning"></i> 举报记录</span>
                     <!--<div class="task-boxes">
                         <div class="task-box" v-for="(item,index) in infoData">
@@ -166,8 +166,9 @@
       return {
         value: 4.5,
         msgDialogVisible: true,
-        activeCart: 'publish_task',
+        activeCart: (window.initState.userId === this.$route.query.userId)?'publish_task':'topic',
         userId: this.$route.query.userId || '',
+        paneVisible: window.initState.userId === this.$route.query.userId,
         infoData: [
           {
             taskId: 12,

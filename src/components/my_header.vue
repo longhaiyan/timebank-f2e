@@ -13,7 +13,7 @@
 
                 </el-menu-item>
                 <el-menu-item index="/task/receive">
-                    已接单
+                    进行中
 
                 </el-menu-item>
                 <el-menu-item index="/task/finish">
@@ -29,7 +29,7 @@
                 投诉
 
             </el-menu-item>
-            <el-menu-item index="/">
+            <el-menu-item index="/" class="header-intro">
                 关于我们
 
             </el-menu-item>
@@ -234,9 +234,13 @@
         }
       },
       init(){
+        let self = this
         if (window.initState.isLogin) {
           console.log("自动登录")
-          this.getBaseUserInfo()
+          this.getBaseUserInfo().then(()=>{
+            window.initState.userId = self.userBaseInfo.userId
+            console.log("获取用户初始化ID 成功",window.initState.userId)
+          })
         }
         this.setNavActiveIndex()
         this.liveOpen()
@@ -265,6 +269,7 @@
     },
     mounted(){
       this.init()
+
 
     },
     components: {

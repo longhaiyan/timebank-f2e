@@ -8,7 +8,7 @@
             </el-button>
             <el-button type="text" class="j-nav-receive">
                 <router-link to="/task/receive" class="logo">
-                    已接单
+                    进行中
                 </router-link>
             </el-button>
             <el-button type="text" class="j-nav-finish">
