@@ -120,10 +120,10 @@ const actions = {
   [Type.A_LIVE_OPEN]: ({commit, state, dispatch}, payload) => {
     console.log('开启心跳')
     dispatch(Type.A_LIVE_MESSAGE_COUNT)
-    /*setInterval(function() {
-      console.log("dong")
+    setInterval(function() {
+      // console.log("dong")
       dispatch(Type.A_LIVE_MESSAGE_COUNT)
-    }, 3000)*/
+    }, 3000)
   },
   [Type.A_LIVE_MESSAGE_COUNT]: ({commit, state, dispatch}, payload) => {
     return apiTools.req(api.unread, payload, rsp => {

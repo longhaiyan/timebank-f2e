@@ -18,14 +18,22 @@ const routerInit = function (store) {
 
   const router = new Router({
     routes,
-    // mode: 'history'
+    // mode: 'history',
+    scrollBehavior (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    }
   })
   // 全局路由钩子
   router.beforeEach((to, from, next) => {
     // console.info("全局路由钩子.beforeEach", to, from, store);
-    if(NO_NEED_LOGIN_ROUTER.has(to.name)){
-      console.log("进入重定向")
-      next({name:'Hello' })
+    if (!to.name) {
+      console.log('不可访问 进入重定向')
+      next({name: 'Error'})
+    }
+    // 拦截未登录的情况,暂时把登陆写在 window 下
+    else if (!window.initState.isLogin && !NO_NEED_LOGIN_ROUTER.has(to.name)) {
+      console.log('未登录 进入重定向')
+      next({name: 'Error'})
     }
 
     routerBefore({to, from, next}, store)

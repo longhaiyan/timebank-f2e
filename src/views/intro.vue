@@ -35,10 +35,11 @@
                     任务状态：正在发布中
                 </template>
             </span>
-            <span>已有 0 人举报</span></div>
+            <!--<span>已有 0 人举报</span>-->
+        </div>
         <div class="btn-group">
-            <el-button type="primary" v-if="myTaskCon.stu === 1" @click="getFormVisible=true">我要接受任务</el-button>
-            <el-button @click="onWarn">我要举报</el-button>
+            <el-button type="primary" v-if="myTaskCon.stu === 1" @click="onGetTask">我要接受任务</el-button>
+            <el-button v-if="warnVisible" @click="onWarn">我要举报</el-button>
         </div>
         <el-dialog title="确定接受这条任务?" v-model="getFormVisible">
             <p>接受任务的话，请对任务的主人说几句话吧</p>
@@ -75,6 +76,7 @@
           }
         },
         getFormVisible: false,
+        warnVisible:true
         /*myTaskCon:{},
         myTaskFinish:{}*/
       }
@@ -118,34 +120,52 @@
 
       }),
       onPublish() {
-        this.publishShow()
+        if(window.initState.isLogin){
+          this.publishShow()
+        }else{
+          this.$message.warning('请先登录后再发布任务')
+        }
+
+      },
+      onGetTask(){
+        if(window.initState.isLogin){
+          this.getFormVisible=true
+        }else{
+          this.$message.warning('请先登录后再接受任务')
+        }
       },
       onWarn: function() {
         let self = this
           /*if(this.getForm.value.trim){
 
            }*/
-        this.$confirm('确定举报这条任务?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          self.warnTask({taskId: self.taskId}).then(() => {
-            if (self.warnStep !== 'error') {
-              self.$message({
-                type: 'success',
-                message: '举报成功!'
-              });
-            } else {
-              self.$message.error(self.warnErrorMsg)
-            }
-          })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消举报'
+        if(window.initState.isLogin){
+          this.$confirm('确定举报这条任务?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            self.warnTask({taskId: self.taskId}).then(() => {
+              if (self.warnStep !== 'error') {
+                self.warnVisible = false
+                self.$message({
+                  type: 'success',
+                  message: '举报成功!'
+                });
+              } else {
+                self.$message.error(self.warnErrorMsg)
+              }
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消举报'
+            });
           });
-        });
+        }else{
+          this.$message.warning('请先登录')
+        }
+
 
       },
       onAccept(){

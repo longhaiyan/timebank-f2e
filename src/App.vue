@@ -6,14 +6,14 @@
                     <img src="http://bank.longhaiyan.cn/img/logo.png" alt=""> 时间银行
                 </router-link>
                 <i v-if="moreIconVisible" @click="onShowMenu" class="el-icon-more my-menu-more"></i>
-                <div v-else style="margin-right: 24px;">
+                <div class="phone-login" v-else style="margin-right: 24px;">
                     <el-button type="text" @click="onLoginShow">登录</el-button>
                     <span>/</span>
                     <el-button type="text" @click="onRegisterShow">注册</el-button>
                 </div>
 
             </el-col>
-            <el-col  :sm="16" class="my_header j-my_header my_header_hide">
+            <el-col :sm="16" class="my_header j-my_header my_header_hide">
                 <MyHeader/>
             </el-col>
         </el-row>
@@ -45,7 +45,7 @@
                               v-model="loginFormData.code">
                     </el-input>
                     <img src="http://bank.longhaiyan.cn/kaptcha-image"
-                         style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                         style="width: 110px;height: 40px;vertical-align: middle;" alt="">
                 </el-form-item>
                 <el-form-item>
                     <el-button type="text" @click="toRegister">还没有账号，赶紧戳我去注册吧</el-button>
@@ -84,8 +84,13 @@
                               v-model="registerFormData.code">
                     </el-input>
                     <img @click="getKaptchaImg" src="http://bank.longhaiyan.cn/kaptcha-image"
-                         style="width: 120px;height: 40px;vertical-align: middle;" alt="">
+                         style="width: 110px;height: 40px;vertical-align: middle;" alt="">
                 </el-form-item>
+                <el-form-item prop="checkRegister">
+                    <el-checkbox v-model="registerFormData.checkRegister">我接受相关规定</el-checkbox>
+                    <div @click="onShowAbout">点我阅读相关规定</div>
+                </el-form-item>
+
             </el-form>
         </MyModal>
         <!--发布任务弹窗-->
@@ -198,12 +203,15 @@
                                 <el-radio label="0">不加急</el-radio>
                                 <el-radio label="1">加急</el-radio>
                             </el-radio-group>-->
-                            <el-checkbox v-model="publishFormData.urgent"><span v-if="!publishFormData.urgent" style="font-size: 13px;color: #999;">我们将根据您的资助优先推送您的任务信息</span></el-checkbox>
+                            <el-checkbox v-model="publishFormData.urgent"><span v-if="!publishFormData.urgent"
+                                                                                style="font-size: 13px;color: #999;">我们将根据您的资助优先推送您的任务信息</span>
+                            </el-checkbox>
 
                         </el-form-item>
 
-                        <el-form-item  label="" prop="urgentMoney">
-                            <el-input-number v-if="publishFormData.urgent" v-model="publishFormData.urgentMoney" :step="5"></el-input-number>
+                        <el-form-item label="" prop="urgentMoney">
+                            <el-input-number v-if="publishFormData.urgent" v-model="publishFormData.urgentMoney"
+                                             :step="5"></el-input-number>
 
                         </el-form-item>
 
@@ -241,7 +249,6 @@
         </MyModal>
 
 
-
     </div>
 </template>
 
@@ -259,7 +266,7 @@
     name: 'app',
     data(){
       return {
-        moreIconVisible:false,
+        moreIconVisible: false,
         pickerOptions0: {
           disabledDate(time) {
             return time.getTime() < Date.now() - 8.64e7;
@@ -276,19 +283,22 @@
           userName: "",
           password: "",
           checkPassword: "",
-          code: ""
+          code: "",
+          checkRegister:false
 
         },
         loginData: {
           //                    visible: false,
-          size: 'tiny',
+          size: 'small',
           confirmButtonText: '确认登录',
           title: '登录',
         },
         registerData: {
-          size: 'tiny',
+          size: 'small',
           confirmButtonText: '确认注册',
-          title: '注册'
+          title: '注册',
+          checkRegister:false
+
         },
         publishData: {
           size: 'small',
@@ -355,7 +365,12 @@
             required: true,
             message: '请输入验证码',
             trigger: 'blur'
-          }
+          },
+//          checkRegister:{
+//            required: true,
+//            message: '请先确认已阅读注册要求',
+//            trigger: 'blur'
+//          }
         },
         publishRules: {
           name: {
@@ -508,6 +523,7 @@
                     self.showMessage(self.loginErrorMsg)
                     return
                   } else {
+                    window.initState.isLogin = true
                     self.moreIconVisible = true
                     self.$message({
                       type: 'success',
@@ -534,32 +550,38 @@
         let self = this
         this.openModal(this.registerFormData, {
           beforeConfirm(next){
-            console.log("beforeConfirm")
+            console.log("beforeConfirm",self.registerFormData)
             self.$refs.registerForm.validate(value => {
+//              console.log("self.registerFormData.checkRegister",self.registerFormData.checkRegister,self.registerFormData,self.registerFormData.email)
               if (value) {
-                self.userRegister({
-                  email: self.registerFormData.email,
-                  userName: self.registerFormData.userName,
-                  password: self.registerFormData.password,
-                  code: self.registerFormData.code
-                }).then(() => {
-                  if (self.registerDialogStep === 'error') {
-                    self.showMessage(self.registerErrorMsg)
-                    return
-                  } else {
-                    const ele = self.$createElement;
-                    self.$notify({
-                      title: '注册并登录成功',
-                      message: ele('span', {style: 'color: #e08080'}, '只有实名认证的用户可以发布或接受任务，请先实名认证，本系统暂时只支持本校学生和教师实名认证'),
-                      duration: 0
-                    });
-                    self.GM_routerPush({
-                      path: '/setting/confirm',
-                    })
-                    self.moreIconVisible = true
-                    return next()
-                  }
-                })
+                if(self.registerFormData.checkRegister){
+                  self.userRegister({
+                    email: self.registerFormData.email,
+                    userName: self.registerFormData.userName,
+                    password: self.registerFormData.password,
+                    code: self.registerFormData.code
+                  }).then(() => {
+                    if (self.registerDialogStep === 'error') {
+                      self.showMessage(self.registerErrorMsg)
+                      return
+                    } else {
+                      const ele = self.$createElement;
+                      window.initState.isLogin = true
+                      self.$notify({
+                        title: '注册并登录成功',
+                        message: ele('span', {style: 'color: #e08080'}, '只有实名认证的用户可以发布或接受任务，请先实名认证，本系统暂时只支持本校学生和教师实名认证'),
+                        duration: 0
+                      });
+                      self.GM_routerPush({
+                        path: '/setting/confirm',
+                      })
+                      self.moreIconVisible = true
+                      return next()
+                    }
+                  })
+                }else{
+                  self.$message.warning('请确认接受相关规定')
+                }
               }
             })
           },
@@ -573,6 +595,13 @@
       },
       onRegisterShow(){
         this.registerShow()
+      },
+      onShowAbout(){
+        this.registerHide()
+        this.GM_routerPush({
+          path: '/about',
+        })
+
       },
       onPublish(){
         let self = this
@@ -597,7 +626,7 @@
                 if (self.publishFormData.urgent) {
                   urgentMoneyValue = parseInt(self.publishFormData.urgentMoney)
                 }
-                if(self.publishFormData.urgent){
+                if (self.publishFormData.urgent) {
                   urgentValue = 1
                 }
                 console.log("urgentMoneyValue", urgentMoneyValue)
@@ -620,15 +649,15 @@
                     self.showMessage(self.publishErrorMsg)
                     return
                   } else {
-                    if(document.querySelector('.j-my-new-task-list')){
+                    if (document.querySelector('.j-my-new-task-list')) {
                       console.log("刷新newtask页面 实现")
                       self.newTaskStartMain()
-                    }else if(document.querySelector('.j-index')){
+                    } else if (document.querySelector('.j-index')) {
                       console.log("刷新index页面 实现")
                       self.indexStartMain()
-                    }else if(document.querySelector('.j-my-zone')){
+                    } else if (document.querySelector('.j-my-zone')) {
                       console.log("刷新zone页面 实现")
-                      self.getZoneInfo({userId:self.zoneUserId})
+                      self.getZoneInfo({userId: self.zoneUserId})
                     }
                     self.$message({
                       type: 'success',
@@ -760,32 +789,32 @@
       },
       checkUrgentMoney(rule, value, callback){
         let self = this
-        if (self.publishFormData.urgent&& value === '') {
+        if (self.publishFormData.urgent && value === '') {
           return callback(new Error('请输入时间币金额'))
-        } else if (self.publishFormData.urgent&& parseInt(value) < 1) {
+        } else if (self.publishFormData.urgent && parseInt(value) < 1) {
           return callback(new Error('请输入大于1的整数'))
         }
         return callback()
       },
       checkTag(rule, value, callback){
-        console.log("checkTag value",value)
+        console.log("checkTag value", value)
         if (value === '' || value.length === 0) {
           return callback(new Error('请选择至少一个标签'))
         }
         return callback()
       },
       checkDeadTime(rule, value, callback){
-        console.log("checkDeadtime value",value)
+        console.log("checkDeadtime value", value)
         if (value === '' || value === undefined) {
           return callback(new Error('请选择任务截止时间'))
         }
         return callback()
       },
       onShowMenu(){
-        if(document.querySelector('.my_header_hide')){
+        if (document.querySelector('.my_header_hide')) {
           document.querySelector('.j-my_header').className = document.querySelector('.j-my_header').className.replace(( /(?:^|\s)my_header_hide(?!\S)/), '')
           document.querySelector('.j-my_header').className += ' my_header_phone_show'
-        }else{
+        } else {
           document.querySelector('.j-my_header').className += ' my_header_hide'
           document.querySelector('.j-my_header').className = document.querySelector('.j-my_header').className.replace(( /(?:^|\s)my_header_phone_show(?!\S)/), '')
         }

@@ -31,7 +31,7 @@
                         </el-input>
                     </el-form-item>
                 </el-form>
-                <el-button type="primary">确认</el-button>
+                <el-button type="primary" @click="onSubmit">确认</el-button>
             </el-col>
         </el-row>
 
@@ -49,6 +49,11 @@
             des:''
           },
           complainRules:{
+            userName: {
+              required: true,
+              message: '请输入您的真实姓名',
+              trigger: 'blur'
+            },
             phone: {
               required: true,
               message: '请输入您的电话号码',
@@ -66,6 +71,21 @@
             },
 
           }
+        }
+      },
+      methods:{
+        onSubmit(){
+          let self = this
+          if(window.initState.isLogin){
+            self.$refs.complainForm.validate(value => {
+              if(value){
+                self.$message.success('提交成功，谢谢反馈')
+              }
+            })
+          }else{
+            this.$message.waning("请先登录")
+          }
+
         }
       }
     }

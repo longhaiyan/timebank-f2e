@@ -218,6 +218,7 @@
     methods: {
       ...mapActions({
         confirmUpdate: SettingConfirmType.A_CONFIRM_UPDATE,
+        startMain: SettingConfirmType.A_START_MAIN,
         settingNav: GlobalType.A_SETTING_NAV,
       }),
       onSubmit(){
@@ -237,6 +238,7 @@
                   self.$message.error(self.confirmErrorMsg)
                   return
                 } else {
+                  self.startMain()
                   self.$message({
                     type: 'success',
                     message: '申请实名认证提交成功'

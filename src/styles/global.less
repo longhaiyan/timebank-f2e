@@ -24,6 +24,9 @@ a{
     align-items: center;
     color: #fff;
   }
+  .phone-login{
+    display: none;
+  }
   .logo img{
     width: 40px;
     height: 40px;
@@ -221,6 +224,9 @@ only screen and (-webkit-min-device-pixel-ratio: 3) {
     .my_header_hide{
       display: none;
     }
+    .phone-login{
+      display: block;
+    }
     .my_header_phone_show{
       .el-menu--horizontal{
         background: rgba(8, 3, 3, 0.33);
@@ -245,5 +251,21 @@ only screen and (-webkit-min-device-pixel-ratio: 3) {
   }
   .index .my-swiper .my-swiper-box{
     height: 240px !important;
+  }
+}
+
+.my-about{
+  padding: 35px 100px 0 100px;
+  .about-header{
+    font-size: 24px;
+    color: #666;
+    font-weight: 400;
+  }
+  .about-bd{
+    line-height: 24px;
+    color: #666;
+    .import{
+      font-weight: 800;
+    }
   }
 }

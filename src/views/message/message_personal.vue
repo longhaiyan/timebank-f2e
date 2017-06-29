@@ -6,7 +6,7 @@
         <el-collapse v-if="msgList" @change="collapseChange" accordion
                      class="personal-collapse-boxes">
             <template v-if="msgList.userMsgUnlook" v-for="(item,index) in msgList.userMsgUnlook">
-                <el-collapse-item v-if="item.user"  :name="item.user.userId" key>
+                <el-collapse-item v-if="item.user" :name="item.user.userId" key>
                     <template slot="title">
                         <img v-if="!item.user.avatarId"
                              src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
@@ -14,7 +14,7 @@
                              :src="'http://bank.longhaiyan.cn/picture/show?id='+item.user.avatarId" alt="">
 
                         <p>{{item.user.userName}}</p>
-                        <el-badge  :value="item.msgCount" :max="99" class="item">
+                        <el-badge :value="item.msgCount" :max="99" class="item">
                         </el-badge>
                     </template>
                     <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="(subitem,index) in userMsg.data">
@@ -40,7 +40,7 @@
                 </el-collapse-item>
             </template>
             <template v-if="msgList.userMsgViewed" v-for="(item,index) in msgList.userMsgViewed">
-                <el-collapse-item v-if="item.user"  :name="item.user.userId" key>
+                <el-collapse-item v-if="item.user" :name="item.user.userId" key>
                     <template slot="title">
                         <img v-if="!item.user.avatarId"
                              src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
@@ -71,69 +71,39 @@
 
                 </el-collapse-item>
             </template>
-<!--
-            <template v-if="msgList.userMsgViewed" v-for="(item,index) in msgList.userMsgViewed">
-                <el-collapse-item v-if="item.user"  :name="item.user.userId" key>
-                    <template slot="title">
-                        <img v-if="!item.user.avatarId"
-                             src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
-                        <img v-else
-                             :src="'http://bank.longhaiyan.cn/picture/show?id='+item.user.avatarId" alt="">
+            <!--
+                        <template v-if="msgList.userMsgViewed" v-for="(item,index) in msgList.userMsgViewed">
+                            <el-collapse-item v-if="item.user"  :name="item.user.userId" key>
+                                <template slot="title">
+                                    <img v-if="!item.user.avatarId"
+                                         src="http://bank.longhaiyan.cn/img/user.jpeg" alt="">
+                                    <img v-else
+                                         :src="'http://bank.longhaiyan.cn/picture/show?id='+item.user.avatarId" alt="">
 
-                        <p>{{item.user.userName}}</p>
-                    </template>
-                    <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="subitem in userMsg.data">
-                        <div class="time">{{item.createTime}}</div>
-                        <div v-if="subitem.senderInfo.userId === userMsg.selfId" class="box right">
-                            <p>{{subitem.message}}</p><span>：我</span>
-                        </div>
-                        <div v-else class="box"><span>{{item.user.userName}}：</span>
-                            <p>{{subitem.message}}</p>
-                        </div>
-                    </template>
-                    <el-input :maxlength=200 placeholder="请输入内容" v-model="answer">
-                        <el-button type="primary" slot="append" @click="onAnswer(item.user.userId)">回复</el-button>
-                    </el-input>
+                                    <p>{{item.user.userName}}</p>
+                                </template>
+                                <template v-if="userMsg&&userMsg.data&&userMsg.selfId" v-for="subitem in userMsg.data">
+                                    <div class="time">{{item.createTime}}</div>
+                                    <div v-if="subitem.senderInfo.userId === userMsg.selfId" class="box right">
+                                        <p>{{subitem.message}}</p><span>：我</span>
+                                    </div>
+                                    <div v-else class="box"><span>{{item.user.userName}}：</span>
+                                        <p>{{subitem.message}}</p>
+                                    </div>
+                                </template>
+                                <el-input :maxlength=200 placeholder="请输入内容" v-model="answer">
+                                    <el-button type="primary" slot="append" @click="onAnswer(item.user.userId)">回复</el-button>
+                                </el-input>
 
-                </el-collapse-item>
-            </template>
--->
+                            </el-collapse-item>
+                        </template>
+            -->
         </el-collapse>
-        <!--<div class="setting-r-bd my-message-personal">
-            <div class="personal-box ">
-                <img src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
-                <div style="width: 100%;">
-                    <div class="my-space-Between personal-box-user">
-                        <span>longhaiyan</span>
-                        <i>2017.05.01  18:00</i>
-                    </div>
-                    <div class="my-space-Between personal-box-info">
-                        <p>啦啦啦啦啦啦</p>
-                        <div style="width: 100px;flex-shrink:0;margin-left: 50px;">
-                            <el-button type="text">回复</el-button>
-                            <el-button type="text">删除</el-button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="personal-box ">
-                <img src="http://bank.longhaiyan.cn/img/userpic.png" alt="">
-                <div style="width: 100%;">
-                    <div class="my-space-Between personal-box-user">
-                        <span>longhaiyan</span>
-                        <i>2017.05.01  18:00</i>
-                    </div>
-                    <div class="my-space-Between personal-box-info">
-                        <p>啦啦啦啦啦啦</p>
-                        <div style="width: 100px;flex-shrink:0;margin-left: 50px;">
-                            <el-button type="text">已回复</el-button>
-                            <el-button type="text">删除</el-button>
-                        </div>
-                    </div>
-                    <p class="personal-box-answer"><span>回复：</span>对呀</p>
-                </div>
-            </div>
-        </div>-->
+        <div v-else style="text-align: center;">
+            <i class="el-icon-warning"></i>无举报记录
+
+        </div>
+
     </div>
 </template>
 <script>
@@ -151,8 +121,8 @@
           {'a': 1},
           {'a': 1}
         ],
-        answer:'',
-        answerVal:[],
+        answer: '',
+        answerVal: [],
       }
     },
     computed: {
@@ -171,22 +141,22 @@
       ...mapActions({
         messageNav: GlobalType.A_MESSAGE_NAV,
         getUserMsg: MessageType.A_USER_MESSAGE,
-        readMsg:MessageType.A_MESSAGE_READ,
+        readMsg: MessageType.A_MESSAGE_READ,
         sendMsg: ZoneType.A_SEND_MSG,
 
       }),
       collapseChange(activeNames){
-        let self =this
+        let self = this
         console.log("改变", activeNames)
         if (activeNames) {
           this.getUserMsg({userId: activeNames}).then(() => {
             console.log("该条用户消息内容", this.userMsg)
-            if(self.userStep !== 'error'){
+            if (self.userStep !== 'error') {
               console.log("这条消息已经被查看")
-              self.readMsg({userId:activeNames}).then(()=>{
+              self.readMsg({userId: activeNames}).then(() => {
 
               })
-            }else{
+            } else {
               self.$message.error(self.userError)
             }
           })
@@ -194,7 +164,7 @@
       },
       onAnswer(id){
         let self = this
-        console.log("id",id)
+        console.log("id", id)
         this.answerVal.push(this.answer)
         self.sendMsg({
           name: self.answer,
@@ -211,7 +181,7 @@
               message: '发送成功'
             })
           }
-        }).catch(()=>{
+        }).catch(() => {
           self.$message.error(self.sendErrorMsg)
         })
         console.log(this.answerVal)

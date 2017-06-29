@@ -28,6 +28,8 @@ import CommunityIndex from '@/views/community/community_index'
 import CommunityInfo from '@/views/community/community_info'
 
 import Account from '@/views/account'
+
+import About from '@/views/about'
 // import NewTask from '@/views/task/new_task'
 
 import index from '@/views/index/index'
@@ -43,15 +45,15 @@ let routes = [
     component: Index,
   },
   {
-    path: '/Hello',
-    name: 'Hello',
+    label: '关于我们',
+    path: '/about',
+    name: 'about',
+    component: About,
+  },
+  {
+    path: '/error',
+    name: 'Error',
     component: Hello,
-    children: [
-      {
-        path: 'demo',
-        component: demo,
-      }
-    ],
   },
   {
     label: '任务详情',
@@ -66,14 +68,17 @@ let routes = [
     children: [
       {
         path: 'new',
+        name:'task_new',
         component: NewTask,
       },
       {
         path: 'receive',
+        name:'task_receive',
         component: ReceiveTask,
       },
       {
         path: 'finish',
+        name:'task_finish',
         component: FinishTask,
       },
 
@@ -117,10 +122,12 @@ let routes = [
     children: [
       {
         path: 'personal',
+        name:'MessageIndex_personal',
         component: MessagePersonal,
       },
       {
         path: 'system',
+        name:'MessageIndex_system',
         component: MessageSystem,
       },
 
@@ -134,26 +141,32 @@ let routes = [
     children: [
       {
         path: 'info',
+        name:'SettingIndex_info',
         component: SettingInfo,
       },
       {
         path: 'get_task',
+        name:'SettingIndex_get',
         component: SettingGetTask,
       },
       {
         path: 'publish_task',
+        name:'SettingIndex_publish',
         component: SettingPublishTask,
       },
       {
         path: 'private',
+        name:'SettingIndex_private',
         component: SettingPrivate,
       },
       {
         path: 'community',
+        name:'SettingIndex_community',
         component: SettingCommunity,
       },
       {
         path: 'confirm',
+        name:'community_confirm',
         component: SettingConfirm,
       },
 

@@ -21,7 +21,8 @@ export default {
       loginDialogStep: 'onload',
       userBaseInfo: payload.data
     })
-    console.log('M_LOGIN_ONLOAD 要回显用户信息', state)
+    window.initState.userId = state.userBaseInfo.userId
+    console.log('M_LOGIN_ONLOAD 要回显用户信息', state,window.initState.userId)
   },
   [Type.M_USER_INFO_ERROR]: (state, payload) => {
     console.log('M_LOGIN_ERROR', payload)
@@ -60,7 +61,8 @@ export default {
       userBaseInfo:payload.data
       // username: payload.data.userName
     })
-    console.log('M_REGISTER_ONLOAD 要回显用户信息', state)
+    window.initState.userId = state.userBaseInfo.userId
+    console.log('M_REGISTER_ONLOAD 要回显用户信息', state,window.initState.userId)
   },
   [Type.M_REGISTER_ERROR]: (state, payload) => {
     console.log('M_REGISTER_ERROR', payload)

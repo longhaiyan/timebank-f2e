@@ -1,16 +1,6 @@
 <template>
-  <div class="hello">
-    <transition name="slide-fade">
-      <router-view></router-view>
-    </transition>
-    <h1 class="haiyan-style">{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <template v-for="item in items">
-      <div>{{item.test}}</div>
-    </template>
-    <el-button type="primary" @click="onBack">进入demo</el-button>
-    <el-button type="primary">主要按钮</el-button>
-
+  <div class="hello" style="margin-top:150px;font-size: 25px;color: #666; text-align: center;">
+    404，对不起，没能找到你想要的页面
   </div>
 </template>
 

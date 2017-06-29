@@ -29,7 +29,7 @@
                 投诉
 
             </el-menu-item>
-            <el-menu-item index="/" class="header-intro">
+            <el-menu-item index="/about" class="header-intro">
                 关于我们
 
             </el-menu-item>
@@ -144,11 +144,13 @@
       unreadMsg: function() {
         let self = this
         const ele = this.$createElement;
-        this.$notify({
-          title: '未读消息提醒',
-          message: ele('i', {style: 'color: #F7BA2A'}, "您有 " + self.unreadMsg + " 条未读消息"),
-          duration: 2000
-        });
+        if(self.unreadMsg){
+          this.$notify({
+            title: '未读消息提醒',
+            message: ele('i', {style: 'color: #F7BA2A'}, "您有 " + self.unreadMsg + " 条未读消息"),
+            duration: 2000
+          });
+        }
       }
     },
     methods: {
@@ -207,17 +209,17 @@
       },
       setNavActiveIndex(){
         if (document.querySelector('.j-index')) {
-          this.activeIndex = "1"
+          this.activeIndex = "/"
         } else if (document.querySelector('.j-task')) {
-          this.activeIndex = "2"
+          this.activeIndex = "/task/new"
         } else if (document.querySelector('.j-community')) {
-          this.activeIndex = "3"
-        } else if (document.querySelector('.complain')) {
-          this.activeIndex = "4"
+          this.activeIndex = "/community"
+        } else if (document.querySelector('.j-complain')) {
+          this.activeIndex = "/complain"
         } else if (document.querySelector('.j-about')) {
-          this.activeIndex = "5"
+          this.activeIndex = "/about"
         } else {
-          this.activeIndex = ""
+          this.activeIndex = "/"
         }
       },
       goZone: function() {
@@ -239,6 +241,7 @@
           console.log("自动登录")
           this.getBaseUserInfo().then(()=>{
             window.initState.userId = self.userBaseInfo.userId
+            window.initState.isLogin = true
             console.log("获取用户初始化ID 成功",window.initState.userId)
           })
         }
@@ -269,8 +272,6 @@
     },
     mounted(){
       this.init()
-
-
     },
     components: {
       MyModal

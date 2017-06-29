@@ -86,13 +86,28 @@
                 <h4 class="friends-hd">友情链接</h4>
                 <el-row class="friends-bd" :gutter="70">
                     <el-col :sm="8">
-                        合肥工业大学
+                        <a href="http://www.hfut.edu.cn/ch/" target="_blank">
+                            合肥工业大学
+                        </a>
 
                     </el-col>
-                    <el-col :sm="8">合肥工业大学管理学院</el-col>
-                    <el-col :sm="8">合肥工业大学宣城校区</el-col>
-                    <el-col :sm="8">工大学子</el-col>
-                    <el-col :sm="8">明理苑大学生网络文化工作室</el-col>
+                    <el-col :sm="8">
+                        <a href="http://som.hfut.edu.cn/glxy/index.htm" target="">
+                            合肥工业大学管理学院
+                        </a>
+                        </el-col>
+                    <el-col :sm="8">
+                        <a href="http://www.hfut.edu.cn/ch/" target="_blank">合肥工业大学宣城校区</a></el-col>
+                    <el-col :sm="8">
+                        <a href="http://online.hfut.edu.cn/" target="_blank">
+                            工大学子
+                        </a>
+                        </el-col>
+                    <el-col :sm="8">
+                        <a href="http://newmly.hfutonline.net/" target="_blank">
+                            明理苑大学生网络文化工作室
+                        </a>
+                        </el-col>
                     <el-col :sm="8"></el-col>
                 </el-row>
             </div>
@@ -168,17 +183,24 @@
         publishShow: GlobalType.A_PUBLISH_SHOW,
       }),
       onPublish: function() {
-        this.publishShow()
+        if(window.initState.isLogin){
+          this.publishShow()
+        }else{
+          this.$message.warning('请先登录后再发布任务')
+        }
+
       },
       goZone: function(id) {
         event.stopPropagation()
-        if (id) {
+        if (id&&window.initState.isLogin) {
           this.GM_routerPush({
             path: '/zone',
             query: {
               userId: id
             }
           })
+        }else{
+          this.$message.warning('请先登录')
         }
       },
       goTaskInfo(taskId) {
